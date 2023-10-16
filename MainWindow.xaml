@@ -14,7 +14,7 @@
     <Window.DataContext>
         <viewModel:MainViewModel/>
     </Window.DataContext>
-    
+
     <Border CornerRadius="20">
         <Border.Background>
             <LinearGradientBrush StartPoint="0, 0" EndPoint="1, 1">
@@ -24,50 +24,43 @@
         </Border.Background>
         <Grid MouseLeftButtonDown="Grid_MouseLeftButtonDown">
             <Grid>
+
                 <Grid.RowDefinitions>
                     <RowDefinition Height="100"/>
                     <RowDefinition/>
                     <RowDefinition Height="75"/>
                 </Grid.RowDefinitions>
 
-                <Button Content="X"
-                    Background="DarkGray"
-                    HorizontalAlignment="Right"
-                    VerticalAlignment="Top"
-                    Width="30"
-                    Height="25"
-                    Grid.Row="0"
-                    Click="CloseButton_Click" RenderTransformOrigin="0.4,0.067"/>
-
                 <Border Grid.Row="0"
                         Background="#1c4942">
                     <TextBlock Text="Image Header"
-                       VerticalAlignment="Center"
-                       HorizontalAlignment="Center"
-                       Foreground="White"
-                       FontSize="22"
-                       Margin="20, 0, 0, 0"/>
+                               VerticalAlignment="Center"
+                               HorizontalAlignment="Center"
+                               Foreground="White"
+                               FontSize="22"
+                               Margin="20, 0, 0, 0"/>
                 </Border>
 
                 <Button Content="X"
-                    HorizontalAlignment="Right"
-                    VerticalAlignment="Top"
-                    Width="30"
-                    Height="25"
-                    Grid.Row="0"
-                    Grid.Column="1"
-                    Click="CloseButton_Click" RenderTransformOrigin="0.4,0.067"/>
+                        Background="DarkGray"
+                        HorizontalAlignment="Right"
+                        VerticalAlignment="Top"
+                        Width="30"
+                        Height="25"
+                        Grid.Row="0"
+                        Grid.Column="1"
+                        Click="CloseButton_Click" RenderTransformOrigin="0.4,0.067"/>
 
                 <Border Grid.Row="2"
                         Background="#1c4942">
                     <TextBlock Text="Image Footer"
-                       VerticalAlignment="Center"
-                       HorizontalAlignment="Center"
-                       Foreground="White"
-                       FontSize="22"
-                       Margin="20, 0, 0, 0"/>
+                               VerticalAlignment="Center"
+                               HorizontalAlignment="Center"
+                               Foreground="White"
+                               FontSize="22"
+                               Margin="20, 0, 0, 0"/>
                 </Border>
-                
+
                 <Grid Grid.Row="1">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="100"/>
@@ -107,7 +100,7 @@
                                                  Style="{StaticResource MenuButtonTheme}"
                                                  GroupName="CategoriesButton"
                                                  IsChecked="True"
-                                                 Command="{Binding PersonalViewCommand}"/> 
+                                                 Command="{Binding PersonalViewCommand}"/>
                                 </Border>
 
                                 <Border Width="105"
@@ -155,15 +148,18 @@
 
                                     <Border Grid.Row="0"
                                             Margin="15, 10, 15, 15"
-                                            Background="#267367">
+                                            Background="#267367"
+                                            CornerRadius="10">
                                         <ContentControl Content="{Binding CurrentView}">
-                                            
+
                                         </ContentControl>
                                     </Border>
 
                                     <Border Grid.Row="1"
                                             Background="#267367"
-                                            Margin="0">
+                                            Margin="0"
+                                            CornerRadius="10"
+                                            Width="330">
                                         <TextBox Width="250"
                                                  VerticalAlignment="Center"
                                                  HorizontalAlignment="Center"
@@ -172,9 +168,18 @@
                                     </Border>
                                 </Grid>
                             </StackPanel>
+                            
                         </StackPanel>
+                        
                     </Border>
+
                 </Grid>
+                <Button Style="{StaticResource IconButtonTheme}"
+                        Width="30"
+                        Height="25"
+                        Grid.Row="1"
+                        RenderTransformOrigin="0.4,0.067" 
+                        Margin="417,219,153,31"/>
             </Grid>
         </Grid>
     </Border>

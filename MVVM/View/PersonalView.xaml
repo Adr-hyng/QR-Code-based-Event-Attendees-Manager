@@ -6,11 +6,38 @@
              xmlns:local="clr-namespace:QEAMApp.MVVM.View"
              mc:Ignorable="d" 
              d:DesignHeight="130" d:DesignWidth="360">
-    <StackPanel>
-        <TextBlock Text="Name Stuffs"
+    <ScrollViewer Style="{StaticResource ModernScrollViewerTheme}">
+        <StackPanel>
+            <TextBlock Text="Name Stuffs"
                    Foreground="White"
                    FontSize="28"
                    HorizontalAlignment="Center"
                    Margin="0, 0, 0, 20"/>
-    </StackPanel>
+            <TextBlock Text="Name Stuffs"
+                   Foreground="White"
+                   FontSize="28"
+                   HorizontalAlignment="Center"
+                   Margin="0, 0, 0, 20"/>
+            <TextBlock Text="Name Stuffs"
+                   Foreground="White"
+                   FontSize="28"
+                   HorizontalAlignment="Center"
+                   Margin="0, 0, 0, 20"/>
+            <TextBlock Text="Name Stuffs"
+                   Foreground="White"
+                   FontSize="28"
+                   HorizontalAlignment="Center"
+                   Margin="0, 0, 0, 20"/>
+            <TextBlock Text="Name Stuffs"
+                   Foreground="White"
+                   FontSize="28"
+                   HorizontalAlignment="Center"
+                   Margin="0, 0, 0, 20"/>
+            <TextBlock Text="Name Stuffs"
+                   Foreground="White"
+                   FontSize="28"
+                   HorizontalAlignment="Center"
+                   Margin="0, 0, 0, 20"/>
+        </StackPanel>
+    </ScrollViewer>
 </UserControl>

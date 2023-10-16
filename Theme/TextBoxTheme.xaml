@@ -16,7 +16,7 @@
                                      Background="Transparent"
                                      VerticalContentAlignment="Center"
                                      Padding="5"
-                                     Foreground="#CFCFCF"
+                                     Foreground="Black"
                                      x:Name="SearchBox"/>
                             <TextBlock IsHitTestVisible="False"
                                        Text="ID"

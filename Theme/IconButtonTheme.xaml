@@ -3,10 +3,22 @@
 
     <Style BasedOn="{StaticResource {x:Type Button}}"
            TargetType="{x:Type Button}"
-           x:Key="IconButtonTheme">
+           x:Key="ExportButton">
         <Setter Property="Content">
             <Setter.Value>
                 <Image Source="\Images\export.png" />
+            </Setter.Value>
+        </Setter>
+        <Setter Property="Background" Value="Transparent"/>
+        <Setter Property="BorderThickness" Value="0"/>
+    </Style>
+
+    <Style BasedOn="{StaticResource {x:Type Button}}"
+           TargetType="{x:Type Button}"
+           x:Key="ImportButton">
+        <Setter Property="Content">
+            <Setter.Value>
+                <Image Source="\Images\import.png" />
             </Setter.Value>
         </Setter>
         <Setter Property="Background" Value="Transparent"/>

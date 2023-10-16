@@ -8,9 +8,11 @@ namespace QEAMApp.MVVM.ViewModel
 
         public RelayCommand PersonalViewCommand { get; set; }
         public RelayCommand StatusViewCommand { get; set; }
+        public RelayCommand SnackViewCommand { get; set; }
 
         public PersonalViewModel PersonalVM { get; set; }
         public StatusViewModel StatusVM { get; set; }
+        public SnackViewModel SnackVM { get; set; }
 
         private object _currentView;
 
@@ -29,6 +31,7 @@ namespace QEAMApp.MVVM.ViewModel
         {
             PersonalVM = new PersonalViewModel();
             StatusVM = new StatusViewModel();
+            SnackVM = new SnackViewModel();
 
             CurrentView = PersonalVM;
 
@@ -40,6 +43,10 @@ namespace QEAMApp.MVVM.ViewModel
             StatusViewCommand = new RelayCommand(o =>
             {
                 CurrentView = StatusVM;
+            });
+            SnackViewCommand = new RelayCommand(o =>
+            {
+                CurrentView = SnackVM;
             });
         }
     }

@@ -135,7 +135,8 @@
                                                  FontSize="20"
                                                  Style="{StaticResource MenuButtonTheme}"
                                                  GroupName="CategoriesButton"
-                                                 IsChecked="False"/>
+                                                 IsChecked="False"
+                                                 Command="{Binding SnackViewCommand}"/>
                                 </Border>
                             </StackPanel>
                             <StackPanel Background="#37a695">
@@ -168,18 +169,21 @@
                                     </Border>
                                 </Grid>
                             </StackPanel>
-                            
+
                         </StackPanel>
-                        
+
                     </Border>
 
                 </Grid>
-                <Button Style="{StaticResource IconButtonTheme}"
-                        Width="30"
-                        Height="25"
+                <Button Style="{StaticResource ExportButton}"
                         Grid.Row="1"
                         RenderTransformOrigin="0.4,0.067" 
-                        Margin="417,219,153,31"/>
+                        Margin="418,216,150,29"/>
+                <Button Style="{StaticResource ImportButton}"
+                        Grid.Row="1"
+                        RenderTransformOrigin="0.4,0.067" 
+                        Margin="151,216,419,29">
+                </Button>
             </Grid>
         </Grid>
     </Border>

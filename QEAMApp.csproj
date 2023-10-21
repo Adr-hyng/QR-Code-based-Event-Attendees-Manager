@@ -8,6 +8,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="Images\base.png" />
     <None Remove="Images\bg.png" />
     <None Remove="Images\footer.png" />
     <None Remove="Images\header.png" />
@@ -25,6 +26,7 @@
     <Resource Include="Images\bg.png" />
     <Resource Include="Images\footer.png" />
     <Resource Include="Images\header.png" />
+    <Resource Include="Images\base.png" />
   </ItemGroup>
 
 </Project>

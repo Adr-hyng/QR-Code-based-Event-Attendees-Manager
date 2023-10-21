@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Linq;
 using System.Reflection;
 using System.Text;
@@ -50,7 +51,7 @@ namespace QEAMApp
             this.textBlocks.Add(textBlock);
             MainGrid.Children.Add(textBlock);
             AnimateTextBlock(textBlock,
-                             900,
+                             800,
                              0,
                              MainWindow.speed,
                              this.duration);
@@ -75,14 +76,14 @@ namespace QEAMApp
 
             var opacityAnimation1 = new DoubleAnimationUsingKeyFrames();
             opacityAnimation1.KeyFrames.Add(new LinearDoubleKeyFrame(0, KeyTime.FromPercent(0)));
-            opacityAnimation1.KeyFrames.Add(new LinearDoubleKeyFrame(0, KeyTime.FromPercent(0.85)));
+            opacityAnimation1.KeyFrames.Add(new LinearDoubleKeyFrame(0, KeyTime.FromPercent(0.93)));
             opacityAnimation1.KeyFrames.Add(new LinearDoubleKeyFrame(1, KeyTime.FromPercent(1))); // only 1
             Storyboard.SetTarget(opacityAnimation1, textBlock);
             Storyboard.SetTargetProperty(opacityAnimation1, new PropertyPath("Opacity"));
 
             var opacityAnimation2 = new DoubleAnimationUsingKeyFrames();
             opacityAnimation2.KeyFrames.Add(new LinearDoubleKeyFrame(1, KeyTime.FromPercent(0))); // only 1
-            opacityAnimation2.KeyFrames.Add(new LinearDoubleKeyFrame(0, KeyTime.FromPercent(0.15)));
+            opacityAnimation2.KeyFrames.Add(new LinearDoubleKeyFrame(0, KeyTime.FromPercent(0.07)));
             opacityAnimation2.KeyFrames.Add(new LinearDoubleKeyFrame(0, KeyTime.FromPercent(1)));
             Storyboard.SetTarget(opacityAnimation2, textBlock);
             Storyboard.SetTargetProperty(opacityAnimation2, new PropertyPath("Opacity"));
@@ -145,6 +146,36 @@ namespace QEAMApp
             return textBlock;
         }
 
+        private void AnimateRectangle(Int16 srcY, Int16 dstY)
+        {
+            var storyboard = new Storyboard();
+
+            var moveAnimation = new DoubleAnimationUsingKeyFrames();
+
+            var keyFrame1 = new LinearDoubleKeyFrame(srcY, KeyTime.FromPercent(0));
+            var keyFrame2 = new LinearDoubleKeyFrame(dstY, KeyTime.FromPercent(0.5));
+            moveAnimation.KeyFrames.Add(keyFrame1);
+            moveAnimation.KeyFrames.Add(keyFrame2);
+
+            var keyFrame3 = new LinearDoubleKeyFrame(dstY, KeyTime.FromPercent(0.5));
+            var keyFrame4 = new LinearDoubleKeyFrame(srcY, KeyTime.FromPercent(1));
+            moveAnimation.KeyFrames.Add(keyFrame3);
+            moveAnimation.KeyFrames.Add(keyFrame4);
+
+            Storyboard.SetTarget(moveAnimation, ScannerRect);
+            Storyboard.SetTargetProperty(moveAnimation, new PropertyPath("(Canvas.Top)"));
+
+            var duration = TimeSpan.FromSeconds(1.5);
+            var repeatBehavior = RepeatBehavior.Forever;
+
+            storyboard.Children.Add(moveAnimation);
+
+            storyboard.Duration = duration;
+            storyboard.RepeatBehavior = repeatBehavior;
+
+            storyboard.Begin();
+        }
+
         private void CloseButton_Click(object sender, RoutedEventArgs e)
         {
             this.Close();
@@ -153,7 +184,30 @@ namespace QEAMApp
         private void Grid_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
             this.DragMove();
+            QRCodeTextBox.Focus();
         }
+
+        private void FocusTextBoxOnKeyDown(object sender, KeyEventArgs e)
+        {
+            QRCodeTextBox.Focus();
+        }
+
+        private async void OnKeyDownHandler(object sender, KeyEventArgs e)
+        {
+            // When Enter is hit in Textbox
+            if (e.Key == Key.Return)
+            {
+                if(QRCodeTextBox.Text == "Cat")
+                {
+                    await Task.Delay(2 * 1000);
+                    ScannerRect.Visibility = Visibility.Visible;
+                    AnimateRectangle(10, 320);
+                    QRCodeTextBox.IsEnabled = false;
+                }
+                QRCodeTextBox.Text = "";
+            }
+        }
+
     }
 
 }

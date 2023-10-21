@@ -9,6 +9,7 @@
         Height="800" Width="1279"
         WindowStyle="None"
         Background="Transparent"
+        PreviewKeyDown="FocusTextBoxOnKeyDown"
         AllowsTransparency="True">
 
     <Window.DataContext>
@@ -70,8 +71,27 @@
                         <ColumnDefinition Width="100"/>
                     </Grid.ColumnDefinitions>
                     <Grid x:Name="MainGrid" Grid.Column="1" Grid.RowSpan="2"/>
+                    <Border BorderThickness="1" Grid.Column="1" Margin="0,44,0,229" Grid.RowSpan="2">
+                        <Border.Background>
+                            <ImageBrush ImageSource="/Images/base.png" Stretch="Uniform"/>
+                        </Border.Background>
+                        <Canvas>
+                            <Rectangle x:Name="ScannerRect" HorizontalAlignment="Center" Height="8" Stroke="White" VerticalAlignment="Top" Width="291" Fill="White" Canvas.Left="393" Canvas.Top="10" Visibility="Hidden"/>
+                        </Canvas>
+                    </Border>
+                    <TextBox x:Name="QRCodeTextBox" 
+                             Grid.Column="1"
+                             HorizontalAlignment="Center" 
+                             Margin="0,200,0,0" 
+                             TextWrapping="Wrap" 
+                             VerticalAlignment="Top" 
+                             Width="552" 
+                             Height="42" 
+                             FontSize="6" 
+                             KeyDown="OnKeyDownHandler"
+                             TabIndex="1" Visibility="Visible" Background="{x:Null}" Foreground="#00000000" BorderBrush="#02ABADB3" Opacity="0" Grid.Row="1"
+                             />
                 </Grid>
-
             </Grid>
         </Grid>
     </Border>

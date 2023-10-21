@@ -189,7 +189,10 @@ namespace QEAMApp
 
         private void FocusTextBoxOnKeyDown(object sender, KeyEventArgs e)
         {
-            QRCodeTextBox.Focus();
+            if(e.Key == Key.Return)
+            {
+                QRCodeTextBox.Focus();
+            }
         }
 
         private async void OnKeyDownHandler(object sender, KeyEventArgs e)

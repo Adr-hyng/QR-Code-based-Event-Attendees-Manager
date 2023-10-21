@@ -16,13 +16,8 @@
         <viewModel:MainViewModel/>
     </Window.DataContext>
 
-    <Border Margin="1,10,-1,10">
-        <Border.Background>
-            <LinearGradientBrush StartPoint="0, 0" EndPoint="1, 1">
-                <GradientStop Color="#1c4942" Offset="0.0"/>
-                <GradientStop Color="#0e1c1c" Offset="1.0"/>
-            </LinearGradientBrush>
-        </Border.Background>
+    <Border Margin="1,10,-1,10"
+            Background="Black">
         <Grid MouseLeftButtonDown="Grid_MouseLeftButtonDown">
             <Grid>
                 <Grid.Background>

@@ -8,8 +8,9 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <None Remove="Images\export.png" />
-    <None Remove="Images\import.png" />
+    <None Remove="Images\bg.png" />
+    <None Remove="Images\footer.png" />
+    <None Remove="Images\header.png" />
   </ItemGroup>
 
   <ItemGroup>
@@ -21,12 +22,9 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Resource Include="Images\export.png">
-      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
-    </Resource>
-    <Resource Include="Images\import.png">
-      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
-    </Resource>
+    <Resource Include="Images\bg.png" />
+    <Resource Include="Images\footer.png" />
+    <Resource Include="Images\header.png" />
   </ItemGroup>
 
 </Project>

@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:QEAMApp"
         xmlns:viewModel="clr-namespace:QEAMApp.MVVM.ViewModel"
         mc:Ignorable="d"
-        Height="450" Width="600"
+        Height="800" Width="1279"
         WindowStyle="None"
         Background="Transparent"
         AllowsTransparency="True">
@@ -15,7 +15,7 @@
         <viewModel:MainViewModel/>
     </Window.DataContext>
 
-    <Border CornerRadius="20">
+    <Border Margin="1,10,-1,10">
         <Border.Background>
             <LinearGradientBrush StartPoint="0, 0" EndPoint="1, 1">
                 <GradientStop Color="#1c4942" Offset="0.0"/>
@@ -24,6 +24,9 @@
         </Border.Background>
         <Grid MouseLeftButtonDown="Grid_MouseLeftButtonDown">
             <Grid>
+                <Grid.Background>
+                    <ImageBrush/>
+                </Grid.Background>
 
                 <Grid.RowDefinitions>
                     <RowDefinition Height="100"/>
@@ -31,14 +34,10 @@
                     <RowDefinition Height="75"/>
                 </Grid.RowDefinitions>
 
-                <Border Grid.Row="0"
-                        Background="#1c4942">
-                    <TextBlock Text="Image Header"
-                               VerticalAlignment="Center"
-                               HorizontalAlignment="Center"
-                               Foreground="White"
-                               FontSize="22"
-                               Margin="20, 0, 0, 0"/>
+                <Border Grid.Row="0" Margin="-3,0,0,0">
+                    <Border.Background>
+                        <ImageBrush ImageSource="/Images/header.png"/>
+                    </Border.Background>
                 </Border>
 
                 <Button Content="X"
@@ -51,26 +50,28 @@
                         Grid.Column="1"
                         Click="CloseButton_Click" RenderTransformOrigin="0.4,0.067"/>
 
-                <Border Grid.Row="2"
-                        Background="#1c4942">
-                    <TextBlock Text="Image Footer"
-                               VerticalAlignment="Center"
-                               HorizontalAlignment="Center"
-                               Foreground="White"
-                               FontSize="22"
-                               Margin="20, 0, 0, 0"/>
+                <Border Grid.Row="2">
+                    <Border.Background>
+                        <ImageBrush ImageSource="/Images/footer.png"/>
+                    </Border.Background>
                 </Border>
 
                 <Grid Grid.Row="1">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="332*"/>
+                        <RowDefinition Height="273*"/>
+                    </Grid.RowDefinitions>
+                    <Grid.Background>
+                        <ImageBrush ImageSource="/Images/bg.png"/>
+                    </Grid.Background>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="100"/>
                         <ColumnDefinition/>
                         <ColumnDefinition Width="100"/>
                     </Grid.ColumnDefinitions>
-                    <StackPanel x:Name="MainGrid" Grid.Column="1">
-                        <TextBlock Name="Test" Text="Hello" FontSize="35" Grid.Column="1"/>
-                    </StackPanel>
+                    <Grid x:Name="MainGrid" Grid.Column="1" Grid.RowSpan="2"/>
                 </Grid>
+
             </Grid>
         </Grid>
     </Border>

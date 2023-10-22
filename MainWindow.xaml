@@ -95,7 +95,16 @@
                              Opacity="0" 
                              Grid.Row="1" Cursor="None"
                              />
-                    <Button x:Name="ImportButton" Content="" HorizontalAlignment="Left" Margin="10,136,0,0" Grid.Row="1" VerticalAlignment="Top" Height="50" Width="168" Grid.ColumnSpan="2" BorderBrush="#00707070">
+
+                    <Button x:Name="ImportButton" 
+                            HorizontalAlignment="Left"
+                            Margin="10,136,0,0"
+                            Grid.Row="1" 
+                            VerticalAlignment="Top" 
+                            Height="50" Width="168" 
+                            Grid.ColumnSpan="2"
+                            MouseLeave="ImportButton_MouseLeave"
+                            MouseEnter="ImportButton_MouseEnter">
                         <Button.Style>
                             <Style TargetType="Button">
                                 <Setter Property="Background">
@@ -114,9 +123,16 @@
                                 </Setter>
                             </Style>
                         </Button.Style>
+                        <Rectangle x:Name="ImportButtonBox" Height="45" Stroke="White" Width="1" RenderTransformOrigin="0,1" HorizontalAlignment="Left" Fill="White" Margin="0,0,155,0">
+                            <Rectangle.RenderTransform>
+                                <ScaleTransform x:Name="ImportBoxScaleTransform" ScaleX="1"/>
+                            </Rectangle.RenderTransform>
+                        </Rectangle>
+
                     </Button>
-                    
-                    <Button x:Name="ExportButton" Content="" HorizontalAlignment="Left" Height="50" Margin="10,200,0,0" Grid.Row="1" VerticalAlignment="Top" Width="168" Grid.ColumnSpan="2" BorderBrush="#03707070">
+
+
+                    <Button x:Name="ExportButton" HorizontalAlignment="Left" Height="50" Margin="10,200,0,0" Grid.Row="1" VerticalAlignment="Top" Width="168" Grid.ColumnSpan="2" BorderBrush="#03707070">
                         <Button.Style>
                             <Style TargetType="Button">
                                 <Setter Property="Background">
@@ -135,6 +151,9 @@
                                 </Setter>
                             </Style>
                         </Button.Style>
+                        <Rectangle Height="43" Stroke="#FFFDFDFD" Width="1" RenderTransformOrigin="0.5,0.5" Margin="0,0,160,0">
+
+                        </Rectangle>
                     </Button>
                 </Grid>
             </Grid>

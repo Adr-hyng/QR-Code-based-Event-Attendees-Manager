@@ -197,13 +197,53 @@ namespace QEAMApp
             }
         }
 
+        private void ImportButton_MouseEnter(object sender, MouseEventArgs e)
+        {
+            double buttonWidth = ImportButton.Width;
+            double rectangleWidth = buttonWidth - 6;
+
+            DoubleAnimation animation = new DoubleAnimation(rectangleWidth, TimeSpan.FromSeconds(0.2));
+            ImportBoxScaleTransform.BeginAnimation(ScaleTransform.ScaleXProperty, animation);
+        }
+
+        //private void ImportButton_Click(object sender, RoutedEventArgs e)
+        //{
+        //    this.Close();
+        //}
+
+        private void ImportButton_MouseLeave(object sender, MouseEventArgs e)
+        {
+            DoubleAnimation animation = new DoubleAnimation(1, TimeSpan.FromSeconds(0.3));
+            ImportBoxScaleTransform.BeginAnimation(ScaleTransform.ScaleXProperty, animation);
+        }
+
+        //private void ExportButton_MouseEnter(object sender, MouseEventArgs e)
+        //{
+        //    double buttonWidth = ExportButton.Width / 2;
+        //    double rectangleWidth = buttonWidth - 3;
+
+        //    DoubleAnimation animation = new DoubleAnimation(rectangleWidth, TimeSpan.FromSeconds(0.2));
+        //    ExportBoxScaleTransform.BeginAnimation(ScaleTransform.ScaleXProperty, animation);
+        //}
+
+        //private void ExportButton_Click(object sender, RoutedEventArgs e)
+        //{
+        //    this.Close();
+        //}
+
+        //private void ExportButton_MouseLeave(object sender, MouseEventArgs e)
+        //{
+        //    DoubleAnimation animation = new DoubleAnimation(1, TimeSpan.FromSeconds(0.3));
+        //    ExportBoxScaleTransform.BeginAnimation(ScaleTransform.ScaleXProperty, animation);
+        //}
+
+
         private async void OnKeyDownHandler(object sender, KeyEventArgs e)
         {
             // When Enter is hit in Textbox
             if (e.Key == Key.Return)
             {
                 string userInput = QRCodeTextBox.Text;
-                Int16 scannedCount = 0;
 
                 if (userInput == "Cat")
                 {
@@ -217,6 +257,8 @@ namespace QEAMApp
                     // Execute your desired action here
                     // Replace the comment with your code
                     QRCodeTextBox.Opacity = 1;
+                    ExportButton.Opacity = 1;
+                    ImportButton.Opacity = 1;
                 }
 
                 else if (userInput == "DevOff" || userInput == "b8381b3e-8ae5-5431-ab37-d25e68769ef1")
@@ -224,13 +266,14 @@ namespace QEAMApp
                     // Execute your desired action here
                     // Replace the comment with your code
                     QRCodeTextBox.Opacity = 0;
+                    ExportButton.IsEnabled = false;
+                    ImportButton.IsEnabled = false;
+                    ExportButton.Opacity = 0;
+                    ImportButton.Opacity = 0;
                 }
 
                 QRCodeTextBox.Text = "";
             }
         }
-
-
     }
-
 }

@@ -180,7 +180,7 @@ namespace QEAMApp.MVVM.View
             double buttonWidth = ImportButton.Width;
             double rectangleWidth = buttonWidth - 6;
 
-            DoubleAnimation animation = new DoubleAnimation(rectangleWidth, TimeSpan.FromSeconds(0.1));
+            DoubleAnimation animation = new(rectangleWidth, TimeSpan.FromSeconds(0.1));
             ImportBoxScaleTransform.BeginAnimation(ScaleTransform.ScaleXProperty, animation);
         }
 
@@ -191,7 +191,7 @@ namespace QEAMApp.MVVM.View
 
         private void ImportButton_MouseLeave(object sender, MouseEventArgs e)
         {
-            DoubleAnimation animation = new DoubleAnimation(1, TimeSpan.FromSeconds(0.1));
+            DoubleAnimation animation = new(1, TimeSpan.FromSeconds(0.1));
             ImportBoxScaleTransform.BeginAnimation(ScaleTransform.ScaleXProperty, animation);
         }
 
@@ -200,7 +200,7 @@ namespace QEAMApp.MVVM.View
             double buttonWidth = ExportButton.Width;
             double rectangleWidth = buttonWidth - 6;
 
-            DoubleAnimation animation = new DoubleAnimation(rectangleWidth, TimeSpan.FromSeconds(0.1));
+            DoubleAnimation animation = new(rectangleWidth, TimeSpan.FromSeconds(0.1));
             ExportBoxScaleTransform.BeginAnimation(ScaleTransform.ScaleXProperty, animation);
         }
 
@@ -211,7 +211,7 @@ namespace QEAMApp.MVVM.View
 
         private void ExportButton_MouseLeave(object sender, MouseEventArgs e)
         {
-            DoubleAnimation animation = new DoubleAnimation(1, TimeSpan.FromSeconds(0.1));
+            DoubleAnimation animation = new(1, TimeSpan.FromSeconds(0.1));
             ExportBoxScaleTransform.BeginAnimation(ScaleTransform.ScaleXProperty, animation);
         }
 

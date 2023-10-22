@@ -33,18 +33,17 @@ namespace QEAMApp
             InitializeComponent();
         }
 
-        private T FindVisualChild<T>(DependencyObject parent, string childName) where T : DependencyObject
+        private T? FindVisualChild<T>(DependencyObject parent, string childName) where T : DependencyObject
         {
             if (parent == null)
                 return null;
 
-            T foundChild = null;
+            T? foundChild = null;
             int childrenCount = VisualTreeHelper.GetChildrenCount(parent);
             for (int i = 0; i < childrenCount; i++)
             {
                 var child = VisualTreeHelper.GetChild(parent, i);
-                T childType = child as T;
-                if (childType == null)
+                if (child is not T)
                 {
                     foundChild = FindVisualChild<T>(child, childName);
                     if (foundChild != null)
@@ -52,8 +51,7 @@ namespace QEAMApp
                 }
                 else if (!string.IsNullOrEmpty(childName))
                 {
-                    var frameworkElement = child as FrameworkElement;
-                    if (frameworkElement != null && frameworkElement.Name == childName)
+                    if (child is FrameworkElement frameworkElement && frameworkElement.Name == childName)
                     {
                         foundChild = (T)child;
                         break;
@@ -79,7 +77,7 @@ namespace QEAMApp
         private void Grid_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
             this.DragMove();
-            if(this.QRCodePrompt == null) this.QRCodePrompt = FindVisualChild<TextBox>(MainView, "QRCodeTextBox");
+            this.QRCodePrompt ??= FindVisualChild<TextBox>(MainView, "QRCodeTextBox");
             this.QRCodePrompt.Focus();
         }
 

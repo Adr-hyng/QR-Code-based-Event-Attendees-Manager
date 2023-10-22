@@ -76,16 +76,66 @@
                     </Border>
                     <TextBox x:Name="QRCodeTextBox" 
                              Grid.Column="1"
+                             Style="{StaticResource ModernTextBox}"
                              HorizontalAlignment="Center" 
                              Margin="0,200,0,0" 
                              TextWrapping="Wrap" 
-                             VerticalAlignment="Top" 
-                             Width="552" 
+                             VerticalAlignment="Top"
+                             TextAlignment="Center"
+                             Width="412" 
                              Height="42" 
-                             FontSize="6" 
+                             FontSize="20" 
+                             FontFamily="/Fonts/#JetBrains Mono" 
                              KeyDown="OnKeyDownHandler"
-                             TabIndex="1" Visibility="Visible" Background="{x:Null}" Foreground="#00000000" BorderBrush="#02ABADB3" Opacity="0" Grid.Row="1"
+                             TabIndex="1" 
+                             Visibility="Visible" 
+                             Background="{x:Null}" 
+                             Foreground="#00000000" 
+                             BorderBrush="#02ABADB3" 
+                             Opacity="0" 
+                             Grid.Row="1" Cursor="None"
                              />
+                    <Button x:Name="ImportButton" Content="" HorizontalAlignment="Left" Margin="10,136,0,0" Grid.Row="1" VerticalAlignment="Top" Height="50" Width="168" Grid.ColumnSpan="2" BorderBrush="#00707070">
+                        <Button.Style>
+                            <Style TargetType="Button">
+                                <Setter Property="Background">
+                                    <Setter.Value>
+                                        <ImageBrush ImageSource="/Images/import.png"/>
+                                    </Setter.Value>
+                                </Setter>
+                                <Setter Property="Template">
+                                    <Setter.Value>
+                                        <ControlTemplate TargetType="Button">
+                                            <Border Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}">
+                                                <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                            </Border>
+                                        </ControlTemplate>
+                                    </Setter.Value>
+                                </Setter>
+                            </Style>
+                        </Button.Style>
+                    </Button>
+                    
+                    <Button x:Name="ExportButton" Content="" HorizontalAlignment="Left" Height="50" Margin="10,200,0,0" Grid.Row="1" VerticalAlignment="Top" Width="168" Grid.ColumnSpan="2" BorderBrush="#03707070">
+                        <Button.Style>
+                            <Style TargetType="Button">
+                                <Setter Property="Background">
+                                    <Setter.Value>
+                                        <ImageBrush ImageSource="/Images/export.png"/>
+                                    </Setter.Value>
+                                </Setter>
+                                <Setter Property="Template">
+                                    <Setter.Value>
+                                        <ControlTemplate TargetType="Button">
+                                            <Border Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}">
+                                                <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                            </Border>
+                                        </ControlTemplate>
+                                    </Setter.Value>
+                                </Setter>
+                            </Style>
+                        </Button.Style>
+                    </Button>
                 </Grid>
             </Grid>
         </Grid>

@@ -8,14 +8,20 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="Fonts\JetBrainsMono-Bold.ttf" />
+    <None Remove="Fonts\JetBrainsMono-ExtraBold.ttf" />
+    <None Remove="Fonts\JetBrainsMono-ExtraLight.ttf" />
+    <None Remove="Fonts\JetBrainsMono-Light.ttf" />
+    <None Remove="Fonts\JetBrainsMono-Medium.ttf" />
+    <None Remove="Fonts\JetBrainsMono-Regular.ttf" />
+    <None Remove="Fonts\JetBrainsMono-SemiBold.ttf" />
+    <None Remove="Fonts\JetBrainsMono-Thin.ttf" />
     <None Remove="Images\base.png" />
     <None Remove="Images\bg.png" />
+    <None Remove="Images\export.png" />
     <None Remove="Images\footer.png" />
     <None Remove="Images\header.png" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="Fonts\" />
+    <None Remove="Images\import.png" />
   </ItemGroup>
 
   <ItemGroup>
@@ -23,10 +29,20 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Resource Include="Fonts\JetBrainsMono-Bold.ttf" />
+    <Resource Include="Fonts\JetBrainsMono-ExtraBold.ttf" />
+    <Resource Include="Fonts\JetBrainsMono-ExtraLight.ttf" />
+    <Resource Include="Fonts\JetBrainsMono-Light.ttf" />
+    <Resource Include="Fonts\JetBrainsMono-Medium.ttf" />
+    <Resource Include="Fonts\JetBrainsMono-Regular.ttf" />
+    <Resource Include="Fonts\JetBrainsMono-SemiBold.ttf" />
+    <Resource Include="Fonts\JetBrainsMono-Thin.ttf" />
     <Resource Include="Images\bg.png" />
+    <Resource Include="Images\export.png" />
     <Resource Include="Images\footer.png" />
     <Resource Include="Images\header.png" />
     <Resource Include="Images\base.png" />
+    <Resource Include="Images\import.png" />
   </ItemGroup>
 
 </Project>

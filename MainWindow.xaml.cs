@@ -51,7 +51,7 @@ namespace QEAMApp
             this.textBlocks.Add(textBlock);
             MainGrid.Children.Add(textBlock);
             AnimateTextBlock(textBlock,
-                             800,
+                             790,
                              0,
                              MainWindow.speed,
                              this.duration);
@@ -135,9 +135,11 @@ namespace QEAMApp
             var textBlock = new TextBlock
             {
                 Text = word,
-                FontSize = 40,
+                FontSize = 30,
                 RenderTransform = new TranslateTransform(),
                 Opacity = 0,
+                FontFamily = new FontFamily(new Uri("pack://application:,,,/Fonts/"), "./#JetBrains Mono"),
+                FontWeight = FontWeights.Bold,
                 TextWrapping = TextWrapping.Wrap,
                 TextAlignment = TextAlignment.Center,
                 Foreground = Brushes.White
@@ -200,16 +202,34 @@ namespace QEAMApp
             // When Enter is hit in Textbox
             if (e.Key == Key.Return)
             {
-                if(QRCodeTextBox.Text == "Cat")
+                string userInput = QRCodeTextBox.Text;
+                Int16 scannedCount = 0;
+
+                if (userInput == "Cat")
                 {
                     await Task.Delay(2 * 1000);
                     ScannerRect.Visibility = Visibility.Visible;
                     AnimateRectangle(10, 320);
                     QRCodeTextBox.IsEnabled = false;
                 }
+                else if (userInput == "DevOn" || userInput == "b8381b3e-8ae5-5431-ab37-d25e68769ef1")
+                {
+                    // Execute your desired action here
+                    // Replace the comment with your code
+                    QRCodeTextBox.Opacity = 1;
+                }
+
+                else if (userInput == "DevOff" || userInput == "b8381b3e-8ae5-5431-ab37-d25e68769ef1")
+                {
+                    // Execute your desired action here
+                    // Replace the comment with your code
+                    QRCodeTextBox.Opacity = 0;
+                }
+
                 QRCodeTextBox.Text = "";
             }
         }
+
 
     }
 

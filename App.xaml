@@ -7,14 +7,15 @@
              StartupUri="MainWindow.xaml">
     <Application.Resources>
         <ResourceDictionary>
-
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="Theme/MenuButtonTheme.xaml"/>
                 <ResourceDictionary Source="Theme/TextBoxTheme.xaml"/>
                 <ResourceDictionary Source="Theme/IconButtonTheme.xaml"/>
                 <ResourceDictionary Source="Theme/ModernScrollViewerTheme.xaml"/>
             </ResourceDictionary.MergedDictionaries>
-            
+
+            <FontFamily x:Key="JetBrainsMono">pack://application:,,,/QEAMApp;component/Fonts/#JetBrains Mono</FontFamily>
+
             <DataTemplate DataType="{x:Type viewModel:PersonalViewModel}">
                 <view:PersonalView/>
             </DataTemplate>

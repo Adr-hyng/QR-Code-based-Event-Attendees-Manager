@@ -105,7 +105,7 @@
                             Grid.ColumnSpan="2"
                             Click="ImportButton_Click"
                             MouseLeave="ImportButton_MouseLeave"
-                            MouseEnter="ImportButton_MouseEnter">
+                            MouseEnter="ImportButton_MouseEnter" Visibility="Hidden">
                         <Button.Style>
                             <Style TargetType="Button">
                                 <Setter Property="Background">
@@ -143,7 +143,7 @@
                             BorderBrush="#03707070"
                             Click="ExportButton_Click"
                             MouseLeave="ExportButton_MouseLeave"
-                            MouseEnter="ExportButton_MouseEnter">
+                            MouseEnter="ExportButton_MouseEnter" Visibility="Hidden">
                         <Button.Style>
                             <Style TargetType="Button">
                                 <Setter Property="Background">

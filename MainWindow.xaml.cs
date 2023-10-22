@@ -21,6 +21,7 @@ namespace QEAMApp
 {
     /// <summary>
     /// Interaction logic for MainWindow.xaml
+    /// Spaghetti code, please use User Control, and ViewModel for EventHandling Soon :D
     /// </summary>
     public partial class MainWindow : Window
     {
@@ -250,15 +251,15 @@ namespace QEAMApp
                     await Task.Delay(2 * 1000);
                     ScannerRect.Visibility = Visibility.Visible;
                     AnimateRectangle(10, 320);
-                    QRCodeTextBox.IsEnabled = false;
+                    QRCodeTextBox.Visibility = Visibility.Hidden;
                 }
                 else if (userInput == "DevOn" || userInput == "b8381b3e-8ae5-5431-ab37-d25e68769ef1")
                 {
                     // Execute your desired action here
                     // Replace the comment with your code
                     QRCodeTextBox.Opacity = 1;
-                    ExportButton.Opacity = 1;
-                    ImportButton.Opacity = 1;
+                    ImportButton.Visibility = Visibility.Visible;
+                    ExportButton.Visibility = Visibility.Visible;
                 }
 
                 else if (userInput == "DevOff" || userInput == "b8381b3e-8ae5-5431-ab37-d25e68769ef1")
@@ -266,10 +267,8 @@ namespace QEAMApp
                     // Execute your desired action here
                     // Replace the comment with your code
                     QRCodeTextBox.Opacity = 0;
-                    ExportButton.IsEnabled = false;
-                    ImportButton.IsEnabled = false;
-                    ExportButton.Opacity = 0;
-                    ImportButton.Opacity = 0;
+                    ImportButton.Visibility = Visibility.Hidden;
+                    ExportButton.Visibility = Visibility.Hidden;
                 }
 
                 QRCodeTextBox.Text = "";

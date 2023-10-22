@@ -103,6 +103,7 @@
                             VerticalAlignment="Top" 
                             Height="50" Width="168" 
                             Grid.ColumnSpan="2"
+                            Click="ImportButton_Click"
                             MouseLeave="ImportButton_MouseLeave"
                             MouseEnter="ImportButton_MouseEnter">
                         <Button.Style>
@@ -140,6 +141,7 @@
                             Width="168"
                             Grid.ColumnSpan="2"
                             BorderBrush="#03707070"
+                            Click="ExportButton_Click"
                             MouseLeave="ExportButton_MouseLeave"
                             MouseEnter="ExportButton_MouseEnter">
                         <Button.Style>

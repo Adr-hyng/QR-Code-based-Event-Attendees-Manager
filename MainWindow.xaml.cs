@@ -206,10 +206,10 @@ namespace QEAMApp
             ImportBoxScaleTransform.BeginAnimation(ScaleTransform.ScaleXProperty, animation);
         }
 
-        //private void ImportButton_Click(object sender, RoutedEventArgs e)
-        //{
-        //    this.Close();
-        //}
+        private void ImportButton_Click(object sender, RoutedEventArgs e)
+        {
+            // Trigger when Import button is clicked
+        }
 
         private void ImportButton_MouseLeave(object sender, MouseEventArgs e)
         {
@@ -226,10 +226,10 @@ namespace QEAMApp
             ExportBoxScaleTransform.BeginAnimation(ScaleTransform.ScaleXProperty, animation);
         }
 
-        //private void ExportButton_Click(object sender, RoutedEventArgs e)
-        //{
-        //    this.Close();
-        //}
+        private void ExportButton_Click(object sender, RoutedEventArgs e)
+        {
+            // Trigger when Export button clicks
+        }
 
         private void ExportButton_MouseLeave(object sender, MouseEventArgs e)
         {

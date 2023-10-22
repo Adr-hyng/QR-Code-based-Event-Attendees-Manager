@@ -128,11 +128,20 @@
                                 <ScaleTransform x:Name="ImportBoxScaleTransform" ScaleX="1"/>
                             </Rectangle.RenderTransform>
                         </Rectangle>
-
                     </Button>
 
 
-                    <Button x:Name="ExportButton" HorizontalAlignment="Left" Height="50" Margin="10,200,0,0" Grid.Row="1" VerticalAlignment="Top" Width="168" Grid.ColumnSpan="2" BorderBrush="#03707070">
+                    <Button x:Name="ExportButton" 
+                            HorizontalAlignment="Left" 
+                            Height="50" 
+                            Margin="10,200,0,0" 
+                            Grid.Row="1" 
+                            VerticalAlignment="Top"
+                            Width="168"
+                            Grid.ColumnSpan="2"
+                            BorderBrush="#03707070"
+                            MouseLeave="ExportButton_MouseLeave"
+                            MouseEnter="ExportButton_MouseEnter">
                         <Button.Style>
                             <Style TargetType="Button">
                                 <Setter Property="Background">
@@ -151,8 +160,10 @@
                                 </Setter>
                             </Style>
                         </Button.Style>
-                        <Rectangle Height="43" Stroke="#FFFDFDFD" Width="1" RenderTransformOrigin="0.5,0.5" Margin="0,0,160,0">
-
+                        <Rectangle Height="44" Stroke="White" Width="1" RenderTransformOrigin="0,1" Margin="0,0,157,0">
+                            <Rectangle.RenderTransform>
+                                <ScaleTransform x:Name="ExportBoxScaleTransform" ScaleX="1"/>
+                            </Rectangle.RenderTransform>
                         </Rectangle>
                     </Button>
                 </Grid>

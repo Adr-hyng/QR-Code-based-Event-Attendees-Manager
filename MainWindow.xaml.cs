@@ -202,7 +202,7 @@ namespace QEAMApp
             double buttonWidth = ImportButton.Width;
             double rectangleWidth = buttonWidth - 6;
 
-            DoubleAnimation animation = new DoubleAnimation(rectangleWidth, TimeSpan.FromSeconds(0.2));
+            DoubleAnimation animation = new DoubleAnimation(rectangleWidth, TimeSpan.FromSeconds(0.1));
             ImportBoxScaleTransform.BeginAnimation(ScaleTransform.ScaleXProperty, animation);
         }
 
@@ -213,29 +213,29 @@ namespace QEAMApp
 
         private void ImportButton_MouseLeave(object sender, MouseEventArgs e)
         {
-            DoubleAnimation animation = new DoubleAnimation(1, TimeSpan.FromSeconds(0.3));
+            DoubleAnimation animation = new DoubleAnimation(1, TimeSpan.FromSeconds(0.1));
             ImportBoxScaleTransform.BeginAnimation(ScaleTransform.ScaleXProperty, animation);
         }
 
-        //private void ExportButton_MouseEnter(object sender, MouseEventArgs e)
-        //{
-        //    double buttonWidth = ExportButton.Width / 2;
-        //    double rectangleWidth = buttonWidth - 3;
+        private void ExportButton_MouseEnter(object sender, MouseEventArgs e)
+        {
+            double buttonWidth = ExportButton.Width;
+            double rectangleWidth = buttonWidth - 6;
 
-        //    DoubleAnimation animation = new DoubleAnimation(rectangleWidth, TimeSpan.FromSeconds(0.2));
-        //    ExportBoxScaleTransform.BeginAnimation(ScaleTransform.ScaleXProperty, animation);
-        //}
+            DoubleAnimation animation = new DoubleAnimation(rectangleWidth, TimeSpan.FromSeconds(0.1));
+            ExportBoxScaleTransform.BeginAnimation(ScaleTransform.ScaleXProperty, animation);
+        }
 
         //private void ExportButton_Click(object sender, RoutedEventArgs e)
         //{
         //    this.Close();
         //}
 
-        //private void ExportButton_MouseLeave(object sender, MouseEventArgs e)
-        //{
-        //    DoubleAnimation animation = new DoubleAnimation(1, TimeSpan.FromSeconds(0.3));
-        //    ExportBoxScaleTransform.BeginAnimation(ScaleTransform.ScaleXProperty, animation);
-        //}
+        private void ExportButton_MouseLeave(object sender, MouseEventArgs e)
+        {
+            DoubleAnimation animation = new DoubleAnimation(1, TimeSpan.FromSeconds(0.1));
+            ExportBoxScaleTransform.BeginAnimation(ScaleTransform.ScaleXProperty, animation);
+        }
 
 
         private async void OnKeyDownHandler(object sender, KeyEventArgs e)

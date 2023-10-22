@@ -14,19 +14,14 @@
                 <ResourceDictionary Source="Theme/ModernScrollViewerTheme.xaml"/>
             </ResourceDictionary.MergedDictionaries>
 
+            <DataTemplate DataType="{x:Type viewModel:HomeViewModel}">
+                <view:HomeView/>
+            </DataTemplate>
+
+            <BitmapImage x:Key="MainBackground" UriSource="pack://application:,,,/QEAMApp;component/Images/bg.png"/>
+
             <FontFamily x:Key="JetBrainsMono">pack://application:,,,/QEAMApp;component/Fonts/#JetBrains Mono</FontFamily>
 
-            <DataTemplate DataType="{x:Type viewModel:PersonalViewModel}">
-                <view:PersonalView/>
-            </DataTemplate>
-
-            <DataTemplate DataType="{x:Type viewModel:StatusViewModel}">
-                <view:StatusView/>
-            </DataTemplate>
-
-            <DataTemplate DataType="{x:Type viewModel:SnackViewModel}">
-                <view:SnackView/>
-            </DataTemplate>
 
         </ResourceDictionary>
     </Application.Resources>

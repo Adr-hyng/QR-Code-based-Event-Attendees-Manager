@@ -18,6 +18,7 @@
 
     <Border Margin="1,10,-1,10"
             Background="Black">
+
         <Grid MouseLeftButtonDown="Grid_MouseLeftButtonDown">
             <Grid>
                 <Grid.Background>
@@ -25,9 +26,9 @@
                 </Grid.Background>
 
                 <Grid.RowDefinitions>
-                    <RowDefinition Height="100"/>
+                    <RowDefinition Height="122"/>
                     <RowDefinition/>
-                    <RowDefinition Height="75"/>
+                    <RowDefinition Height="71"/>
                 </Grid.RowDefinitions>
 
                 <Border Grid.Row="0" Margin="-3,0,0,0">
@@ -51,124 +52,10 @@
                         <ImageBrush ImageSource="/Images/footer.png"/>
                     </Border.Background>
                 </Border>
-
-                <Grid Grid.Row="1">
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="332*"/>
-                        <RowDefinition Height="273*"/>
-                    </Grid.RowDefinitions>
-                    <Grid.Background>
-                        <ImageBrush ImageSource="/Images/bg.png"/>
-                    </Grid.Background>
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="100"/>
-                        <ColumnDefinition/>
-                        <ColumnDefinition Width="100"/>
-                    </Grid.ColumnDefinitions>
-                    <Grid x:Name="MainGrid" Grid.Column="1" Grid.RowSpan="2"/>
-                    <Border BorderThickness="1" Grid.Column="1" Margin="0,44,0,229" Grid.RowSpan="2">
-                        <Border.Background>
-                            <ImageBrush ImageSource="/Images/base.png" Stretch="Uniform"/>
-                        </Border.Background>
-                        <Canvas>
-                            <Rectangle x:Name="ScannerRect" HorizontalAlignment="Center" Height="8" Stroke="White" VerticalAlignment="Top" Width="291" Fill="White" Canvas.Left="393" Canvas.Top="10" Visibility="Hidden"/>
-                        </Canvas>
-                    </Border>
-                    <TextBox x:Name="QRCodeTextBox" 
-                             Grid.Column="1"
-                             Style="{StaticResource ModernTextBox}"
-                             HorizontalAlignment="Center" 
-                             Margin="0,200,0,0" 
-                             TextWrapping="Wrap" 
-                             VerticalAlignment="Top"
-                             TextAlignment="Center"
-                             Width="412" 
-                             Height="42" 
-                             FontSize="20" 
-                             FontFamily="/Fonts/#JetBrains Mono" 
-                             KeyDown="OnKeyDownHandler"
-                             TabIndex="1" 
-                             Visibility="Visible" 
-                             Background="{x:Null}" 
-                             Foreground="#00000000" 
-                             BorderBrush="#02ABADB3" 
-                             Opacity="0" 
-                             Grid.Row="1" Cursor="None"
-                             />
-
-                    <Button x:Name="ImportButton" 
-                            HorizontalAlignment="Left"
-                            Margin="10,136,0,0"
-                            Grid.Row="1" 
-                            VerticalAlignment="Top" 
-                            Height="50" Width="168" 
-                            Grid.ColumnSpan="2"
-                            Click="ImportButton_Click"
-                            MouseLeave="ImportButton_MouseLeave"
-                            MouseEnter="ImportButton_MouseEnter" Visibility="Hidden">
-                        <Button.Style>
-                            <Style TargetType="Button">
-                                <Setter Property="Background">
-                                    <Setter.Value>
-                                        <ImageBrush ImageSource="/Images/import.png"/>
-                                    </Setter.Value>
-                                </Setter>
-                                <Setter Property="Template">
-                                    <Setter.Value>
-                                        <ControlTemplate TargetType="Button">
-                                            <Border Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}">
-                                                <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
-                                            </Border>
-                                        </ControlTemplate>
-                                    </Setter.Value>
-                                </Setter>
-                            </Style>
-                        </Button.Style>
-                        <Rectangle x:Name="ImportButtonBox" Height="45" Stroke="White" Width="1" RenderTransformOrigin="0,1" HorizontalAlignment="Left" Fill="White" Margin="0,0,155,0">
-                            <Rectangle.RenderTransform>
-                                <ScaleTransform x:Name="ImportBoxScaleTransform" ScaleX="1"/>
-                            </Rectangle.RenderTransform>
-                        </Rectangle>
-                    </Button>
-
-
-                    <Button x:Name="ExportButton" 
-                            HorizontalAlignment="Left" 
-                            Height="50" 
-                            Margin="10,200,0,0" 
-                            Grid.Row="1" 
-                            VerticalAlignment="Top"
-                            Width="168"
-                            Grid.ColumnSpan="2"
-                            BorderBrush="#03707070"
-                            Click="ExportButton_Click"
-                            MouseLeave="ExportButton_MouseLeave"
-                            MouseEnter="ExportButton_MouseEnter" Visibility="Hidden">
-                        <Button.Style>
-                            <Style TargetType="Button">
-                                <Setter Property="Background">
-                                    <Setter.Value>
-                                        <ImageBrush ImageSource="/Images/export.png"/>
-                                    </Setter.Value>
-                                </Setter>
-                                <Setter Property="Template">
-                                    <Setter.Value>
-                                        <ControlTemplate TargetType="Button">
-                                            <Border Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}">
-                                                <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
-                                            </Border>
-                                        </ControlTemplate>
-                                    </Setter.Value>
-                                </Setter>
-                            </Style>
-                        </Button.Style>
-                        <Rectangle Height="44" Stroke="White" Width="1" RenderTransformOrigin="0,1" Margin="0,0,157,0">
-                            <Rectangle.RenderTransform>
-                                <ScaleTransform x:Name="ExportBoxScaleTransform" ScaleX="1"/>
-                            </Rectangle.RenderTransform>
-                        </Rectangle>
-                    </Button>
-                </Grid>
+                <ContentControl 
+                    x:Name="MainView"
+                    Content="{Binding CurrentView}" 
+                    Grid.Row="1"/>
             </Grid>
         </Grid>
     </Border>

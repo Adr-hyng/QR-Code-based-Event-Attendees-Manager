@@ -16,12 +16,12 @@
     <None Remove="Fonts\JetBrainsMono-Regular.ttf" />
     <None Remove="Fonts\JetBrainsMono-SemiBold.ttf" />
     <None Remove="Fonts\JetBrainsMono-Thin.ttf" />
-    <None Remove="Images\base.png" />
     <None Remove="Images\bg.png" />
     <None Remove="Images\export.png" />
     <None Remove="Images\footer.png" />
     <None Remove="Images\header.png" />
     <None Remove="Images\import.png" />
+    <None Remove="Images\qr-code.png" />
   </ItemGroup>
 
   <ItemGroup>
@@ -37,11 +37,13 @@
     <Resource Include="Fonts\JetBrainsMono-Regular.ttf" />
     <Resource Include="Fonts\JetBrainsMono-SemiBold.ttf" />
     <Resource Include="Fonts\JetBrainsMono-Thin.ttf" />
-    <Resource Include="Images\bg.png" />
+    <Resource Include="Images\bg.png">
+      <CopyToOutputDirectory></CopyToOutputDirectory>
+    </Resource>
     <Resource Include="Images\export.png" />
     <Resource Include="Images\footer.png" />
     <Resource Include="Images\header.png" />
-    <Resource Include="Images\base.png" />
+    <Resource Include="Images\qr-code.png" />
     <Resource Include="Images\import.png" />
   </ItemGroup>
 

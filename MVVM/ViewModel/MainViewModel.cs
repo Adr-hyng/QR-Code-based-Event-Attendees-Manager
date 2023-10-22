@@ -5,14 +5,7 @@ namespace QEAMApp.MVVM.ViewModel
 {
     class MainViewModel : ObservableObject
     {
-
-        public RelayCommand PersonalViewCommand { get; set; }
-        public RelayCommand StatusViewCommand { get; set; }
-        public RelayCommand SnackViewCommand { get; set; }
-
-        public PersonalViewModel PersonalVM { get; set; }
-        public StatusViewModel StatusVM { get; set; }
-        public SnackViewModel SnackVM { get; set; }
+        public HomeViewModel HomeVM { get; set; }
 
         private object _currentView;
 
@@ -29,25 +22,8 @@ namespace QEAMApp.MVVM.ViewModel
 
         public MainViewModel()
         {
-            PersonalVM = new PersonalViewModel();
-            StatusVM = new StatusViewModel();
-            SnackVM = new SnackViewModel();
-
-            CurrentView = PersonalVM;
-
-            PersonalViewCommand = new RelayCommand(o =>
-            {
-                CurrentView = PersonalVM;
-            });
-
-            StatusViewCommand = new RelayCommand(o =>
-            {
-                CurrentView = StatusVM;
-            });
-            SnackViewCommand = new RelayCommand(o =>
-            {
-                CurrentView = SnackVM;
-            });
+            HomeVM = new HomeViewModel();
+            CurrentView = HomeVM;
         }
     }
 }

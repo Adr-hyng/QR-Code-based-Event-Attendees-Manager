@@ -1,4 +1,5 @@
 ﻿using QEAMApp.Core;
+using QEAMApp.MVVM.ViewModel;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -23,12 +24,11 @@ namespace QEAMApp.MVVM.View
     public partial class HomeView : UserControl
     {
 
-        private readonly Rectangle ScannerRect;
+        private Rectangle ScannerRect;
 
         public HomeView()
         {
             InitializeComponent();
-            this.ScannerRect ??= Utility.FindVisualChild<Rectangle>(BaseView, "ScannerRect");
         }
 
         private void ImportButton_MouseEnter(object sender, MouseEventArgs e)
@@ -80,10 +80,16 @@ namespace QEAMApp.MVVM.View
 
                 if (userInput == "Cat")
                 {
-                    await Task.Delay(2 * 1000);
+                    this.ScannerRect ??= Utility.FindVisualChild<Rectangle>(BaseView, "ScannerRect");
                     this.ScannerRect.Visibility = Visibility.Visible;
                     Utility.AnimateRectangle(this.ScannerRect, 20, 300);
                     QRCodeTextBox.Visibility = Visibility.Hidden;
+                    await Task.Delay(2 * 1000);
+
+                    // Trigger the CardViewCommand down below
+                    MainViewModel mainViewModel = (MainViewModel)DataContext;
+                    mainViewModel.CardViewCommand.Execute(parameter: null);
+
                 }
                 else if (userInput == "DevOn" || userInput == "b8381b3e-8ae5-5431-ab37-d25e68769ef1")
                 {

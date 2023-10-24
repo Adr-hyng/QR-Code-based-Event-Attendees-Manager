@@ -30,7 +30,6 @@
 
             <FontFamily x:Key="JetBrainsMono">pack://application:,,,/QEAMApp;component/Fonts/#JetBrains Mono</FontFamily>
 
-
         </ResourceDictionary>
     </Application.Resources>
 </Application>

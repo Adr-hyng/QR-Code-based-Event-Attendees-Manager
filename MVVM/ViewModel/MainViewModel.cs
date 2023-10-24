@@ -39,6 +39,10 @@ namespace QEAMApp.MVVM.ViewModel
             {
                 CurrentView = BaseVM;
             });
+            CardViewCommand = new RelayCommand(o =>
+            {
+                CurrentView = CardVM;
+            });
         }
     }
 }

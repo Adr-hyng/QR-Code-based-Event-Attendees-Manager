@@ -7,6 +7,31 @@
              mc:Ignorable="d" 
              d:DesignHeight="468" d:DesignWidth="1279">
     <Grid>
-            
+        <Border BorderBrush="#00000000" BorderThickness="1" Background="#2D00DD75" CornerRadius="40,40,40,40" Width="711" Margin="0,55,0,0">
+            <StackPanel>
+                <Border BorderBrush="#00000000" BorderThickness="1" Height="118">
+                    
+                </Border>
+                <Grid>
+                    <Border Margin="424,0,19,0" Height="266" Width="266">
+                        <Border.Background>
+                            <ImageBrush ImageSource="/Images/icpep-logo.png"/>
+                        </Border.Background>
+                    </Border>
+                    <Border Margin="38,10,613,184" Width="58" Height="72">
+                        <Border.Background>
+                            <ImageBrush ImageSource="/Images/name-section.png"/>
+                        </Border.Background>
+                    </Border>
+                    <Border Margin="38,91,613,19" Width="58" Height="156">
+                        <Border.Background>
+                            <ImageBrush ImageSource="/Images/status-section.png"/>
+                        </Border.Background>
+
+                    </Border>
+                </Grid>
+                    
+            </StackPanel>
+        </Border>
     </Grid>
 </UserControl>

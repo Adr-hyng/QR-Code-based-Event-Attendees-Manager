@@ -20,8 +20,11 @@
     <None Remove="Images\export.png" />
     <None Remove="Images\footer.png" />
     <None Remove="Images\header.png" />
+    <None Remove="Images\icpep-logo.png" />
     <None Remove="Images\import.png" />
+    <None Remove="Images\name-section.png" />
     <None Remove="Images\qr-code.png" />
+    <None Remove="Images\status-section.png" />
   </ItemGroup>
 
   <ItemGroup>
@@ -43,8 +46,11 @@
     <Resource Include="Images\export.png" />
     <Resource Include="Images\footer.png" />
     <Resource Include="Images\header.png" />
+    <Resource Include="Images\icpep-logo.png" />
+    <Resource Include="Images\name-section.png" />
     <Resource Include="Images\qr-code.png" />
     <Resource Include="Images\import.png" />
+    <Resource Include="Images\status-section.png" />
   </ItemGroup>
 
 </Project>

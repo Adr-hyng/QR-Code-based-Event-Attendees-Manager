@@ -29,6 +29,9 @@ namespace QEAMApp.MVVM.View
         public HomeView()
         {
             InitializeComponent();
+
+            MainViewModel mainViewModel = new MainViewModel();
+            DataContext = mainViewModel;
         }
 
         private void ImportButton_MouseEnter(object sender, MouseEventArgs e)
@@ -78,9 +81,9 @@ namespace QEAMApp.MVVM.View
             {
                 string userInput = QRCodeTextBox.Text;
 
+                this.ScannerRect ??= Utility.FindVisualChild<Rectangle>(BaseView, "ScannerRect");
                 if (userInput == "Cat")
                 {
-                    this.ScannerRect ??= Utility.FindVisualChild<Rectangle>(BaseView, "ScannerRect");
                     this.ScannerRect.Visibility = Visibility.Visible;
                     Utility.AnimateRectangle(this.ScannerRect, 20, 300);
                     QRCodeTextBox.Visibility = Visibility.Hidden;
@@ -88,7 +91,7 @@ namespace QEAMApp.MVVM.View
 
                     // Trigger the CardViewCommand down below
                     MainViewModel mainViewModel = (MainViewModel)DataContext;
-                    mainViewModel.CardViewCommand.Execute(parameter: null);
+                    mainViewModel.CardViewCommand.Execute(null);
 
                 }
                 else if (userInput == "DevOn" || userInput == "b8381b3e-8ae5-5431-ab37-d25e68769ef1")

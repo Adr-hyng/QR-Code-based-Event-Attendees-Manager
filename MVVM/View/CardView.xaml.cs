@@ -13,6 +13,8 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
+using QEAMApp.MVVM.ViewModel;
+
 namespace QEAMApp.MVVM.View
 {
     /// <summary>
@@ -20,9 +22,19 @@ namespace QEAMApp.MVVM.View
     /// </summary>
     public partial class CardView : UserControl
     {
+        public event EventHandler NavigateBackRequested;
+
         public CardView()
         {
             InitializeComponent();
+        }
+
+        private void ExitCardButton_Click(object sender, RoutedEventArgs e)
+        {
+            MainViewModel mainViewModel = (MainViewModel)DataContext;
+            mainViewModel.CardViewCommand.Execute(null);
+            //MessageBox.Show(mainViewModel.CurrentView.ToString());
+            // Doesn't go back
         }
     }
 }

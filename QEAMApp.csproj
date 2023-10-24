@@ -19,6 +19,7 @@
     <None Remove="Images\bg.png" />
     <None Remove="Images\breakfast.png" />
     <None Remove="Images\dinner.png" />
+    <None Remove="Images\exit-card.png" />
     <None Remove="Images\export.png" />
     <None Remove="Images\footer.png" />
     <None Remove="Images\header.png" />
@@ -48,6 +49,7 @@
     </Resource>
     <Resource Include="Images\breakfast.png" />
     <Resource Include="Images\dinner.png" />
+    <Resource Include="Images\exit-card.png" />
     <Resource Include="Images\export.png" />
     <Resource Include="Images\footer.png" />
     <Resource Include="Images\header.png" />

@@ -4,55 +4,71 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:QEAMApp.MVVM.View"
+             xmlns:viewModel="clr-namespace:QEAMApp.MVVM.ViewModel"
              mc:Ignorable="d" 
              d:DesignHeight="468" d:DesignWidth="1279">
+    <UserControl.DataContext>
+        <viewModel:MainViewModel />
+    </UserControl.DataContext>
     <Grid>
         <Border BorderBrush="#00000000" BorderThickness="1" Background="#2D00DD75" CornerRadius="40,40,40,40" Width="711" Margin="0,55,0,0">
             <StackPanel>
-                <Border BorderBrush="#00000000" BorderThickness="1" Height="118">
+                <Grid>
+                    
+                    <Border BorderBrush="#00000000" BorderThickness="1" Height="118">
+                        <Border Margin="0,24,0,0" Width="470" Height="90" CornerRadius="38,38,38,38">
+                            <Border.Background>
+                                <LinearGradientBrush EndPoint="0,1" StartPoint="1,0">
+                                    <GradientStop Color="#FF001D10"/>
+                                    <GradientStop Color="#FF009B51" Offset="1"/>
+                                </LinearGradientBrush>
+                            </Border.Background>
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="35"/>
+                                    <ColumnDefinition Width="85"/>
+                                    <ColumnDefinition Width="74"/>
+                                    <ColumnDefinition Width="85"/>
+                                    <ColumnDefinition Width="74"/>
+                                    <ColumnDefinition Width="85"/>
+                                    <ColumnDefinition/>
+                                </Grid.ColumnDefinitions>
 
-                    <Border Margin="0,24,0,0" Width="470" Height="90" CornerRadius="38,38,38,38">
-                        <Border.Background>
-                            <LinearGradientBrush EndPoint="0,1" StartPoint="1,0">
-                                <GradientStop Color="#FF001D10"/>
-                                <GradientStop Color="#FF009B51" Offset="1"/>
-                            </LinearGradientBrush>
-                        </Border.Background>
-                        <Grid>
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="35"/>
-                                <ColumnDefinition Width="85"/>
-                                <ColumnDefinition Width="74"/>
-                                <ColumnDefinition Width="85"/>
-                                <ColumnDefinition Width="74"/>
-                                <ColumnDefinition Width="85"/>
-                                <ColumnDefinition/>
-                            </Grid.ColumnDefinitions>
+                                <Border Grid.Column="1">
+                                    <Border.Background>
+                                        <ImageBrush ImageSource="/QEAMApp;component/Images/breakfast.png"/>
+                                    </Border.Background>
+                                </Border>
 
-                            <Border Grid.Column="1">
-                                <Border.Background>
-                                    <ImageBrush ImageSource="/QEAMApp;component/Images/breakfast.png"/>
-                                </Border.Background>
-                            </Border>
+                                <Border Grid.Column="3">
+                                    <Border.Background>
+                                        <ImageBrush ImageSource="/QEAMApp;component/Images/lunch.png"/>
+                                    </Border.Background>
 
-                            <Border Grid.Column="3">
-                                <Border.Background>
-                                    <ImageBrush ImageSource="/QEAMApp;component/Images/lunch.png"/>
-                                </Border.Background>
+                                </Border>
 
-                            </Border>
+                                <Border Grid.Column="5">
+                                    <Border.Background>
+                                        <ImageBrush ImageSource="/QEAMApp;component/Images/dinner.png"/>
+                                    </Border.Background>
 
-                            <Border Grid.Column="5">
-                                <Border.Background>
-                                    <ImageBrush ImageSource="/QEAMApp;component/Images/dinner.png"/>
-                                </Border.Background>
+                                </Border>
 
-                            </Border>
+                            </Grid>
+                        </Border>
 
-                        </Grid>
                     </Border>
-
-                </Border>
+                    <Button Margin="652,10,10,65" 
+                            x:Name="ExitCardButton"
+                            Foreground="#00000000" 
+                            BorderBrush="#00707070" 
+                            Click="ExitCardButton_Click"
+                            Width="47" Height="47">
+                        <Button.Background>
+                            <ImageBrush ImageSource="/QEAMApp;component/Images/exit-card.png"/>
+                        </Button.Background>
+                    </Button>
+                </Grid>
                 <Grid>
                     <Viewbox Margin="110,15,285,212"
                              Height="35" Width="280" 

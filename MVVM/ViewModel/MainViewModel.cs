@@ -5,7 +5,11 @@ namespace QEAMApp.MVVM.ViewModel
 {
     class MainViewModel : ObservableObject
     {
+
+        public RelayCommand HomeViewCommand { get; set; }
+        public RelayCommand BaseViewCommand { get; set; }
         public HomeViewModel HomeVM { get; set; }
+        public BaseViewModel BaseVM { get; set; }
 
         private object _currentView;
 
@@ -23,7 +27,14 @@ namespace QEAMApp.MVVM.ViewModel
         public MainViewModel()
         {
             HomeVM = new HomeViewModel();
-            CurrentView = HomeVM;
+            BaseVM = new BaseViewModel();
+
+            CurrentView = BaseVM;
+
+            BaseViewCommand = new RelayCommand(o =>
+            {
+                CurrentView = BaseVM;
+            });
         }
     }
 }

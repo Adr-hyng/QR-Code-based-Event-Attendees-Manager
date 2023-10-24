@@ -4,28 +4,23 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:QEAMApp.MVVM.View"
+             xmlns:viewModel="clr-namespace:QEAMApp.MVVM.ViewModel"
              mc:Ignorable="d" 
              d:DesignHeight="587" d:DesignWidth="1279">
+    <UserControl.DataContext>
+        <viewModel:MainViewModel/>
+    </UserControl.DataContext>
     <Grid>
         <Grid.Background>
             <ImageBrush ImageSource="/QEAMApp;component/Images/bg.png"/>
         </Grid.Background>
-        <Grid x:Name="MainGrid"/>
 
-        <Border BorderThickness="1" Grid.Column="1" Margin="0,44,0,229">
-            <Border.Background>
-                <ImageBrush ImageSource="/QEAMApp;component/Images/qr-code.png" Stretch="Uniform"/>
-            </Border.Background>
-            <Canvas>
-                <Rectangle x:Name="ScannerRect" 
-                           HorizontalAlignment="Left"
-                           Height="8" Stroke="White"
-                           VerticalAlignment="Center"
-                           Width="291" Fill="White"
-                           Canvas.Left="493" Canvas.Top="10"
-                           Visibility="Hidden"/>
-            </Canvas>
-        </Border>
+        <ContentControl x:Name="BaseView"
+                        Grid.Column="1" 
+                        Margin="0,44,0,75"
+                        Content="{Binding CurrentView}">
+            
+        </ContentControl>
 
         <TextBox x:Name="QRCodeTextBox"
                  Style="{StaticResource ModernTextBox}"

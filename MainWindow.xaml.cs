@@ -1,4 +1,5 @@
-﻿using QEAMApp.MVVM.View;
+﻿using QEAMApp.Core;
+using QEAMApp.MVVM.View;
 using QEAMApp.MVVM.ViewModel;
 using System;
 using System.Collections.Generic;
@@ -33,42 +34,6 @@ namespace QEAMApp
             InitializeComponent();
         }
 
-        private T? FindVisualChild<T>(DependencyObject parent, string childName) where T : DependencyObject
-        {
-            if (parent == null)
-                return null;
-
-            T? foundChild = null;
-            int childrenCount = VisualTreeHelper.GetChildrenCount(parent);
-            for (int i = 0; i < childrenCount; i++)
-            {
-                var child = VisualTreeHelper.GetChild(parent, i);
-                if (child is not T)
-                {
-                    foundChild = FindVisualChild<T>(child, childName);
-                    if (foundChild != null)
-                        break;
-                }
-                else if (!string.IsNullOrEmpty(childName))
-                {
-                    if (child is FrameworkElement frameworkElement && frameworkElement.Name == childName)
-                    {
-                        foundChild = (T)child;
-                        break;
-                    }
-                }
-                else
-                {
-                    foundChild = (T)child;
-                    break;
-                }
-            }
-
-            return foundChild;
-        }
-
-
-
         private void CloseButton_Click(object sender, RoutedEventArgs e)
         {
             this.Close();
@@ -77,7 +42,7 @@ namespace QEAMApp
         private void Grid_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
             this.DragMove();
-            this.QRCodePrompt ??= FindVisualChild<TextBox>(MainView, "QRCodeTextBox");
+            this.QRCodePrompt ??= Utility.FindVisualChild<TextBox>(MainView, "QRCodeTextBox");
             this.QRCodePrompt.Focus();
         }
 

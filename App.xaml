@@ -18,6 +18,10 @@
                 <view:HomeView/>
             </DataTemplate>
 
+            <DataTemplate DataType="{x:Type viewModel:BaseViewModel}">
+                <view:BaseView/>
+            </DataTemplate>
+
             <BitmapImage x:Key="MainBackground" UriSource="pack://application:,,,/QEAMApp;component/Images/bg.png"/>
 
             <FontFamily x:Key="JetBrainsMono">pack://application:,,,/QEAMApp;component/Fonts/#JetBrains Mono</FontFamily>

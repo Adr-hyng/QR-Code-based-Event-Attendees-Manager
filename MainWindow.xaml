@@ -54,7 +54,7 @@
                 </Border>
                 <ContentControl 
                     x:Name="MainView"
-                    Content="{Binding CurrentView}" 
+                    Content="{Binding HomeVM}" 
                     Grid.Row="1"/>
             </Grid>
         </Grid>

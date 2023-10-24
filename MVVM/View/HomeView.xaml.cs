@@ -23,7 +23,7 @@ namespace QEAMApp.MVVM.View
     public partial class HomeView : UserControl
     {
 
-        private Rectangle ScannerRect;
+        private readonly Rectangle ScannerRect;
 
         public HomeView()
         {

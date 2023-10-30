@@ -13,28 +13,21 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-using QEAMApp.MVVM.ViewModel;
-
 namespace QEAMApp.MVVM.View
 {
     /// <summary>
-    /// Interaction logic for CardView.xaml
+    /// Interaction logic for IdleScreenView.xaml
     /// </summary>
-    public partial class CardView : UserControl
+    public partial class IdleScreenView : UserControl
     {
-        public event EventHandler NavigateBackRequested;
-
-        public CardView()
+        public IdleScreenView()
         {
             InitializeComponent();
         }
 
-        private void ExitCardButton_Click(object sender, RoutedEventArgs e)
+        private void Grid_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
-            MainViewModel mainViewModel = (MainViewModel)DataContext;
-            mainViewModel.CardViewCommand.Execute(null);
-            //MessageBox.Show(mainViewModel.CurrentView.ToString());
-            // Doesn't go back
+            QRCodeTextBox.Focus();
         }
     }
 }

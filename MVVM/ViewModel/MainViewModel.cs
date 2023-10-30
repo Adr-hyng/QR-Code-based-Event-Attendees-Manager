@@ -1,47 +1,24 @@
 ﻿using QEAMApp.Core;
 using System;
+using System.Windows;
 
 namespace QEAMApp.MVVM.ViewModel
 {
-    class MainViewModel : ObservableObject
+    internal class MainViewModel: ViewModelBase
     {
+        private readonly NavigationStore _navigationStore;
+        private readonly Window _window;
+        public ViewModelBase CurrentViewModel => _navigationStore.CurrentViewModel;
 
-        public RelayCommand BaseViewCommand { get; set; }
-        public RelayCommand CardViewCommand { get; set; }
-
-        public HomeViewModel HomeVM { get; set; }
-        public BaseViewModel BaseVM { get; set; }
-        public CardViewModel CardVM { get; set; }
-
-        private object _currentView;
-
-        public object CurrentView
+        public MainViewModel(NavigationStore navigationStore)
         {
-            get { return _currentView; }
-            set
-            {
-                _currentView = value;
-                OnPropertyChanged();
-            }
+            _navigationStore = navigationStore;
+            _navigationStore.CurrentViewModelChanged += OnCurrentViewModelChanged;
         }
 
-
-        public MainViewModel()
+        private void OnCurrentViewModelChanged()
         {
-            HomeVM = new HomeViewModel();
-            BaseVM = new BaseViewModel();
-            CardVM = new CardViewModel();
-
-            CurrentView = BaseVM;
-
-            BaseViewCommand = new RelayCommand(o =>
-            {
-                CurrentView = BaseVM;
-            });
-            CardViewCommand = new RelayCommand(o =>
-            {
-                CurrentView = CardVM;
-            });
+            OnPropertyChanged(nameof(CurrentViewModel));
         }
     }
 }

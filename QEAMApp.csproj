@@ -8,6 +8,13 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="DataObjects\**" />
+    <EmbeddedResource Remove="DataObjects\**" />
+    <None Remove="DataObjects\**" />
+    <Page Remove="DataObjects\**" />
+  </ItemGroup>
+
+  <ItemGroup>
     <None Remove="Fonts\JetBrainsMono-Bold.ttf" />
     <None Remove="Fonts\JetBrainsMono-ExtraBold.ttf" />
     <None Remove="Fonts\JetBrainsMono-ExtraLight.ttf" />
@@ -16,19 +23,12 @@
     <None Remove="Fonts\JetBrainsMono-Regular.ttf" />
     <None Remove="Fonts\JetBrainsMono-SemiBold.ttf" />
     <None Remove="Fonts\JetBrainsMono-Thin.ttf" />
-    <None Remove="Images\bg.png" />
-    <None Remove="Images\breakfast.png" />
-    <None Remove="Images\dinner.png" />
-    <None Remove="Images\exit-card.png" />
-    <None Remove="Images\export.png" />
-    <None Remove="Images\footer.png" />
-    <None Remove="Images\header.png" />
-    <None Remove="Images\icpep-logo.png" />
-    <None Remove="Images\import.png" />
-    <None Remove="Images\lunch.png" />
-    <None Remove="Images\name-section.png" />
-    <None Remove="Images\qr-code.png" />
-    <None Remove="Images\status-section.png" />
+    <None Remove="Fonts\Poppins-Regular.ttf" />
+    <None Remove="Images\barcode_scanner.png" />
+    <None Remove="Images\found_user_loading_icon.png" />
+    <None Remove="Images\Header.png" />
+    <None Remove="Images\logger.png" />
+    <None Remove="Images\profile_icon.png" />
   </ItemGroup>
 
   <ItemGroup>
@@ -36,29 +36,12 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Resource Include="Fonts\JetBrainsMono-Bold.ttf" />
-    <Resource Include="Fonts\JetBrainsMono-ExtraBold.ttf" />
-    <Resource Include="Fonts\JetBrainsMono-ExtraLight.ttf" />
-    <Resource Include="Fonts\JetBrainsMono-Light.ttf" />
-    <Resource Include="Fonts\JetBrainsMono-Medium.ttf" />
-    <Resource Include="Fonts\JetBrainsMono-Regular.ttf" />
-    <Resource Include="Fonts\JetBrainsMono-SemiBold.ttf" />
-    <Resource Include="Fonts\JetBrainsMono-Thin.ttf" />
-    <Resource Include="Images\bg.png">
-      <CopyToOutputDirectory></CopyToOutputDirectory>
-    </Resource>
-    <Resource Include="Images\breakfast.png" />
-    <Resource Include="Images\dinner.png" />
-    <Resource Include="Images\exit-card.png" />
-    <Resource Include="Images\export.png" />
-    <Resource Include="Images\footer.png" />
+    <Resource Include="Fonts\Poppins-Regular.ttf" />
+    <Resource Include="Images\barcode_scanner.png" />
+    <Resource Include="Images\found_user_loading_icon.png" />
     <Resource Include="Images\header.png" />
-    <Resource Include="Images\icpep-logo.png" />
-    <Resource Include="Images\lunch.png" />
-    <Resource Include="Images\name-section.png" />
-    <Resource Include="Images\qr-code.png" />
-    <Resource Include="Images\import.png" />
-    <Resource Include="Images\status-section.png" />
+    <Resource Include="Images\logger.png" />
+    <Resource Include="Images\profile_icon.png" />
   </ItemGroup>
 
 </Project>

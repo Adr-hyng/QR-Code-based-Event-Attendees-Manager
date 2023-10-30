@@ -1,28 +1,29 @@
-﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
 
-    <Style BasedOn="{StaticResource {x:Type Button}}"
-           TargetType="{x:Type Button}"
-           x:Key="ExportButton">
+    <Style
+        x:Key="ExportButton"
+        BasedOn="{StaticResource {x:Type Button}}"
+        TargetType="{x:Type Button}">
         <Setter Property="Content">
             <Setter.Value>
                 <Image Source="\Images\export.png" />
             </Setter.Value>
         </Setter>
-        <Setter Property="Background" Value="Transparent"/>
-        <Setter Property="BorderThickness" Value="0"/>
+        <Setter Property="Background" Value="Transparent" />
+        <Setter Property="BorderThickness" Value="0" />
     </Style>
 
-    <Style BasedOn="{StaticResource {x:Type Button}}"
-           TargetType="{x:Type Button}"
-           x:Key="ImportButton">
+    <Style
+        x:Key="ImportButton"
+        BasedOn="{StaticResource {x:Type Button}}"
+        TargetType="{x:Type Button}">
         <Setter Property="Content">
             <Setter.Value>
                 <Image Source="\Images\import.png" />
             </Setter.Value>
         </Setter>
-        <Setter Property="Background" Value="Transparent"/>
-        <Setter Property="BorderThickness" Value="0"/>
+        <Setter Property="Background" Value="Transparent" />
+        <Setter Property="BorderThickness" Value="0" />
     </Style>
 
 </ResourceDictionary>

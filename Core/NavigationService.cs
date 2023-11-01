@@ -9,7 +9,7 @@ namespace QEAMApp.Core
 {
     internal class NavigationService
     {
-        private readonly NavigationStore _navigationStore;
+        public NavigationStore _navigationStore;
         private readonly Func<ViewModelBase> _createViewModel;
 
         public NavigationService(NavigationStore navigationStore, Func<ViewModelBase> createViewModel)

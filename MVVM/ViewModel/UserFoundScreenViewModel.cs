@@ -1,5 +1,6 @@
 ﻿using QEAMApp.Core;
 using QEAMApp.MVVM.Command;
+using QEAMApp.MVVM.Model;
 using System;
 using System.Collections.Generic;
 using System.Linq;

@@ -26,7 +26,7 @@ namespace QEAMApp.MVVM.Command
         {
             if (parameter is string uniqueIdentifier)
             {
-                (bool IsValidUser, Account attendee) = await _apiService.Authenticate(uniqueIdentifier);
+                (bool IsValidUser, Attendee attendee) = await _apiService.Authenticate(uniqueIdentifier);
                 if (!string.IsNullOrEmpty(uniqueIdentifier) && IsValidUser)
                 {
                     MessageBox.Show(attendee.ToString());
@@ -34,7 +34,7 @@ namespace QEAMApp.MVVM.Command
                 }
                 else
                 {
-                    MessageBox.Show("User not found.", "Cat");
+                    MessageBox.Show("User not found.", "5th ICPEP Regional Convention");
                 }
             }
         }

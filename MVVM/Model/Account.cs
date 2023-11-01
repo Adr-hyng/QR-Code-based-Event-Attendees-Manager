@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace QEAMApp.MVVM.Model
 {
-    public class Account
+    public class Attendee
     {
         public string uid { get; set; }
         public string fn { get; set; }
@@ -19,7 +19,7 @@ namespace QEAMApp.MVVM.Model
         public string institution { get; set; }
         public string pn { get; set; }
 
-        public Account(string _fn, string _mi, string _ln, string _uid, byte _membership, byte _position, string _institution, string _pn)
+        public Attendee(string _fn, string _mi, string _ln, string _uid, byte _membership, byte _position, string _institution, string _pn)
         {
             fn = _fn;
             mi = _mi;
@@ -29,6 +29,11 @@ namespace QEAMApp.MVVM.Model
             position = _position == 1 ? "Region VIII Officer" : "Member";
             institution = _institution;
             pn = _pn;
+        }
+
+        public Attendee Clone()
+        {
+            return new Attendee(fn, mi, ln, uid, membershipBit, positionBit, institution, pn);
         }
 
         public override string ToString()

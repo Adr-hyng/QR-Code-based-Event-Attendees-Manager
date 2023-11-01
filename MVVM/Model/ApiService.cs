@@ -22,7 +22,7 @@ namespace QEAMApp.MVVM.Model
             _client = new HttpClient();
         }
 
-        public async Task<(bool, Account)> Authenticate(string id)
+        public async Task<(bool, Attendee)> Authenticate(string id)
         {
             string url = $"{_baseUri}authenticate/{id}";
 
@@ -32,12 +32,12 @@ namespace QEAMApp.MVVM.Model
             {
                 string json = await response.Content.ReadAsStringAsync();
                 Dictionary<string, object> result = JsonConvert.DeserializeObject<Dictionary<string, object>>(json);
-                bool IsFound = (bool)result["success"];
+                bool IsFound = (bool) result["success"];
                 if (IsFound)
                 {
                     JArray data2 = JArray.Parse(result["data"].ToString());
                     var firstElement = data2.FirstOrDefault();
-                    Account attendee = new Account(
+                    Attendee attendee = new Attendee(
                         _fn: firstElement["fn"].ToString(),
                         _mi: firstElement["mi"].ToString(),
                         _ln: firstElement["ln"].ToString(),

@@ -67,7 +67,7 @@
                         HorizontalAlignment="Center"
                         FontFamily="/Fonts/#Poppins"
                         FontWeight="Bold"
-                        Text="Hello, Juan!" />
+                        Text="{Binding FirstName, StringFormat='Hello, {0}!'}" />
                 </Viewbox>
 
                 <Viewbox
@@ -79,7 +79,7 @@
                         HorizontalAlignment="Center"
                         FontFamily="/Fonts/#Poppins"
                         FontWeight="Bold"
-                        Text="MICHAEL ANGELITO C. A.."
+                        Text="{Binding Name}"
                         TextWrapping="Wrap" />
                 </Viewbox>
 
@@ -102,7 +102,7 @@
                         HorizontalAlignment="Center"
                         FontFamily="/Fonts/#Poppins"
                         FontWeight="Bold"
-                        Text="Professional"
+                        Text="{Binding Membership}"
                         TextWrapping="Wrap" />
                 </Viewbox>
 
@@ -125,7 +125,7 @@
                         HorizontalAlignment="Center"
                         FontFamily="/Fonts/#Poppins"
                         FontWeight="Bold"
-                        Text="Active Member"
+                        Text="{Binding Position}"
                         TextWrapping="Wrap" />
                 </Viewbox>
 
@@ -147,7 +147,7 @@
                         HorizontalAlignment="Center"
                         FontFamily="/Fonts/#Poppins"
                         FontWeight="Bold"
-                        Text="Eastern Samar State University"
+                        Text="{Binding Institution}"
                         TextWrapping="Wrap" />
                 </Viewbox>
 

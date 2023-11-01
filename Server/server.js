@@ -2,6 +2,7 @@ const express = require('express');
 const app = express();
 const db = require('./db');
 const bodyParser = require('body-parser');
+const os = require('os');
 
 const PORT = 5000;
 
@@ -13,7 +14,7 @@ app.get("/api/authenticate/:id", (req, res) => {
   const id = req.params.id;
   const query = `SELECT * FROM attendees WHERE uid = ?`;
 
-  db.query(query, [id], (error, results) => {
+  db.connection.query(query, [id], (error, results) => {
     if (error) {
       console.log(error);
       res.status(500).json({ error: 'An error occurred while executing the query.' });
@@ -28,7 +29,7 @@ app.get("/api/authenticate/:id", (req, res) => {
 app.get("/api/attendees", (req, res) => {
   const query = `SELECT * FROM attendees`;
 
-  db.query(query, (error, results) => {
+  db.connection.query(query, (error, results) => {
     if (error) {
       console.log(error);
       res.status(500).json({ error: 'An error occurred while executing the query.' });
@@ -38,7 +39,24 @@ app.get("/api/attendees", (req, res) => {
   });
 });
 
+app.get("/api/status_info", (req, res) => {
+  const networkInterfaces = os.networkInterfaces();
+  let localHostAddress;
+  if ("Wi-Fi" in networkInterfaces) {
+    localHostAddress = networkInterfaces['Wi-Fi'][3]['address'];
+  } else {
+    localHostAddress = networkInterfaces["Loopback Pseudo-Interface 1"][1]["address"]
+  }
+  res.json({ address: localHostAddress, port: PORT });
+});
 
 app.listen(PORT, () => {
-  console.log(`QEAM Server from port ${PORT} running loaded with Database Schema: ${db.SCHEMA_NAME}`);
+  const networkInterfaces = os.networkInterfaces();
+  let localHostAddress;
+  if("Wi-Fi" in networkInterfaces) {
+    localHostAddress = networkInterfaces['Wi-Fi'][3]['address'];
+  } else {
+    localHostAddress = networkInterfaces["Loopback Pseudo-Interface 1"][1]["address"]
+  }
+  console.log(`QEAM Server from ${localHostAddress}:${PORT} running loaded with Database Schema: ${db.SCHEMA_NAME}`);
 });

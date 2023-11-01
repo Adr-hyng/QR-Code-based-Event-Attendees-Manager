@@ -26,6 +26,38 @@ namespace QEAMApp.MVVM.Model
             return (false, null);
         }
 
+        public async Task<(bool, string?, int?)> GetServerInfo()
+        {
+            string url = $"{_baseUri}status_info";
+            string Address = "";
+            int Port = 5000;
+            bool IsConnected = false;
+            try
+            {
+                HttpResponseMessage response = await _client.GetAsync(url);
+
+                if (response.IsSuccessStatusCode)
+                {
+                    IsConnected = true;
+                    string json = await response.Content.ReadAsStringAsync();
+                    Dictionary<string, object>? result = JsonConvert.DeserializeObject<Dictionary<string, object>>(json);
+                    if (result is null) return (IsConnected, Address, Port);
+                    Address = (string)result["address"];
+                    Port = (int)result["port"];
+                    return (IsConnected, Address, Port);
+                }
+                else
+                {
+                    return (IsConnected, Address, Port);
+                }
+            }
+            catch (Exception)
+            {
+                return (IsConnected, Address, Port);
+            }
+        }
+
+
         public async Task<(bool, Attendee?)> Authenticate(string id)
         {
             string url = $"{_baseUri}authenticate/{id}";

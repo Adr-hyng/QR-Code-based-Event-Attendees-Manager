@@ -19,6 +19,7 @@ namespace QEAMApp
     public partial class App : Application
     {
         private readonly NavigationStore _navigationStore;
+        private ControlCenter _secondWindow;
 
         public App()
         {
@@ -34,15 +35,18 @@ namespace QEAMApp
             {
                 DataContext = new MainViewModel(_navigationStore)
             };
+            MainWindow.Closing += MainWindow_Closing; // Attach the Closing event handler
             MainWindow.Show();
 
-            //ControlCenter secondWindow = new ControlCenter()
-            //{
-            //    DataContext = new ControlCenterViewModel()
-            //};
-            //secondWindow.Show();
+            _secondWindow = new ControlCenter();
+            _secondWindow.Show();
 
             base.OnStartup(e);
+        }
+
+        private void MainWindow_Closing(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            _secondWindow.Close(); // Close the secondWindow when the MainWindow is closing
         }
 
         // Navigations

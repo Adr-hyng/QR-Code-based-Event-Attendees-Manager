@@ -9,6 +9,8 @@ using Newtonsoft.Json;
 using System.Windows;
 using Newtonsoft.Json.Linq;
 using System.Security.Cryptography;
+using System.Media;
+using QEAMApp.Core;
 
 namespace QEAMApp.MVVM.Model
 {
@@ -26,34 +28,44 @@ namespace QEAMApp.MVVM.Model
         {
             string url = $"{_baseUri}authenticate/{id}";
 
-            HttpResponseMessage response = await _client.GetAsync(url);
-
-            if (response.IsSuccessStatusCode)
+            try
             {
-                string json = await response.Content.ReadAsStringAsync();
-                Dictionary<string, object> result = JsonConvert.DeserializeObject<Dictionary<string, object>>(json);
-                bool IsFound = (bool) result["success"];
-                if (IsFound)
+                HttpResponseMessage response = await _client.GetAsync(url);
+
+                if (response.IsSuccessStatusCode)
                 {
-                    JArray data2 = JArray.Parse(result["data"].ToString());
-                    var firstElement = data2.FirstOrDefault();
-                    Attendee attendee = new Attendee(
-                        _fn: firstElement["fn"].ToString(),
-                        _mi: firstElement["mi"].ToString(),
-                        _ln: firstElement["ln"].ToString(),
-                        _uid: firstElement["uid"].ToString(),
-                        _membership: (byte)firstElement["membership"]["data"][0],
-                        _position: (byte)firstElement["position"]["data"][0],
-                        _institution: firstElement["institution"].ToString(),
-                        _pn: "0" + firstElement["pn"]
-                        );
-                    return (true, attendee);
-                } else if(!IsFound)
-                {
-                    return (false, null);
+                    string json = await response.Content.ReadAsStringAsync();
+                    Dictionary<string, object> result = JsonConvert.DeserializeObject<Dictionary<string, object>>(json);
+                    bool IsFound = (bool)result["success"];
+                    if (IsFound)
+                    {
+                        JArray data2 = JArray.Parse(result["data"].ToString());
+                        var firstElement = data2.FirstOrDefault();
+                        Attendee attendee = new Attendee(
+                            _fn: firstElement["fn"].ToString(),
+                            _mi: firstElement["mi"].ToString(),
+                            _ln: firstElement["ln"].ToString(),
+                            _uid: firstElement["uid"].ToString(),
+                            _membership: (byte)firstElement["membership"]["data"][0],
+                            _position: (byte)firstElement["position"]["data"][0],
+                            _institution: firstElement["institution"].ToString(),
+                            _pn: "0" + firstElement["pn"]
+                            );
+                        return (true, attendee);
+                    }
+                    else if (!IsFound)
+                    {
+                        return (false, null);
+                    }
                 }
+                return (false, null);
             }
-            return (false, null);
+            catch (Exception)
+            {
+                SystemSounds.Exclamation.Play();
+                AutoClosingMessageBox.Show("No Server Connected.", "SERVER 404", 5000);
+                return (false, null);
+            }
         }
     }
 }

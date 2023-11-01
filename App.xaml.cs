@@ -1,5 +1,6 @@
 ﻿using QEAMApp.Core;
 using QEAMApp.MVVM.Model;
+using QEAMApp.MVVM.View;
 using QEAMApp.MVVM.ViewModel;
 using System;
 using System.Collections.Generic;
@@ -34,6 +35,12 @@ namespace QEAMApp
                 DataContext = new MainViewModel(_navigationStore)
             };
             MainWindow.Show();
+
+            //ControlCenter secondWindow = new ControlCenter()
+            //{
+            //    DataContext = new ControlCenterViewModel()
+            //};
+            //secondWindow.Show();
 
             base.OnStartup(e);
         }

@@ -3,15 +3,11 @@ const app = express();
 const db = require('./db');
 const bodyParser = require('body-parser');
 
+const PORT = 5000;
+
 app.use(bodyParser.json());
 
 app.use(express.json());
-
-// app.get("/api", (req, res) => {
-//   res.json({
-//       "user": "Adrian is good"
-//   });
-// });
 
 app.get("/api/authenticate/:id", (req, res) => {
   const id = req.params.id;
@@ -29,8 +25,6 @@ app.get("/api/authenticate/:id", (req, res) => {
   });
 });
 
-
-
 app.get("/api/attendees", (req, res) => {
   const query = `SELECT * FROM attendees`;
 
@@ -45,7 +39,6 @@ app.get("/api/attendees", (req, res) => {
 });
 
 
-
-app.listen(5000, () => {
-  console.log("QEAM Server running with from port 5000");
+app.listen(PORT, () => {
+  console.log(`QEAM Server from port ${PORT} running loaded with Database Schema: ${db.SCHEMA_NAME}`);
 });

@@ -12,6 +12,19 @@ namespace QEAMApp.MVVM.ViewModel
 {
     internal class IdleScreenViewModel: ViewModelBase
     {
+        private bool _isReadOnly;
+        public bool IsReadOnly
+        {
+            get
+            {
+                return _isReadOnly;
+            }
+            set
+            {
+                _isReadOnly = value;
+                OnPropertyChanged(nameof(IsReadOnly));
+            }
+        }
         private string _uniqueIdentifier;
         public string UniqueIdentifier
         {
@@ -30,7 +43,7 @@ namespace QEAMApp.MVVM.ViewModel
 
         public IdleScreenViewModel(NavigationService GoToFoundScreenNavigation)
         {
-            ScanningCommand = new UserFoundCommand(GoToFoundScreenNavigation);
+            ScanningCommand = new UserFoundCommand(GoToFoundScreenNavigation, this);
         }
     }
 }

@@ -26,20 +26,8 @@ namespace QEAMApp.MVVM.View
         {
             InitializeComponent();
         }
-
-        private async void OnKeyDownHandler(object sender, KeyEventArgs e)
-        {
-            // When Enter is hit in Textbox
-            if (e.Key == Key.Return)
-            {
-                QRCodeTextBox.IsReadOnly = true;
-                await Task.Delay(1000);
-                QRCodeTextBox.Text = "";
-                QRCodeTextBox.IsReadOnly = false;
-            }
-        }
-
-                private void Grid_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        
+        private void Grid_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
             QRCodeTextBox.Focus();
         }

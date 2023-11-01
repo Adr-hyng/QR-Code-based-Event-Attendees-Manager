@@ -36,8 +36,8 @@ namespace QEAMApp.MVVM.ViewModel
 
         private async void InitializeAsync()
         {
-            // Wait for 2 seconds
-            await Task.Delay(2000);
+            // Wait for x seconds (Seconds for waiting)
+            await Task.Delay(1000);
             ShowProfileCommand.Execute(null);
         }
     }

@@ -26,11 +26,15 @@ namespace QEAMApp.MVVM.View
         {
             InitializeComponent();
         }
-        
+
         private void Grid_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
             QRCodeTextBox.Focus();
         }
 
+        private void UserControl_Loaded(object sender, RoutedEventArgs e)
+        {
+            QRCodeTextBox.Focus();
+        }
     }
 }

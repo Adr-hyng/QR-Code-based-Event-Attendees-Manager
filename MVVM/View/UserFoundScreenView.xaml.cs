@@ -33,7 +33,7 @@ namespace QEAMApp.MVVM.View
             {
                 From = 0,
                 To = 1,
-                Duration = TimeSpan.FromSeconds(0.8),
+                Duration = TimeSpan.FromSeconds(0.7),
                 AutoReverse = true,
                 RepeatBehavior = RepeatBehavior.Forever
             };
@@ -51,14 +51,14 @@ namespace QEAMApp.MVVM.View
 
             periodCount = 1;
 
-            // Create a DispatcherTimer with an interval of 500 milliseconds
+            // Create a DispatcherTimer with an interval of x milliseconds (How fast the dots generate)
             timer = new DispatcherTimer();
-            timer.Interval = TimeSpan.FromMilliseconds(500);
+            timer.Interval = TimeSpan.FromMilliseconds(200);
             timer.Tick += Timer_Tick;
             timer.Start();
         }
 
-        private void Timer_Tick(object sender, EventArgs e)
+        private async void Timer_Tick(object sender, EventArgs e)
         {
             // Update the text with the appropriate number of periods
             loadingText.Text = "User Found, now loading" + new string('.', periodCount);

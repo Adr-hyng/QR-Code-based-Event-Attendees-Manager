@@ -14,6 +14,7 @@ namespace QEAMApp.MVVM.ViewModel
 {
     internal class ProfileScreenViewModel: ViewModelBase
     {
+        private const bool AUTO_CLOSE = true;
         private string _firstName;
         public string FirstName
         {
@@ -96,6 +97,13 @@ namespace QEAMApp.MVVM.ViewModel
             Position = profile.position;
             Institution = profile.institution;
             GoBackCommand = new NavigateCommand(GoToIdleScreen);
+            if (AUTO_CLOSE) CloseTimerOption(Seconds: 3);
+        }
+
+        public async void CloseTimerOption(int Seconds)
+        {
+            await Task.Delay(1000 * Seconds);
+            GoBackCommand.Execute(null);
         }
     }
 }

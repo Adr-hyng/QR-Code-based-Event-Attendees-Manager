@@ -30,10 +30,10 @@ namespace QEAMApp.MVVM.Command
 
         public static async Task PlaySound(string filePath)
         {
-            MediaPlayer mediaPlayer = new MediaPlayer();
+            MediaPlayer mediaPlayer = new();
             mediaPlayer.Open(new Uri(filePath));
 
-            TaskCompletionSource<bool> taskCompletionSource = new TaskCompletionSource<bool>();
+            TaskCompletionSource<bool> taskCompletionSource = new();
 
             mediaPlayer.MediaEnded += (sender, e) =>
             {
@@ -61,7 +61,8 @@ namespace QEAMApp.MVVM.Command
                 if (string.IsNullOrEmpty(id)) return;
                 _idleScreen.UniqueIdentifier = "";
                 _idleScreen.IsReadOnly = true;
-                (bool IsValidUser, Attendee attendee) = await _apiService.Authenticate(id);
+                (bool IsValidUser, Attendee? attendee) = await _apiService.Authenticate(id);
+                if (attendee == null) return;
                 if (IsValidUser)
                 {
                     NavigationStore navigationStore = _navigationService._navigationStore;

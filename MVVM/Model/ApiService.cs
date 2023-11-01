@@ -1,14 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System;
 using System.Net.Http;
-using System.Text;
 using System.Threading.Tasks;
 using Newtonsoft.Json;
-using System.Windows;
 using Newtonsoft.Json.Linq;
-using System.Security.Cryptography;
 using System.Media;
 using QEAMApp.Core;
 
@@ -17,14 +13,20 @@ namespace QEAMApp.MVVM.Model
     public class ApiService
     {
         private readonly HttpClient _client;
-        private readonly string _baseUri = "http://localhost:5000/api/";
+        private const string DEFAULT_GATEWAY = "http://localhost:5000";
+        private readonly string _baseUri = $"{DEFAULT_GATEWAY}/api/";
 
         public ApiService()
         {
             _client = new HttpClient();
         }
 
-        public async Task<(bool, Attendee)> Authenticate(string id)
+        private static (bool, Attendee?) Exit()
+        {
+            return (false, null);
+        }
+
+        public async Task<(bool, Attendee?)> Authenticate(string id)
         {
             string url = $"{_baseUri}authenticate/{id}";
 
@@ -35,36 +37,37 @@ namespace QEAMApp.MVVM.Model
                 if (response.IsSuccessStatusCode)
                 {
                     string json = await response.Content.ReadAsStringAsync();
-                    Dictionary<string, object> result = JsonConvert.DeserializeObject<Dictionary<string, object>>(json);
-                    bool IsFound = (bool)result["success"];
+                    Dictionary<string, object>? result = JsonConvert.DeserializeObject<Dictionary<string, object>>(json);
+                    if (result is null) return Exit();
+                    bool IsFound = (bool) result["success"];
                     if (IsFound)
                     {
-                        JArray data2 = JArray.Parse(result["data"].ToString());
-                        var firstElement = data2.FirstOrDefault();
-                        Attendee attendee = new Attendee(
-                            _fn: firstElement["fn"].ToString(),
-                            _mi: firstElement["mi"].ToString(),
-                            _ln: firstElement["ln"].ToString(),
-                            _uid: firstElement["uid"].ToString(),
-                            _membership: (byte)firstElement["membership"]["data"][0],
-                            _position: (byte)firstElement["position"]["data"][0],
-                            _institution: firstElement["institution"].ToString(),
+                        JArray data2 = JArray.Parse((string)result["data"]);
+                        JToken? firstElement = data2.FirstOrDefault();
+                        byte membership = (byte) firstElement!["membership"]!["data"]![0]!;
+                        byte position = (byte) firstElement!["position"]!["data"]![0]!;
+                        
+                        Attendee attendee = new(
+                            _fn: firstElement["fn"] + "",
+                            _mi: firstElement["mi"] + "",
+                            _ln: firstElement["ln"] + "",
+                            _uid: firstElement["uid"] + "",
+                            _membership: membership,
+                            _position: position,
+                            _institution: firstElement["institution"] + "",
                             _pn: "0" + firstElement["pn"]
                             );
                         return (true, attendee);
                     }
-                    else if (!IsFound)
-                    {
-                        return (false, null);
-                    }
+                    else if (!IsFound) return Exit();
                 }
-                return (false, null);
+                return Exit();
             }
             catch (Exception)
             {
                 SystemSounds.Exclamation.Play();
                 AutoClosingMessageBox.Show("No Server Connected.", "SERVER 404", 5000);
-                return (false, null);
+                return Exit();
             }
         }
     }

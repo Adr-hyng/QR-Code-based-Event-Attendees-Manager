@@ -30,7 +30,7 @@ namespace QEAMApp.MVVM.ViewModel
 
         public IdleScreenViewModel(NavigationService GoToFoundScreenNavigation)
         {
-            ScanningCommand = new NavigateCommand(GoToFoundScreenNavigation);
+            ScanningCommand = new UserFoundCommand(GoToFoundScreenNavigation);
         }
     }
 }

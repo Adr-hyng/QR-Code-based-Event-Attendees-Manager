@@ -26,12 +26,16 @@
                 Cursor="None"
                 Foreground="Black"
                 Opacity="1"
+                PreviewKeyDown="OnKeyDownHandler"
                 Style="{StaticResource ModernTextBox}"
                 Text="{Binding UniqueIdentifier, UpdateSourceTrigger=PropertyChanged}"
                 TextWrapping="Wrap"
                 Visibility="Visible">
                 <TextBox.InputBindings>
-                    <KeyBinding Key="Enter" Command="{Binding ScanningCommand}" />
+                    <KeyBinding
+                        Key="Enter"
+                        Command="{Binding ScanningCommand}"
+                        CommandParameter="{Binding Text, ElementName=QRCodeTextBox}" />
                 </TextBox.InputBindings>
             </TextBox>
         </Grid>

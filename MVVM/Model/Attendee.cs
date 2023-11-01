@@ -1,4 +1,6 @@
 ﻿
+using System.Collections.Generic;
+
 namespace QEAMApp.MVVM.Model
 {
     public class Attendee

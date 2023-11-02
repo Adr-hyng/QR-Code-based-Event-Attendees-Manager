@@ -12,9 +12,32 @@ CREATE TABLE Attendees (
     position BIT NOT NULL,
     institution VARCHAR(64),
     pn VARCHAR (10),
+    
+    amd1 DATETIME,
+    lunchd1 DATETIME,
+    pmd1 DATETIME,
+    checkind1 DATETIME,
+    checkoutd1 DATETIME,
+    
+    amd2 DATETIME,
+    lunchd2 DATETIME,
+    pmd2 DATETIME,
+    checkind2 DATETIME,
+    checkoutd2 DATETIME,
+    
+    amd3 DATETIME,
+    lunchd3 DATETIME,
+    pmd3 DATETIME,
+    checkind3 DATETIME,
+    checkoutd DATETIME,
+    
     PRIMARY KEY (id)
 );
 
+-- Update value based on condition
+UPDATE Attendees
+SET checkind1 = CURRENT_TIMESTAMP
+WHERE id = 2;
 
 -- Delete table content created
 DROP TABLE Attendees;

@@ -36,7 +36,7 @@ namespace QEAMApp
 
         private void MainWindow_Loaded(object sender, RoutedEventArgs e)
         {
-            _QRCodePrompt = Utility.FindVisualChild<TextBox>(CurrentView, "QRCodeTextBox");
+            _QRCodePrompt = Utility.FindVisualChild<TextBox>(CurrentView, "QRCodeTextBox")!;
         }
 
         private void CloseButton_Click(object sender, RoutedEventArgs e)

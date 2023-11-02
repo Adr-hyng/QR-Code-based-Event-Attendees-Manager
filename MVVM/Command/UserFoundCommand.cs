@@ -21,37 +21,12 @@ namespace QEAMApp.MVVM.Command
         private readonly NavigationService _navigationService;
         private readonly ApiService _apiService;
 
-        public UserFoundCommand(NavigationService navigationService, IdleScreenViewModel idleScreen)
+        public UserFoundCommand(NavigationService navigationService, IdleScreenViewModel idleScreen, ApiService API)
         {
             _idleScreen = idleScreen;
             _navigationService = navigationService;
-            _apiService = new ApiService();
+            _apiService = API;
         }
-
-        public static async Task PlaySound(string filePath)
-        {
-            MediaPlayer mediaPlayer = new();
-            mediaPlayer.Open(new Uri(filePath));
-
-            TaskCompletionSource<bool> taskCompletionSource = new();
-
-            mediaPlayer.MediaEnded += (sender, e) =>
-            {
-                mediaPlayer.Close();
-                taskCompletionSource.SetResult(true);
-            };
-
-            while (true)
-            {
-                mediaPlayer.Play();
-
-                await taskCompletionSource.Task;
-
-                // Reset the task completion source for the next play
-                taskCompletionSource = new TaskCompletionSource<bool>();
-            }
-        }
-
 
         public override async void Execute(object? parameter)
         {
@@ -61,9 +36,8 @@ namespace QEAMApp.MVVM.Command
                 if (string.IsNullOrEmpty(id)) return;
                 _idleScreen.UniqueIdentifier = "";
                 _idleScreen.IsReadOnly = true;
-                (bool IsValidUser, Attendee? attendee) = await _apiService.Authenticate(id);
-                if (attendee == null) return;
-                if (IsValidUser)
+                (bool? IsValidUser, Attendee? attendee) = await _apiService.Authenticate(id);
+                if (IsValidUser == true)
                 {
                     NavigationStore navigationStore = _navigationService._navigationStore;
 
@@ -73,7 +47,7 @@ namespace QEAMApp.MVVM.Command
                             () => new ProfileScreenViewModel(
                                 GoToIdleScreen: new NavigationService(navigationStore,
                                     () => _idleScreen),
-                                profile: attendee
+                                profile: attendee!
                             )
                         )
                     );
@@ -81,10 +55,14 @@ namespace QEAMApp.MVVM.Command
                     _navigationService._navigationStore = navigationStore;
                     _idleScreen.IsReadOnly = false;
                 }
-                else
+                else if(IsValidUser == false)
                 {
                     SystemSounds.Exclamation.Play();
                     AutoClosingMessageBox.Show("User not found.", "ERROR 404", 2000);
+                    _idleScreen.IsReadOnly = false;
+                }
+                else
+                {
                     _idleScreen.IsReadOnly = false;
                 }
             }

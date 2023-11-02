@@ -92,7 +92,7 @@ namespace QEAMApp.MVVM.ViewModel
         public ProfileScreenViewModel(NavigationService GoToIdleScreen, Attendee profile)
         {
             FirstName = profile.fn;
-            Name = $"{profile.fn} {profile.mi}. {profile.ln}";
+            Name = $"{profile.fn} {(!String.IsNullOrEmpty(profile.mi) ? profile.mi + "." : "")} {profile.ln}";
             Membership = profile.membership;
             Position = profile.position;
             Institution = profile.institution;

@@ -54,11 +54,11 @@ namespace QEAMApp.MVVM.View
             // Create a DispatcherTimer with an interval of x milliseconds (How fast the dots generate)
             timer = new DispatcherTimer();
             timer.Interval = TimeSpan.FromMilliseconds(200);
-            timer.Tick += Timer_Tick;
+            timer.Tick += Timer_Tick!;
             timer.Start();
         }
 
-        private async void Timer_Tick(object sender, EventArgs e)
+        private void Timer_Tick(object sender, EventArgs e)
         {
             // Update the text with the appropriate number of periods
             loadingText.Text = "User Found, now loading" + new string('.', periodCount);

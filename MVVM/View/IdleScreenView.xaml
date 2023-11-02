@@ -8,6 +8,7 @@
     d:DesignHeight="550"
     d:DesignWidth="1066"
     Loaded="UserControl_Loaded"
+    MouseLeftButtonDown="Grid_MouseLeftButtonDown"
     mc:Ignorable="d">
     <Grid Background="White" MouseLeftButtonDown="Grid_MouseLeftButtonDown">
         <Grid.RowDefinitions>
@@ -29,7 +30,7 @@
                 IsReadOnly="{Binding IsReadOnly}"
                 Opacity="1"
                 Style="{StaticResource ModernTextBox}"
-                Text="{Binding UniqueIdentifier, UpdateSourceTrigger=PropertyChanged}"
+                Text="{Binding UniqueIdentifier, UpdateSourceTrigger=Default}"
                 TextWrapping="Wrap"
                 Visibility="Visible">
                 <TextBox.InputBindings>

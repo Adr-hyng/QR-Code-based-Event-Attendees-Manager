@@ -1,5 +1,6 @@
 ﻿using QEAMApp.Core;
 using QEAMApp.MVVM.Command;
+using QEAMApp.MVVM.Model;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -41,9 +42,9 @@ namespace QEAMApp.MVVM.ViewModel
 
         public ICommand ScanningCommand { get; }
 
-        public IdleScreenViewModel(NavigationService GoToFoundScreenNavigation)
+        public IdleScreenViewModel(NavigationService GoToFoundScreenNavigation, ApiService InstanceAPI)
         {
-            ScanningCommand = new UserFoundCommand(GoToFoundScreenNavigation, this);
+            ScanningCommand = new UserFoundCommand(GoToFoundScreenNavigation, this, InstanceAPI);
         }
     }
 }

@@ -24,11 +24,20 @@
     <None Remove="Fonts\JetBrainsMono-SemiBold.ttf" />
     <None Remove="Fonts\JetBrainsMono-Thin.ttf" />
     <None Remove="Fonts\Poppins-Regular.ttf" />
+    <None Remove="Images\am_snack_icon.png" />
     <None Remove="Images\barcode_scanner.png" />
+    <None Remove="Images\check-in_icon.png" />
+    <None Remove="Images\check-out_icon.png" />
+    <None Remove="Images\check_icon.png" />
     <None Remove="Images\found_user_loading_icon.png" />
+    <None Remove="Images\go_back_button.png" />
     <None Remove="Images\Header.png" />
     <None Remove="Images\logger.png" />
+    <None Remove="Images\lunch_snack_icon.png" />
+    <None Remove="Images\pm_snack_icon.png" />
     <None Remove="Images\profile_icon.png" />
+    <None Remove="Images\Table.png" />
+    <None Remove="Images\wrong_icon.png" />
   </ItemGroup>
 
   <ItemGroup>
@@ -38,11 +47,20 @@
 
   <ItemGroup>
     <Resource Include="Fonts\Poppins-Regular.ttf" />
+    <Resource Include="Images\am_snack_icon.png" />
     <Resource Include="Images\barcode_scanner.png" />
+    <Resource Include="Images\check-in_icon.png" />
+    <Resource Include="Images\check-out_icon.png" />
+    <Resource Include="Images\check_icon.png" />
     <Resource Include="Images\found_user_loading_icon.png" />
+    <Resource Include="Images\go_back_button.png" />
     <Resource Include="Images\header.png" />
     <Resource Include="Images\logger.png" />
+    <Resource Include="Images\lunch_snack_icon.png" />
+    <Resource Include="Images\pm_snack_icon.png" />
     <Resource Include="Images\profile_icon.png" />
+    <Resource Include="Images\Table.png" />
+    <Resource Include="Images\wrong_icon.png" />
   </ItemGroup>
 
 </Project>

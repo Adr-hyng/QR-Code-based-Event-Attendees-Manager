@@ -8,6 +8,7 @@
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="Theme/TextBoxTheme.xaml" />
                 <ResourceDictionary Source="Theme/IconButtonTheme.xaml" />
+                <ResourceDictionary Source="Theme/ToggleButton.xaml" />
             </ResourceDictionary.MergedDictionaries>
 
             <FontFamily x:Key="Poppins">pack://application:,,,/QEAMApp;component/Fonts/#Poppins</FontFamily>

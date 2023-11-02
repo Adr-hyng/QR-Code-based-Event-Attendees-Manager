@@ -14,7 +14,7 @@ namespace QEAMApp.MVVM.ViewModel
 {
     internal class ProfileScreenViewModel: ViewModelBase
     {
-        private const bool AUTO_CLOSE = true;
+        private const bool AUTO_CLOSE = false;
         private string _firstName;
         public string FirstName
         {

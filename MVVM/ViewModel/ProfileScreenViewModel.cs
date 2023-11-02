@@ -109,17 +109,32 @@ namespace QEAMApp.MVVM.ViewModel
 
         public void RadioButtonsHandler(Attendee profile)
         {
-            List<string> ToggleButtonNames = new List<string>()
+            Dictionary<string, bool> dayContents = new Dictionary<string, bool>()
             {
-                "AMD1", "LD1", "PMD1", "CheckInD1" ,"CheckOutD1",
-                "AMD2", "LD2", "PMD2", "CheckInD2" ,"CheckOutD2",
-                "AMD3", "LD3", "PMD3", "CheckInD3" ,"CheckOutD3",
+                ["AMD1"] = profile.day1.amSnack.HasValue,
+                ["LD1"] = profile.day1.lunchSnack.HasValue,
+                ["PMD1"] = profile.day1.pmSnack.HasValue,
+                ["CheckInD1"] = profile.day1.checkIn.HasValue,
+                ["CheckOutD1"] = profile.day1.checkOut.HasValue,
+
+                ["AMD2"] = profile.day2.amSnack.HasValue,
+                ["LD2"] = profile.day2.lunchSnack.HasValue,
+                ["PMD2"] = profile.day2.pmSnack.HasValue,
+                ["CheckInD2"] = profile.day2.checkIn.HasValue,
+                ["CheckOutD2"] = profile.day2.checkOut.HasValue,
+
+                ["AMD3"] = profile.day3.amSnack.HasValue,
+                ["LD3"] = profile.day3.lunchSnack.HasValue,
+                ["PMD3"] = profile.day3.pmSnack.HasValue,
+                ["CheckInD3"] = profile.day3.checkIn.HasValue,
+                ["CheckOutD3"] = profile.day3.checkOut.HasValue,
             };
 
             RadioButtons = new Dictionary<string, RadioButtonViewModel>();
-            foreach (string ToggleButtonName in ToggleButtonNames)
+
+            foreach (KeyValuePair<string, bool> ToggleButtonContent in dayContents)
             {
-                RadioButtons.Add(ToggleButtonName, new RadioButtonViewModel { IsChecked = true, Opacity = 0 });
+                RadioButtons.Add(ToggleButtonContent.Key, new RadioButtonViewModel { IsChecked = true, Opacity = ToggleButtonContent.Value ? 1 : 0 });
             }
         }
 

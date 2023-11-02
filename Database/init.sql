@@ -37,7 +37,7 @@ CREATE TABLE Attendees (
 -- Update value based on condition
 UPDATE Attendees
 SET amd1 = CURRENT_TIMESTAMP
-WHERE id = 2;
+WHERE id = 1;
 
 -- Delete table content created
 DROP TABLE Attendees;

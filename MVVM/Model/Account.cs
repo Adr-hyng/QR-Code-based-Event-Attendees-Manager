@@ -18,8 +18,11 @@ namespace QEAMApp.MVVM.Model
         public byte positionBit { get; set; }
         public string institution { get; set; }
         public string pn { get; set; }
+        public DayContent day1 { get; set; }
+        public DayContent day2 { get; set; }
+        public DayContent day3 { get; set; }
 
-        public Attendee(string _fn, string _mi, string _ln, string _uid, byte _membership, byte _position, string _institution, string _pn)
+        public Attendee(string _fn, string _mi, string _ln, string _uid, byte _membership, byte _position, string _institution, string _pn, DayContent _day1, DayContent _day2, DayContent _day3)
         {
             fn = _fn;
             mi = _mi;
@@ -29,11 +32,14 @@ namespace QEAMApp.MVVM.Model
             position = _position == 1 ? "Region VIII Officer" : "Member";
             institution = _institution;
             pn = _pn;
+            day1 = _day1;
+            day2 = _day2;
+            day3 = _day3;
         }
 
         public Attendee Clone()
         {
-            return new Attendee(fn, mi, ln, uid, membershipBit, positionBit, institution, pn);
+            return new Attendee(fn, mi, ln, uid, membershipBit, positionBit, institution, pn, day1, day2, day3);
         }
 
         public override string ToString()

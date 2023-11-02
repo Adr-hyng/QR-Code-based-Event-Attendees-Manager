@@ -70,7 +70,7 @@ namespace QEAMApp.MVVM.Model
                 return IsConnected;
             }
         }
-        public async Task<(bool?, Attendee?)> Authenticate(string id, double maxTimeoutSeconds = 0.5)
+        public async Task<(bool?, Attendee?)> Authenticate(string id, double maxTimeoutSeconds = 2)
         {
             string url = $"{_baseUri}authenticate/{id}";
 
@@ -95,7 +95,7 @@ namespace QEAMApp.MVVM.Model
                             byte membership = (byte)firstElement!["membership"]!["data"]![0]!;
                             byte position = (byte)firstElement!["position"]!["data"]![0]!;
 
-                            Attendee attendee = new(
+                            Attendee attendee = new Attendee(
                                 _fn: firstElement["fn"] + "",
                                 _mi: firstElement["mi"] + "",
                                 _ln: firstElement["ln"] + "",
@@ -103,8 +103,12 @@ namespace QEAMApp.MVVM.Model
                                 _membership: membership,
                                 _position: position,
                                 _institution: firstElement["institution"] + "",
-                                _pn: "0" + firstElement["pn"]
+                                _pn: "0" + firstElement["pn"],
+                                _day1: new DayContent(firstElement.ToObject<Dictionary<string, object>>(), new string[] { "amd1", "lunchd1", "pmd1", "checkind1", "checkoutd1" }),
+                                _day2: new DayContent(firstElement.ToObject<Dictionary<string, object>>(), new string[] { "amd2", "lunchd2", "pmd2", "checkind2", "checkoutd2" }),
+                                _day3: new DayContent(firstElement.ToObject<Dictionary<string, object>>(), new string[] { "amd3", "lunchd3", "pmd3", "checkind3", "checkoutd3" })
                             );
+
                             return (true, attendee);
                         }
                         else if (!IsFound) return Exit();
@@ -112,7 +116,7 @@ namespace QEAMApp.MVVM.Model
                     return Exit();
                 }
             }
-            catch (Exception)
+            catch (Exception ex)
             {
                 SystemSounds.Exclamation.Play();
                 AutoClosingMessageBox.Show("No Server Connected.", "SERVER 404", 5000);

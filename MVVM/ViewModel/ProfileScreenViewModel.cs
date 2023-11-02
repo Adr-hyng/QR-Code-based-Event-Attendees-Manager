@@ -90,11 +90,11 @@ namespace QEAMApp.MVVM.ViewModel
         public ProfileScreenViewModel(NavigationService GoToIdleScreen)
         {
             GoBackCommand = new NavigateCommand(GoToIdleScreen);
+            ToggleCommand = new ToggleButtonCommand(RadioButtons!);
         }
 
         public ProfileScreenViewModel(NavigationService GoToIdleScreen, Attendee profile)
         {
-            RadioButtonsHandler();
             FirstName = profile.fn;
             Name = $"{profile.fn} {(!String.IsNullOrEmpty(profile.mi) ? profile.mi + "." : "")} {profile.ln}";
             Membership = profile.membership;
@@ -102,15 +102,16 @@ namespace QEAMApp.MVVM.ViewModel
             Institution = profile.institution;
             GoBackCommand = new NavigateCommand(GoToIdleScreen);
             ToggleCommand = new ToggleButtonCommand(RadioButtons!); // Soon for Developer Mode To Manually Toggle
+            RadioButtonsHandler(profile);
 
             if (AUTO_CLOSE) CloseTimerOption(Seconds: 3);
         }
 
-        public void RadioButtonsHandler()
+        public void RadioButtonsHandler(Attendee profile)
         {
             List<string> ToggleButtonNames = new List<string>()
             {
-                "PMD1", "CheckInD1" ,"CheckOutD1",
+                "AMD1", "LD1", "PMD1", "CheckInD1" ,"CheckOutD1",
                 "AMD2", "LD2", "PMD2", "CheckInD2" ,"CheckOutD2",
                 "AMD3", "LD3", "PMD3", "CheckInD3" ,"CheckOutD3",
             };

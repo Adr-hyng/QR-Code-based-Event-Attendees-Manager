@@ -29,14 +29,14 @@ CREATE TABLE Attendees (
     lunchd3 DATETIME,
     pmd3 DATETIME,
     checkind3 DATETIME,
-    checkoutd DATETIME,
+    checkoutd3 DATETIME,
     
     PRIMARY KEY (id)
 );
 
 -- Update value based on condition
 UPDATE Attendees
-SET checkind1 = CURRENT_TIMESTAMP
+SET amd1 = CURRENT_TIMESTAMP
 WHERE id = 2;
 
 -- Delete table content created

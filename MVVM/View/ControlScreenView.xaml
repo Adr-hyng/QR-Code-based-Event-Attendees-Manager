@@ -10,15 +10,12 @@
     mc:Ignorable="d">
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="75" />
-            <RowDefinition Height="60" />
+            <RowDefinition Height="58" />
+            <RowDefinition Height="58" />
             <RowDefinition />
         </Grid.RowDefinitions>
 
-        <ComboBox
-            Width="174"
-            Margin="19,43,19,0"
-            SelectedIndex="0">
+        <ComboBox Margin="19,36,19,0" SelectedIndex="0">
             <ComboBoxItem Content="0" />
             <ComboBoxItem Content="1" />
             <ComboBoxItem Content="2" />
@@ -42,7 +39,8 @@
 
         <TextBlock
             Width="112"
-            Margin="34,22,0,0"
+            Height="16"
+            Margin="34,16,0,0"
             HorizontalAlignment="Left"
             VerticalAlignment="Top"
             FontFamily="Consolas"
@@ -52,7 +50,8 @@
         <TextBlock
             Grid.Row="1"
             Width="112"
-            Margin="34,10,0,0"
+            Height="16"
+            Margin="34,13,0,0"
             HorizontalAlignment="Left"
             VerticalAlignment="Top"
             FontFamily="Consolas"
@@ -63,7 +62,7 @@
         <Border
             Grid.Row="1"
             Height="22"
-            Margin="19,28,19,10"
+            Margin="19,33,19,3"
             Background="#FFE9E9E9"
             BorderBrush="#FFACACAC">
             <TextBox
@@ -87,15 +86,18 @@
             <Ellipse
                 x:Name="StatusIndicator"
                 Grid.Column="0"
+                Grid.ColumnSpan="2"
                 Width="20"
                 Height="20"
-                HorizontalAlignment="Center"
-                VerticalAlignment="Center"
+                Margin="96,52,0,0"
+                HorizontalAlignment="Left"
+                VerticalAlignment="Top"
                 Fill="{Binding IndicatorColor}" />
             <TextBlock
+                Grid.ColumnSpan="2"
                 Width="70"
-                Margin="0,53,0,0"
-                HorizontalAlignment="Center"
+                Margin="71,77,0,0"
+                HorizontalAlignment="Left"
                 VerticalAlignment="Top"
                 FontFamily="Consolas"
                 RenderTransformOrigin="0.518,-1.104"
@@ -106,7 +108,7 @@
                 Grid.Column="1"
                 Width="86"
                 Height="30"
-                Margin="0,29,0,0"
+                Margin="0,13,0,0"
                 HorizontalAlignment="Center"
                 VerticalAlignment="Top"
                 Background="#FFE9E9E9"
@@ -114,6 +116,17 @@
                 Command="{Binding SubmitAddressCommand}"
                 CommandParameter="{Binding Text, ElementName=DefaultGatewayAddress}"
                 Content="Submit"
+                FontFamily="Consolas"
+                FontSize="13" />
+            <Button
+                Width="86"
+                Height="30"
+                Margin="0,13,0,0"
+                HorizontalAlignment="Center"
+                VerticalAlignment="Top"
+                Background="#FFE9E9E9"
+                BorderBrush="#FFACACAC"
+                Content="Export"
                 FontFamily="Consolas"
                 FontSize="13" />
 

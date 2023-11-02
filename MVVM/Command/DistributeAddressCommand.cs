@@ -60,6 +60,7 @@ namespace QEAMApp.MVVM.Command
         {
             if (parameter is string IpAddress)
             {
+                if (String.IsNullOrEmpty(IpAddress) || String.IsNullOrWhiteSpace(IpAddress)) return;
                 bool IsValid = ValidateIPAddress(IpAddress, out string? ipAddress, out int port);
                 if (String.IsNullOrEmpty(ipAddress) || String.IsNullOrEmpty(port.ToString()) || !IsValid)
                 {

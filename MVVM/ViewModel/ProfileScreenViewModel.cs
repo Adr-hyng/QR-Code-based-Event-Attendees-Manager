@@ -14,6 +14,8 @@ namespace QEAMApp.MVVM.ViewModel
 {
     internal class ProfileScreenViewModel: ViewModelBase
     {
+        public Dictionary<string, RadioButtonViewModel> RadioButtons { get; set; }
+
         private const bool AUTO_CLOSE = false;
         private string _firstName;
         public string FirstName
@@ -83,6 +85,7 @@ namespace QEAMApp.MVVM.ViewModel
 
         public ICommand StayCommand { get; private set; }
         public ICommand GoBackCommand { get;}
+        public ICommand ToggleCommand { get;}
 
         public ProfileScreenViewModel(NavigationService GoToIdleScreen)
         {
@@ -91,13 +94,32 @@ namespace QEAMApp.MVVM.ViewModel
 
         public ProfileScreenViewModel(NavigationService GoToIdleScreen, Attendee profile)
         {
+            RadioButtonsHandler();
             FirstName = profile.fn;
             Name = $"{profile.fn} {(!String.IsNullOrEmpty(profile.mi) ? profile.mi + "." : "")} {profile.ln}";
             Membership = profile.membership;
             Position = profile.position;
             Institution = profile.institution;
             GoBackCommand = new NavigateCommand(GoToIdleScreen);
+            ToggleCommand = new ToggleButtonCommand(RadioButtons!); // Soon for Developer Mode To Manually Toggle
+
             if (AUTO_CLOSE) CloseTimerOption(Seconds: 3);
+        }
+
+        public void RadioButtonsHandler()
+        {
+            List<string> ToggleButtonNames = new List<string>()
+            {
+                "PMD1", "CheckInD1" ,"CheckOutD1",
+                "AMD2", "LD2", "PMD2", "CheckInD2" ,"CheckOutD2",
+                "AMD3", "LD3", "PMD3", "CheckInD3" ,"CheckOutD3",
+            };
+
+            RadioButtons = new Dictionary<string, RadioButtonViewModel>();
+            foreach (string ToggleButtonName in ToggleButtonNames)
+            {
+                RadioButtons.Add(ToggleButtonName, new RadioButtonViewModel { IsChecked = true, Opacity = 0 });
+            }
         }
 
         public async void CloseTimerOption(int Seconds)

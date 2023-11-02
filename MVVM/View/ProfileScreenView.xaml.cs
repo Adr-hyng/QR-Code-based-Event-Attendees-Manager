@@ -24,5 +24,11 @@ namespace QEAMApp.MVVM.View
         {
             InitializeComponent();
         }
+
+        private void RadioButton_PreviewMouseDown(object sender, MouseButtonEventArgs e)
+        {
+            // Make the two Radiobuttons be constantly unchecked
+            e.Handled = true;
+        }
     }
 }

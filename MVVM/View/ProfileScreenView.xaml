@@ -195,69 +195,6 @@
                 </Border.Background>
             </Border>
 
-            <RadioButton
-                x:Name="AMD1"
-                Width="60"
-                Height="60"
-                Margin="238,166,368,294"
-                BorderBrush="#00707070"
-                GroupName="101"
-                IsChecked="False"
-                Style="{StaticResource {x:Type ToggleButton}}">
-                <RadioButton.Background>
-                    <ImageBrush ImageSource="/Images/check_icon.png" />
-                </RadioButton.Background>
-            </RadioButton>
-
-            <RadioButton
-                x:Name="LD1"
-                Width="60"
-                Height="60"
-                Margin="238,232,368,228"
-                BorderBrush="#00707070"
-                GroupName="100"
-                IsChecked="False"
-                Style="{StaticResource {x:Type ToggleButton}}">
-                <RadioButton.Background>
-                    <ImageBrush ImageSource="/Images/check_icon.png" />
-                </RadioButton.Background>
-            </RadioButton>
-
-            <RadioButton
-                x:Name="PMD1"
-                Width="60"
-                Height="60"
-                Margin="238,296,368,164"
-                BorderBrush="#00707070"
-                GroupName="1"
-                IsChecked="True"
-                Opacity="1"
-                Style="{StaticResource {x:Type ToggleButton}}" />
-
-            <RadioButton
-                x:Name="CheckInD1"
-                Width="60"
-                Height="60"
-                Margin="238,361,368,99"
-                BorderBrush="#00707070"
-                GroupName="2"
-                IsChecked="True"
-                Opacity="1"
-                Style="{StaticResource {x:Type ToggleButton}}" />
-
-            <RadioButton
-                x:Name="CheckOutD1"
-                Width="60"
-                Height="60"
-                Margin="238,426,368,34"
-                BorderBrush="#00707070"
-                GroupName="3"
-                IsChecked="True"
-                Opacity="1"
-                Style="{StaticResource {x:Type ToggleButton}}" />
-
-
-
             <Border
                 Width="55"
                 Height="55"
@@ -298,6 +235,64 @@
                     <ImageBrush ImageSource="/Images/check-out_icon.png" />
                 </Border.Background>
             </Border>
+
+            <RadioButton
+                x:Name="AMD1"
+                Width="60"
+                Height="60"
+                Margin="238,166,368,294"
+                BorderBrush="#00707070"
+                GroupName="101"
+                IsChecked="False"
+                PreviewMouseDown="RadioButton_PreviewMouseDown"
+                Style="{StaticResource {x:Type ToggleButton}}" />
+
+            <RadioButton
+                x:Name="LD1"
+                Width="60"
+                Height="60"
+                Margin="238,232,368,228"
+                BorderBrush="#00707070"
+                GroupName="100"
+                IsChecked="False"
+                PreviewMouseDown="RadioButton_PreviewMouseDown"
+                Style="{StaticResource {x:Type ToggleButton}}" />
+
+
+
+            <RadioButton
+                x:Name="PMD1"
+                Width="60"
+                Height="60"
+                Margin="238,296,368,164"
+                BorderBrush="#00707070"
+                GroupName="1"
+                IsChecked="{Binding RadioButtons[PMD1].IsChecked}"
+                Opacity="{Binding RadioButtons[PMD1].Opacity}"
+                Style="{StaticResource {x:Type ToggleButton}}" />
+
+            <RadioButton
+                x:Name="CheckInD1"
+                Width="60"
+                Height="60"
+                Margin="238,361,368,99"
+                BorderBrush="#00707070"
+                GroupName="2"
+                IsChecked="{Binding RadioButtons[CheckInD1].IsChecked}"
+                Opacity="{Binding RadioButtons[CheckInD1].Opacity}"
+                Style="{StaticResource {x:Type ToggleButton}}" />
+
+            <RadioButton
+                x:Name="CheckOutD1"
+                Width="60"
+                Height="60"
+                Margin="238,426,368,34"
+                BorderBrush="#00707070"
+                GroupName="3"
+                IsChecked="{Binding RadioButtons[CheckOutD1].IsChecked}"
+                Opacity="{Binding RadioButtons[CheckOutD1].Opacity}"
+                Style="{StaticResource {x:Type ToggleButton}}" />
+
             <RadioButton
                 x:Name="AMD2"
                 Width="60"
@@ -305,9 +300,10 @@
                 Margin="378,166,228,294"
                 BorderBrush="#00707070"
                 GroupName="4"
-                IsChecked="True"
-                Opacity="1"
+                IsChecked="{Binding RadioButtons[AMD2].IsChecked}"
+                Opacity="{Binding RadioButtons[AMD2].Opacity}"
                 Style="{StaticResource {x:Type ToggleButton}}" />
+
             <RadioButton
                 x:Name="LD2"
                 Width="60"
@@ -315,9 +311,10 @@
                 Margin="378,232,228,228"
                 BorderBrush="#00707070"
                 GroupName="5"
-                IsChecked="True"
-                Opacity="1"
+                IsChecked="{Binding RadioButtons[LD2].IsChecked}"
+                Opacity="{Binding RadioButtons[LD2].Opacity}"
                 Style="{StaticResource {x:Type ToggleButton}}" />
+
             <RadioButton
                 x:Name="PMD2"
                 Width="60"
@@ -325,39 +322,10 @@
                 Margin="378,296,228,164"
                 BorderBrush="#00707070"
                 GroupName="6"
-                IsChecked="True"
-                Opacity="1"
+                IsChecked="{Binding RadioButtons[PMD2].IsChecked}"
+                Opacity="{Binding RadioButtons[PMD2].Opacity}"
                 Style="{StaticResource {x:Type ToggleButton}}" />
-            <RadioButton
-                x:Name="AMD3"
-                Width="60"
-                Height="60"
-                Margin="518,166,88,294"
-                BorderBrush="#00707070"
-                GroupName="9"
-                IsChecked="True"
-                Opacity="1"
-                Style="{StaticResource {x:Type ToggleButton}}" />
-            <RadioButton
-                x:Name="LD3"
-                Width="60"
-                Height="60"
-                Margin="518,232,88,228"
-                BorderBrush="#00707070"
-                GroupName="10"
-                IsChecked="True"
-                Opacity="1"
-                Style="{StaticResource {x:Type ToggleButton}}" />
-            <RadioButton
-                x:Name="PMD3"
-                Width="60"
-                Height="60"
-                Margin="518,296,88,164"
-                BorderBrush="#00707070"
-                GroupName="11"
-                IsChecked="True"
-                Opacity="1"
-                Style="{StaticResource {x:Type ToggleButton}}" />
+
             <RadioButton
                 x:Name="CheckInD2"
                 Width="60"
@@ -365,19 +333,10 @@
                 Margin="378,361,228,99"
                 BorderBrush="#00707070"
                 GroupName="7"
-                IsChecked="True"
-                Opacity="1"
+                IsChecked="{Binding RadioButtons[CheckInD2].IsChecked}"
+                Opacity="{Binding RadioButtons[CheckInD2].Opacity}"
                 Style="{StaticResource {x:Type ToggleButton}}" />
-            <RadioButton
-                x:Name="CheckInD3"
-                Width="60"
-                Height="60"
-                Margin="518,361,88,99"
-                BorderBrush="#00707070"
-                GroupName="12"
-                IsChecked="True"
-                Opacity="1"
-                Style="{StaticResource {x:Type ToggleButton}}" />
+
             <RadioButton
                 x:Name="CheckOutD2"
                 Width="60"
@@ -385,9 +344,54 @@
                 Margin="378,426,228,34"
                 BorderBrush="#00707070"
                 GroupName="8"
-                IsChecked="True"
-                Opacity="1"
+                IsChecked="{Binding RadioButtons[CheckOutD2].IsChecked}"
+                Opacity="{Binding RadioButtons[CheckOutD2].Opacity}"
                 Style="{StaticResource {x:Type ToggleButton}}" />
+
+            <RadioButton
+                x:Name="AMD3"
+                Width="60"
+                Height="60"
+                Margin="518,166,88,294"
+                BorderBrush="#00707070"
+                GroupName="9"
+                IsChecked="{Binding RadioButtons[AMD3].IsChecked}"
+                Opacity="{Binding RadioButtons[AMD3].Opacity}"
+                Style="{StaticResource {x:Type ToggleButton}}" />
+
+            <RadioButton
+                x:Name="LD3"
+                Width="60"
+                Height="60"
+                Margin="518,232,88,228"
+                BorderBrush="#00707070"
+                GroupName="10"
+                IsChecked="{Binding RadioButtons[LD3].IsChecked}"
+                Opacity="{Binding RadioButtons[LD3].Opacity}"
+                Style="{StaticResource {x:Type ToggleButton}}" />
+
+            <RadioButton
+                x:Name="PMD3"
+                Width="60"
+                Height="60"
+                Margin="518,296,88,164"
+                BorderBrush="#00707070"
+                GroupName="11"
+                IsChecked="{Binding RadioButtons[PMD3].IsChecked}"
+                Opacity="{Binding RadioButtons[PMD3].Opacity}"
+                Style="{StaticResource {x:Type ToggleButton}}" />
+
+            <RadioButton
+                x:Name="CheckInD3"
+                Width="60"
+                Height="60"
+                Margin="518,361,88,99"
+                BorderBrush="#00707070"
+                GroupName="12"
+                IsChecked="{Binding RadioButtons[CheckInD3].IsChecked}"
+                Opacity="{Binding RadioButtons[CheckInD3].Opacity}"
+                Style="{StaticResource {x:Type ToggleButton}}" />
+
             <RadioButton
                 x:Name="CheckOutD3"
                 Width="60"
@@ -395,8 +399,8 @@
                 Margin="518,426,88,34"
                 BorderBrush="#00707070"
                 GroupName="13"
-                IsChecked="True"
-                Opacity="1"
+                IsChecked="{Binding RadioButtons[CheckOutD3].IsChecked}"
+                Opacity="{Binding RadioButtons[CheckOutD3].Opacity}"
                 Style="{StaticResource {x:Type ToggleButton}}" />
 
         </Grid>

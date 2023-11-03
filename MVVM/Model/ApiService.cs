@@ -9,6 +9,7 @@ using System.Media;
 using QEAMApp.Core;
 using System.ComponentModel;
 using System.Threading;
+using System.Text;
 
 namespace QEAMApp.MVVM.Model
 {
@@ -70,6 +71,7 @@ namespace QEAMApp.MVVM.Model
                 return IsConnected;
             }
         }
+
         public async Task<(bool?, Attendee?)> Authenticate(string id, double maxTimeoutSeconds = 2)
         {
             string url = $"{_baseUri}authenticate/{id}";
@@ -123,6 +125,45 @@ namespace QEAMApp.MVVM.Model
                 return Exit(flag: null);
             }
         }
+
+        public async Task<bool> UpdateAttendee(string id, string column, string value)
+        {
+            string url = $"{_baseUri}update_attendee/{id}";
+
+            try
+            {
+                var data = new Dictionary<string, string>
+        {
+            { "column", column },
+            { "value", value }
+        };
+
+                var json = JsonConvert.SerializeObject(data);
+                var content = new StringContent(json, Encoding.UTF8, "application/json");
+
+                HttpResponseMessage response = await _client.PostAsync(url, content);
+
+                if (response.IsSuccessStatusCode)
+                {
+                    Console.WriteLine("Attendee updated successfully.");
+                    Console.WriteLine(await response.Content.ReadAsStringAsync());
+                    return true;
+                }
+                else
+                {
+                    Console.WriteLine("Failed to update attendee.");
+                    Console.WriteLine(await response.Content.ReadAsStringAsync());
+                    return false;
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("An error occurred while making the request.");
+                Console.WriteLine(ex.Message);
+                return false;
+            }
+        }
+
 
     }
 }

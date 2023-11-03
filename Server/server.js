@@ -50,6 +50,27 @@ app.get("/api/status_info", (req, res) => {
   res.json({ address: localHostAddress, port: PORT });
 });
 
+app.post("/api/update_attendee/:id", (req, res) => {
+  const id = req.params.id;
+  const column = req.body.column;
+  const value = req.body.value;
+
+  const query = `UPDATE attendees SET ${column} = ? WHERE uid = ?`;
+
+  db.connection.query(query, [value, id], (error, results) => {
+    if (error) {
+      console.log(error);
+      res.status(500).json({ error: 'An error occurred while executing the query.' });
+    } else if (results.affectedRows > 0) {
+      res.json({ success: true });
+    } else {
+      res.status(404).json({ success: false, error: 'No attendee found with the given id.' });
+    }
+  });
+});
+
+
+
 app.listen(PORT, () => {
   const networkInterfaces = os.networkInterfaces();
   let localHostAddress;

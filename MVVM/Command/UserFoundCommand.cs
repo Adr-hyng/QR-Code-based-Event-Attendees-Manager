@@ -52,6 +52,21 @@ namespace QEAMApp.MVVM.Command
                         )
                     );
 
+                    // Check if it's first time to check-in.
+                    // Check first if what day is today, and get if it has already have value.
+                    if(!attendee!.day1.checkIn.HasValue)
+                    {
+                        bool success = await _apiService.UpdateAttendee("NzmW19gA3ER4GNxwx8JOKh", "pmd1", DateTime.Now.ToString());
+                        if (success)
+                        {
+                            Console.WriteLine("Attendee updated successfully.");
+                        }
+                        else
+                        {
+                            Console.WriteLine("Failed to update attendee.");
+                        }
+                    }
+
                     _navigationService._navigationStore = navigationStore;
                     _idleScreen.IsReadOnly = false;
                 }

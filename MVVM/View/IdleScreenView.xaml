@@ -1,0 +1,81 @@
+﻿<UserControl
+    x:Class="QEAMApp.MVVM.View.IdleScreenView"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:local="clr-namespace:QEAMApp.MVVM.View"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    d:DesignHeight="550"
+    d:DesignWidth="1066"
+    Loaded="UserControl_Loaded"
+    MouseLeftButtonDown="Grid_MouseLeftButtonDown"
+    mc:Ignorable="d">
+    <Grid Background="White" MouseLeftButtonDown="Grid_MouseLeftButtonDown">
+        <Grid.RowDefinitions>
+            <RowDefinition />
+            <RowDefinition Height="50" />
+        </Grid.RowDefinitions>
+
+        <Grid Grid.Row="1">
+            <TextBox
+                x:Name="QRCodeTextBox"
+                Width="450"
+                Margin="0,0,0,0"
+                HorizontalAlignment="Center"
+                VerticalAlignment="Bottom"
+                Background="{x:Null}"
+                BorderBrush="#02ABADB3"
+                Cursor="None"
+                Foreground="Black"
+                IsReadOnly="{Binding IsReadOnly}"
+                Opacity="1"
+                Style="{StaticResource ModernTextBox}"
+                Text="{Binding UniqueIdentifier, UpdateSourceTrigger=Default}"
+                TextWrapping="Wrap"
+                Visibility="Visible">
+                <TextBox.InputBindings>
+                    <KeyBinding
+                        Key="Enter"
+                        Command="{Binding ScanningCommand}"
+                        CommandParameter="{Binding Text, ElementName=QRCodeTextBox}" />
+                </TextBox.InputBindings>
+            </TextBox>
+        </Grid>
+
+        <TextBlock
+            HorizontalAlignment="Center"
+            VerticalAlignment="Bottom"
+            FontSize="50"
+            FontWeight="Light"
+            Foreground="Black"
+            Text="Scan ID to Get Started!"
+            TextAlignment="Center" />
+
+        <Grid Grid.Row="0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="300" />
+                <ColumnDefinition />
+                <ColumnDefinition Width="300" />
+            </Grid.ColumnDefinitions>
+
+            <Border
+                Grid.Column="1"
+                Width="372"
+                Height="372"
+                Margin="10,10,10,10">
+                <Border.Background>
+                    <ImageBrush ImageSource="/QEAMApp;component/Images/barcode_scanner.png" Stretch="UniformToFill" />
+                </Border.Background>
+            </Border>
+
+            <Border
+                Grid.Column="1"
+                Grid.ColumnSpan="2"
+                Margin="414,-90,0,332">
+                <Border.Background>
+                    <ImageBrush ImageSource="/QEAMApp;component/Images/logger.png" Stretch="Uniform" />
+                </Border.Background>
+            </Border>
+        </Grid>
+    </Grid>
+</UserControl>

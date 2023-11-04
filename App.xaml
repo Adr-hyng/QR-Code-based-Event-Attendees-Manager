@@ -1,34 +1,17 @@
-﻿<Application x:Class="QEAMApp.App"
-             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:local="clr-namespace:QEAMApp"
-             xmlns:viewModel="clr-namespace:QEAMApp.MVVM.ViewModel"
-             xmlns:view="clr-namespace:QEAMApp.MVVM.View"
-             StartupUri="MainWindow.xaml">
+﻿<Application
+    x:Class="QEAMApp.App"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="clr-namespace:QEAMApp">
     <Application.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
-                <ResourceDictionary Source="Theme/MenuButtonTheme.xaml"/>
-                <ResourceDictionary Source="Theme/TextBoxTheme.xaml"/>
-                <ResourceDictionary Source="Theme/IconButtonTheme.xaml"/>
-                <ResourceDictionary Source="Theme/ModernScrollViewerTheme.xaml"/>
+                <ResourceDictionary Source="Theme/TextBoxTheme.xaml" />
+                <ResourceDictionary Source="Theme/IconButtonTheme.xaml" />
+                <ResourceDictionary Source="Theme/ToggleButton.xaml" />
             </ResourceDictionary.MergedDictionaries>
 
-            <DataTemplate DataType="{x:Type viewModel:HomeViewModel}">
-                <view:HomeView/>
-            </DataTemplate>
-
-            <DataTemplate DataType="{x:Type viewModel:BaseViewModel}">
-                <view:BaseView/>
-            </DataTemplate>
-
-            <DataTemplate DataType="{x:Type viewModel:CardViewModel}">
-                <view:CardView/>
-            </DataTemplate>
-
-            <BitmapImage x:Key="MainBackground" UriSource="pack://application:,,,/QEAMApp;component/Images/bg.png"/>
-
-            <FontFamily x:Key="JetBrainsMono">pack://application:,,,/QEAMApp;component/Fonts/#JetBrains Mono</FontFamily>
+            <FontFamily x:Key="Poppins">pack://application:,,,/QEAMApp;component/Fonts/#Poppins</FontFamily>
 
         </ResourceDictionary>
     </Application.Resources>

@@ -1,5 +1,4 @@
 ﻿using QEAMApp.Core;
-using QEAMApp.MVVM.View;
 using QEAMApp.MVVM.ViewModel;
 using System;
 using System.Collections.Generic;
@@ -28,10 +27,16 @@ namespace QEAMApp
     /// </summary>
     public partial class MainWindow : Window
     {
-        private TextBox QRCodePrompt;
+        public TextBox _QRCodePrompt;
         public MainWindow()
         {
             InitializeComponent();
+            Loaded += MainWindow_Loaded;
+        }
+
+        private void MainWindow_Loaded(object sender, RoutedEventArgs e)
+        {
+            _QRCodePrompt = Utility.FindVisualChild<TextBox>(CurrentView, "QRCodeTextBox")!;
         }
 
         private void CloseButton_Click(object sender, RoutedEventArgs e)
@@ -42,16 +47,7 @@ namespace QEAMApp
         private void Grid_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
             this.DragMove();
-            this.QRCodePrompt ??= Utility.FindVisualChild<TextBox>(MainView, "QRCodeTextBox");
-            this.QRCodePrompt.Focus();
-        }
-
-        private void FocusTextBoxOnKeyDown(object sender, KeyEventArgs e)
-        {
-            if (e.Key == Key.Return)
-            {
-                this.QRCodePrompt.Focus();
-            }
+            _QRCodePrompt.Focus();
         }
     }
 }

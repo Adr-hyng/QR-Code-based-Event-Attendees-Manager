@@ -5,6 +5,7 @@
 
 Server/node_modules/
 Server/package-lock.json
+Server/db_data.sql
 
 # User-specific files
 *.rsuser

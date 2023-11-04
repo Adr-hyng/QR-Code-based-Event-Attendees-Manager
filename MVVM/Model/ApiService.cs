@@ -72,7 +72,7 @@ namespace QEAMApp.MVVM.Model
             }
         }
 
-        public async Task<(bool?, Attendee?)> Authenticate(string id, double maxTimeoutSeconds = 2)
+        public async Task<(bool?, Attendee?)> Authenticate(string id, double maxTimeoutSeconds = 0.5)
         {
             string url = $"{_baseUri}authenticate/{id}";
 
@@ -106,9 +106,9 @@ namespace QEAMApp.MVVM.Model
                                 _position: position,
                                 _institution: firstElement["institution"] + "",
                                 _pn: "0" + firstElement["pn"],
-                                _day1: new DayContent(firstElement.ToObject<Dictionary<string, object>>(), new string[] { "amd1", "lunchd1", "pmd1", "checkind1", "checkoutd1" }),
-                                _day2: new DayContent(firstElement.ToObject<Dictionary<string, object>>(), new string[] { "amd2", "lunchd2", "pmd2", "checkind2", "checkoutd2" }),
-                                _day3: new DayContent(firstElement.ToObject<Dictionary<string, object>>(), new string[] { "amd3", "lunchd3", "pmd3", "checkind3", "checkoutd3" })
+                                _day1: new DayContent(firstElement.ToObject<Dictionary<string, object>>()!, new string[] { "amd1", "lunchd1", "pmd1", "checkind1", "checkoutd1" }),
+                                _day2: new DayContent(firstElement.ToObject<Dictionary<string, object>>()!, new string[] { "amd2", "lunchd2", "pmd2", "checkind2", "checkoutd2" }),
+                                _day3: new DayContent(firstElement.ToObject<Dictionary<string, object>>()!, new string[] { "amd3", "lunchd3", "pmd3", "checkind3", "checkoutd3" })
                             );
 
                             return (true, attendee);
@@ -118,7 +118,7 @@ namespace QEAMApp.MVVM.Model
                     return Exit();
                 }
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 SystemSounds.Exclamation.Play();
                 AutoClosingMessageBox.Show("No Server Connected.", "SERVER 404", 5000);
@@ -126,17 +126,17 @@ namespace QEAMApp.MVVM.Model
             }
         }
 
-        public async Task<bool> UpdateAttendee(string id, string column, string value)
+        public async Task<(bool, Attendee?)> UpdateAttendee(string id, string column, string value)
         {
             string url = $"{_baseUri}update_attendee/{id}";
 
             try
             {
                 var data = new Dictionary<string, string>
-        {
-            { "column", column },
-            { "value", value }
-        };
+                    {
+                        { "column", column },
+                        { "value", value }
+                    };
 
                 var json = JsonConvert.SerializeObject(data);
                 var content = new StringContent(json, Encoding.UTF8, "application/json");
@@ -147,22 +147,35 @@ namespace QEAMApp.MVVM.Model
                 {
                     Console.WriteLine("Attendee updated successfully.");
                     Console.WriteLine(await response.Content.ReadAsStringAsync());
-                    return true;
+
+                    // Call Authenticate method to get the updated attendee
+                    var (isAuthenticated, updatedAttendee) = await Authenticate(id);
+
+                    if (isAuthenticated.HasValue && isAuthenticated.Value)
+                    {
+                        return (true, updatedAttendee);
+                    }
+                    else
+                    {
+                        Console.WriteLine("Failed to retrieve updated attendee.");
+                        return (false, null);
+                    }
                 }
                 else
                 {
                     Console.WriteLine("Failed to update attendee.");
                     Console.WriteLine(await response.Content.ReadAsStringAsync());
-                    return false;
+                    return (false, null);
                 }
             }
             catch (Exception ex)
             {
                 Console.WriteLine("An error occurred while making the request.");
                 Console.WriteLine(ex.Message);
-                return false;
+                return (false, null);
             }
         }
+
 
 
     }

@@ -20,7 +20,7 @@ namespace QEAMApp
     {
         private readonly NavigationStore _mainNavigationStore;
         private readonly NavigationStore _controlNavigationStore;
-        private ControlCenter _secondWindow;
+        private ControlCenter? _secondWindow;
         private readonly ApiService _apiService;
 
         public App()

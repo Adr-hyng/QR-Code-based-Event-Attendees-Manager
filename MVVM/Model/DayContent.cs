@@ -29,9 +29,10 @@ namespace QEAMApp.MVVM.Model
             this.checkOut = GetNullableDateTimeValue(values, key[4]);
         }
 
+        // Replace DateTime with String, but still read as DateTime
         private DateTime? GetNullableDateTimeValue(Dictionary<string, object> values, string key)
         {
-            if (values.TryGetValue(key, out object value) && DateTime.TryParse(value?.ToString(), out DateTime result))
+            if (values.TryGetValue(key, out object? value) && DateTime.TryParse(value?.ToString(), out DateTime result))
             {
                 return result;
             }

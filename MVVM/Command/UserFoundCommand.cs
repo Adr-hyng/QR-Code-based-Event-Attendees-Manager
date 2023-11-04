@@ -43,29 +43,15 @@ namespace QEAMApp.MVVM.Command
 
                     // To change the next page or navigation
                     navigationStore.CurrentViewModel = new UserFoundScreenViewModel(
-                        GoToProfileNavigation: new NavigationService(navigationStore, 
+                        GoToProfileNavigation: new NavigationService(navigationStore,
                             () => new ProfileScreenViewModel(
                                 GoToIdleScreen: new NavigationService(navigationStore,
                                     () => _idleScreen),
-                                profile: attendee!
+                                Profile: attendee!,
+                                APIInstance: _apiService
                             )
                         )
                     );
-
-                    // Check if it's first time to check-in.
-                    // Check first if what day is today, and get if it has already have value.
-                    if(!attendee!.day1.checkIn.HasValue)
-                    {
-                        bool success = await _apiService.UpdateAttendee("NzmW19gA3ER4GNxwx8JOKh", "pmd1", DateTime.Now.ToString());
-                        if (success)
-                        {
-                            Console.WriteLine("Attendee updated successfully.");
-                        }
-                        else
-                        {
-                            Console.WriteLine("Failed to update attendee.");
-                        }
-                    }
 
                     _navigationService._navigationStore = navigationStore;
                     _idleScreen.IsReadOnly = false;

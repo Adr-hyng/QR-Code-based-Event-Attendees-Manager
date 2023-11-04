@@ -69,15 +69,13 @@ app.post("/api/update_attendee/:id", (req, res) => {
   });
 });
 
-
-
 app.listen(PORT, () => {
   const networkInterfaces = os.networkInterfaces();
-  let localHostAddress;
-  if("Wi-Fi" in networkInterfaces) {
-    localHostAddress = networkInterfaces['Wi-Fi'][3]['address'];
-  } else {
-    localHostAddress = networkInterfaces["Loopback Pseudo-Interface 1"][1]["address"]
-  }
+  let localHostAddress = "localhost";
+  // if("Wi-Fi" in networkInterfaces) {
+  //   localHostAddress = networkInterfaces['Wi-Fi'][3]['address'];
+  // } else {
+  //   localHostAddress = networkInterfaces["Loopback Pseudo-Interface 1"][1]["address"]
+  // }
   console.log(`QEAM Server from ${localHostAddress}:${PORT} running loaded with Database Schema: ${db.SCHEMA_NAME}`);
 });

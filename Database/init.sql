@@ -13,31 +13,42 @@ CREATE TABLE Attendees (
     institution VARCHAR(64),
     pn VARCHAR (10),
     
-    amd1 DATETIME,
-    lunchd1 DATETIME,
-    pmd1 DATETIME,
-    checkind1 DATETIME,
-    checkoutd1 DATETIME,
+    amd1 VARCHAR(100),
+    lunchd1 VARCHAR(100),
+    pmd1 VARCHAR(100),
+    checkind1 VARCHAR(100),
+    checkoutd1 VARCHAR(100),
     
-    amd2 DATETIME,
-    lunchd2 DATETIME,
-    pmd2 DATETIME,
-    checkind2 DATETIME,
-    checkoutd2 DATETIME,
+    amd2 VARCHAR(100),
+    lunchd2 VARCHAR(100),
+    pmd2 VARCHAR(100),
+    checkind2 VARCHAR(100),
+    checkoutd2 VARCHAR(100),
     
-    amd3 DATETIME,
-    lunchd3 DATETIME,
-    pmd3 DATETIME,
-    checkind3 DATETIME,
-    checkoutd3 DATETIME,
+    amd3 VARCHAR(100),
+    lunchd3 VARCHAR(100),
+    pmd3 VARCHAR(100),
+    checkind3 VARCHAR(100),
+    checkoutd3 VARCHAR(100),
     
     PRIMARY KEY (id)
 );
 
--- Update value based on condition
-UPDATE Attendees
-SET amd1 = CURRENT_TIMESTAMP
+-- Update pmd1 columnw with current time.
+UPDATE attendees
+SET pmd1 = NOW()
 WHERE id = 1;
+
+-- Reset the attendances and stuffs for x Day
+UPDATE attendees 
+SET 
+    amd1 = NULL,
+    lunchd1 = NULL,
+    pmd1 = NULL,
+    checkind1 = NULL,
+    checkoutd1 = NULL
+WHERE id = 1;
+
 
 -- Delete table content created
 DROP TABLE Attendees;

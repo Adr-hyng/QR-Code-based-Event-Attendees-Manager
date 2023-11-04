@@ -45,25 +45,23 @@ namespace QEAMApp.MVVM.Model
             try
             {
                 // Create a CancellationTokenSource with the specified timeout
-                using (CancellationTokenSource cts = new CancellationTokenSource(TimeSpan.FromSeconds(maxTimeoutSeconds)))
-                {
-                    // Assign the CancellationToken from the CancellationTokenSource to the GetAsync method
-                    HttpResponseMessage response = await _client.GetAsync(url, cts.Token);
+                using CancellationTokenSource cts = new(TimeSpan.FromSeconds(maxTimeoutSeconds));
+                // Assign the CancellationToken from the CancellationTokenSource to the GetAsync method
+                HttpResponseMessage response = await _client.GetAsync(url, cts.Token);
 
-                    if (response.IsSuccessStatusCode)
-                    {
-                        IsConnected = true;
-                        string json = await response.Content.ReadAsStringAsync();
-                        Dictionary<string, object>? result = JsonConvert.DeserializeObject<Dictionary<string, object>>(json);
-                        if (result is null) return IsConnected;
-                        Address = (string)result["address"];
-                        Port = (int)result["port"];
-                        return IsConnected;
-                    }
-                    else
-                    {
-                        return IsConnected;
-                    }
+                if (response.IsSuccessStatusCode)
+                {
+                    IsConnected = true;
+                    string json = await response.Content.ReadAsStringAsync();
+                    Dictionary<string, object>? result = JsonConvert.DeserializeObject<Dictionary<string, object>>(json);
+                    if (result is null) return IsConnected;
+                    Address = (string)result["address"];
+                    Port = (int)result["port"];
+                    return IsConnected;
+                }
+                else
+                {
+                    return IsConnected;
                 }
             }
             catch (Exception)
@@ -79,44 +77,42 @@ namespace QEAMApp.MVVM.Model
             try
             {
                 // Create a CancellationTokenSource with the specified timeout
-                using (CancellationTokenSource cts = new CancellationTokenSource(TimeSpan.FromSeconds(maxTimeoutSeconds)))
+                using CancellationTokenSource cts = new(TimeSpan.FromSeconds(maxTimeoutSeconds));
+                // Assign the CancellationToken from the CancellationTokenSource to the GetAsync method
+                HttpResponseMessage response = await _client.GetAsync(url, cts.Token);
+
+                if (response.IsSuccessStatusCode)
                 {
-                    // Assign the CancellationToken from the CancellationTokenSource to the GetAsync method
-                    HttpResponseMessage response = await _client.GetAsync(url, cts.Token);
-
-                    if (response.IsSuccessStatusCode)
+                    string json = await response.Content.ReadAsStringAsync();
+                    Dictionary<string, object>? result = JsonConvert.DeserializeObject<Dictionary<string, object>>(json);
+                    if (result is null) return Exit();
+                    bool IsFound = (bool)result["success"];
+                    if (IsFound)
                     {
-                        string json = await response.Content.ReadAsStringAsync();
-                        Dictionary<string, object>? result = JsonConvert.DeserializeObject<Dictionary<string, object>>(json);
-                        if (result is null) return Exit();
-                        bool IsFound = (bool)result["success"];
-                        if (IsFound)
-                        {
-                            JArray data2 = JArray.Parse(result["data"] + "");
-                            var firstElement = data2.FirstOrDefault();
-                            byte membership = (byte)firstElement!["membership"]!["data"]![0]!;
-                            byte position = (byte)firstElement!["position"]!["data"]![0]!;
+                        JArray data2 = JArray.Parse(result["data"] + "");
+                        var firstElement = data2.FirstOrDefault();
+                        byte membership = (byte)firstElement!["membership"]!["data"]![0]!;
+                        byte position = (byte)firstElement!["position"]!["data"]![0]!;
 
-                            Attendee attendee = new Attendee(
-                                _fn: firstElement["fn"] + "",
-                                _mi: firstElement["mi"] + "",
-                                _ln: firstElement["ln"] + "",
-                                _uid: firstElement["uid"] + "",
-                                _membership: membership,
-                                _position: position,
-                                _institution: firstElement["institution"] + "",
-                                _pn: "0" + firstElement["pn"],
-                                _day1: new DayContent(firstElement.ToObject<Dictionary<string, object>>()!, new string[] { "amd1", "lunchd1", "pmd1", "checkind1", "checkoutd1" }),
-                                _day2: new DayContent(firstElement.ToObject<Dictionary<string, object>>()!, new string[] { "amd2", "lunchd2", "pmd2", "checkind2", "checkoutd2" }),
-                                _day3: new DayContent(firstElement.ToObject<Dictionary<string, object>>()!, new string[] { "amd3", "lunchd3", "pmd3", "checkind3", "checkoutd3" })
-                            );
+                        Attendee attendee = new(
+                            _fn: firstElement["fn"] + "",
+                            _mi: firstElement["mi"] + "",
+                            _ln: firstElement["ln"] + "",
+                            _uid: firstElement["uid"] + "",
+                            _membership: membership,
+                            _position: position,
+                            _institution: firstElement["institution"] + "",
+                            _pn: "0" + firstElement["pn"],
+                            _day1: new DayContent(firstElement.ToObject<Dictionary<string, object>>()!, new string[] { "amd1", "lunchd1", "pmd1", "checkind1", "checkoutd1" }),
+                            _day2: new DayContent(firstElement.ToObject<Dictionary<string, object>>()!, new string[] { "amd2", "lunchd2", "pmd2", "checkind2", "checkoutd2" }),
+                            _day3: new DayContent(firstElement.ToObject<Dictionary<string, object>>()!, new string[] { "amd3", "lunchd3", "pmd3", "checkind3", "checkoutd3" })
+                        );
 
-                            return (true, attendee);
-                        }
-                        else if (!IsFound) return Exit();
+                        return (true, attendee);
                     }
-                    return Exit();
+                    else if (!IsFound) return Exit();
                 }
+                return Exit();
             }
             catch (Exception)
             {

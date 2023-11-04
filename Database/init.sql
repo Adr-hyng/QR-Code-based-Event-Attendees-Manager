@@ -46,7 +46,19 @@ SET
     lunchd1 = NULL,
     pmd1 = NULL,
     checkind1 = NULL,
-    checkoutd1 = NULL
+    checkoutd1 = NULL,
+    
+    amd2 = NULL,
+    lunchd2 = NULL,
+    pmd2 = NULL,
+    checkind2 = NULL,
+    checkoutd2 = NULL,
+    
+    amd3 = NULL,
+    lunchd3 = NULL,
+    pmd3 = NULL,
+    checkind3 = NULL,
+    checkoutd3 = NULL
 WHERE id = 1;
 
 

@@ -168,9 +168,7 @@
                 x:Name="MonitoringTable"
                 Margin="20,30,20,10"
                 Background="#665B5B5B"
-                CornerRadius="40">
-                <Border BorderBrush="Black" BorderThickness="1" />
-            </Border>
+                CornerRadius="40" />
 
             <TextBlock
                 Margin="136,57,136,417"
@@ -179,15 +177,38 @@
                 Text="Attendance &amp; Snacks"
                 TextAlignment="Center" />
 
+
+
             <Button
                 Height="50"
-                Margin="578,41,34,429"
+                Margin="583,39,29,431"
+                Panel.ZIndex="2"
                 BorderBrush="Transparent"
                 Command="{Binding GoBackCommand}">
-                <Button.Background>
-                    <ImageBrush ImageSource="/Images/go_back_button.png" />
-                </Button.Background>
+                <Button.Style>
+                    <Style TargetType="Button">
+                        <Setter Property="Background">
+                            <Setter.Value>
+                                <ImageBrush ImageSource="/Images/go_back_button.png" />
+                            </Setter.Value>
+                        </Setter>
+                        <Setter Property="Template">
+                            <Setter.Value>
+                                <ControlTemplate TargetType="Button">
+                                    <Border
+                                        Background="{TemplateBinding Background}"
+                                        BorderBrush="{TemplateBinding BorderBrush}"
+                                        BorderThickness="{TemplateBinding BorderThickness}">
+                                        <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" />
+                                    </Border>
+                                </ControlTemplate>
+                            </Setter.Value>
+                        </Setter>
+                    </Style>
+                </Button.Style>
             </Button>
+
+
 
             <Border Margin="50,119,50,32">
                 <Border.Background>

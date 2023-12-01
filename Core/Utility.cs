@@ -71,6 +71,12 @@ namespace QEAMApp.Core
 
             storyboard.Begin();
         }
+
+        public static bool IsNotNullOrEmpty(object value)
+        {
+            // Check if the value is not null and not an empty string
+            return value != null && !string.IsNullOrEmpty(value.ToString());
+        }
         public static T? FindVisualChild<T>(DependencyObject parent, string childName) where T : DependencyObject
         {
             if (parent == null)

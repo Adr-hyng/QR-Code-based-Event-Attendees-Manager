@@ -5,6 +5,8 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Printing;
+using System.Reflection;
+using System.Reflection.Metadata.Ecma335;
 using System.Security.Principal;
 using System.Text;
 using System.Threading.Tasks;
@@ -117,9 +119,17 @@ namespace QEAMApp.MVVM.ViewModel
         {
             Dictionary<string, DayContent> DayController = new()
             {
-                ["11/04"] = _profile.day1,
-                ["11/05"] = _profile.day2,
-                ["11/06"] = _profile.day3,
+                ["12/02"] = _profile.day1,
+                ["12/03"] = _profile.day2,
+                ["12/04"] = _profile.day3,
+            };
+
+            Dictionary<string, (TimeSpan from, TimeSpan to, String columnPrefix, String radioButtonPrefix)> timeSpans = new()
+            {
+                { "AmSnack", (new TimeSpan(8, 0, 0), new TimeSpan(11, 59, 0), "am", "AM") }, // Morning Snack (Between 8 AM - 11:59 AM)
+                { "LunchSnack", (new TimeSpan(12, 0, 0), new TimeSpan(15, 59, 59), "lunch" ,"L") }, // Lunch Snack (Between 12 PM - 3:59 PM)
+                { "PmSnack", (new TimeSpan(16, 0, 0), new TimeSpan(17, 59, 59), "pm" , "PM") }, // Evening Snack (Between 4 PM - 5:59 PM)
+                { "CheckOut", (new TimeSpan(18, 0, 0), new TimeSpan(20, 0, 0), "checkout" , "CheckOut") }, // Check Out (Time Out) (Between 6 PM - 8:00 PM)
             };
 
             DateTime currentDateTime = DateTime.Now;
@@ -127,6 +137,8 @@ namespace QEAMApp.MVVM.ViewModel
 
             if (!DayController.ContainsKey(currentDate)) return;
             DayContent subDayController = DayController[currentDate];
+
+            PropertyInfo[] properties = subDayController.GetType().GetProperties();
 
             // Check In (Time In)
             if (!subDayController.CheckIn.HasValue)
@@ -137,56 +149,31 @@ namespace QEAMApp.MVVM.ViewModel
                 RadioButtons![$"CheckIn{subDayController.id.ToUpper()}"].Opacity = 1;
             }
 
-            // Morning Snack (Between 8 AM - 11:59 AM)
-            else if (!subDayController.AmSnack.HasValue && subDayController.InTimeBound(
-                currentDateTime,
-                new TimeSpan(8, 0, 0),
-                new TimeSpan(11, 59, 0)
-                ))
+            else
             {
-                (bool IsUpdated, _profile) = await _apiService.UpdateAttendee(_profile.uid, $"am{subDayController.id}", currentDateTime.ToString());
-                if (!IsUpdated) return;
-                await Task.Delay(1000);
-                RadioButtons![$"AM{subDayController.id.ToUpper()}"].Opacity = 1;
-            }
+                foreach (PropertyInfo property in properties)
+                {
+                    string propertyName = property.Name;
+                    object propertyValue = property.GetValue(subDayController)!;
+                    if (propertyName.Contains("CheckIn")) continue;
+                    if (timeSpans.TryGetValue(propertyName, out var TimeSchedule))
+                    {
+                        if (!Utility.IsNotNullOrEmpty(propertyValue) && subDayController.InTimeBound(currentDateTime, TimeSchedule.from, TimeSchedule.to))
+                        {
+                            Action<string, string> updateMarkIcon = async (columnPrefix, radioButtonPrefix) =>
+                            {
+                                (bool IsUpdated, _profile) = await _apiService.UpdateAttendee(_profile.uid, $"{columnPrefix}{subDayController.id}", currentDateTime.ToString());
+                                if (IsUpdated)
+                                {
+                                    await Task.Delay(1000);
+                                    RadioButtons![$"{radioButtonPrefix}{subDayController.id.ToUpper()}"].Opacity = 1;
+                                }
+                            };
 
-            // Lunch Snack (Between 12 PM - 3:00 PM)
-            else if (!subDayController.LunchSnack.HasValue && subDayController.InTimeBound(
-                currentDateTime,
-                new TimeSpan(12, 0, 0),
-                new TimeSpan(15, 0, 0)
-                ))
-            {
-                (bool IsUpdated, _profile) = await _apiService.UpdateAttendee(_profile.uid, $"lunch{subDayController.id}", currentDateTime.ToString());
-                if (!IsUpdated) return;
-                await Task.Delay(1000);
-                RadioButtons![$"L{subDayController.id.ToUpper()}"].Opacity = 1;
-            }
-
-            // Evening Snack (Between 4 PM - 5:59 PM)
-            else if (!subDayController.PmSnack.HasValue && subDayController.InTimeBound(
-                currentDateTime,
-                new TimeSpan(16, 0, 0),
-                new TimeSpan(17, 59, 59)
-                ))
-            {
-                (bool IsUpdated, _profile) = await _apiService.UpdateAttendee(_profile.uid, $"pm{subDayController.id}", currentDateTime.ToString());
-                if (!IsUpdated) return;
-                await Task.Delay(1000);
-                RadioButtons![$"PM{subDayController.id.ToUpper()}"].Opacity = 1;
-            }
-
-            // Check Out (Time Out) (Between 6 PM - 7:59 PM)
-            else if (!subDayController.CheckOut.HasValue && subDayController.InTimeBound(
-                currentDateTime, 
-                new TimeSpan(18, 0, 0), 
-                new TimeSpan(20, 0, 0)
-                ))
-            {
-                (bool IsUpdated, _profile) = await _apiService.UpdateAttendee(_profile.uid, $"checkout{subDayController.id}", currentDateTime.ToString());
-                if (!IsUpdated) return;
-                await Task.Delay(1000);
-                RadioButtons![$"CheckOut{subDayController.id.ToUpper()}"].Opacity = 1;
+                            updateMarkIcon.Invoke(TimeSchedule.columnPrefix, TimeSchedule.radioButtonPrefix);
+                        }
+                    }
+                }
             }
         }
 

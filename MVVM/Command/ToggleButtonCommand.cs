@@ -17,9 +17,18 @@ namespace QEAMApp.MVVM.Command
         }
         public override void Execute(object? parameter)
         {
-            if (parameter is string radioButtonName)
+            if (parameter is object[] parameters)
             {
+                bool isChecked = (bool)parameters[0];
+                string name = (string)parameters[1];
+
+                if (RadioButtons.TryGetValue(name, out var SelectedRadioButton))
+                {
+                    SelectedRadioButton.Opacity = 1;
+                    SelectedRadioButton.IsChecked = isChecked;
+                }
             }
         }
+
     }
 }

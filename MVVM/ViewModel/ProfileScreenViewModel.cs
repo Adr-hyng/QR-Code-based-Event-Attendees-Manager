@@ -106,12 +106,12 @@ namespace QEAMApp.MVVM.ViewModel
             Position = Profile.position;
             Institution = Profile.institution;
             GoBackCommand = new NavigateCommand(GoToIdleScreen);
-            ToggleCommand = new ToggleButtonCommand(RadioButtons!); // Soon for Developer Mode To Manually Toggle
             _profile = Profile;
             _apiService = APIInstance;
-            AttendanceMarking();
             RadioButtonsHandler();
+            AttendanceMarking();
 
+            ToggleCommand = new ToggleButtonCommand(RadioButtons!); // Soon for Developer Mode To Manually Toggle
             if (AUTO_CLOSE) CloseTimerOption(Seconds: 3);
         }
 

@@ -37,19 +37,20 @@ function getIPAddress() {
 
 app.get("/api/authenticate/:id", (req, res) => {
   const id = req.params.id;
-  const query = `SELECT * FROM attendees WHERE uid = ?`;
-
+  const query = `SELECT * FROM attendees WHERE BINARY uid = ?`;
+ 
   db.connection.query(query, [id], (error, results) => {
-    if (error) {
-      console.log(error);
-      res.status(500).json({ error: 'An error occurred while executing the query.' });
-    } else if (results.length > 0) {
-      res.json({ success: true, data: results });
-    } else {
-      res.status(401).json({ success: false });
-    }
+   if (error) {
+     console.log(error);
+     res.status(500).json({ error: 'An error occurred while executing the query.' });
+   } else if (results.length > 0) {
+     res.json({ success: true, data: results });
+   } else {
+     res.status(401).json({ success: false });
+   }
   });
-});
+ });
+ 
 
 app.get("/api/attendees", (req, res) => {
   const query = `SELECT * FROM attendees`;

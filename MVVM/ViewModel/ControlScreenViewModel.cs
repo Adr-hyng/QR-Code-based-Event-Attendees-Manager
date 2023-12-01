@@ -15,7 +15,7 @@ namespace QEAMApp.MVVM.ViewModel
     internal class ControlScreenViewModel: ViewModelBase
     {
         public ICommand SubmitAddressCommand { get; }
-		private string _ipAddress = "192.168.1.6:5000";
+		private string _ipAddress = "192.168.1.10:5000";
 
 		private Brush _indicatorColor;
 		public Brush IndicatorColor

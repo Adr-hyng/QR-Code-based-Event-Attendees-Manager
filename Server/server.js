@@ -3,12 +3,37 @@ const app = express();
 const db = require('./db');
 const bodyParser = require('body-parser');
 const os = require('os');
+const { Console } = require('console');
 
 const PORT = 5000;
 
 app.use(bodyParser.json());
 
 app.use(express.json());
+
+
+function getIPAddress() {
+  const { networkInterfaces } = require('os');
+
+  const nets = networkInterfaces();
+  const results = Object.create(null); // Or just '{}', an empty object
+
+  for (const name of Object.keys(nets)) {
+    for (const net of nets[name]) {
+        // Skip over non-IPv4 and internal (i.e. 127.0.0.1) addresses
+        // 'IPv4' is in Node <= 17, from 18 it's a number 4 or 6
+        const familyV4Value = typeof net.family === 'string' ? 'IPv4' : 4
+        if (net.family === familyV4Value && !net.internal) {
+            if (!results[name]) {
+                results[name] = [];
+            }
+            results[name].push(net.address);
+        }
+    }
+  }
+  return results;
+}
+
 
 app.get("/api/authenticate/:id", (req, res) => {
   const id = req.params.id;
@@ -40,14 +65,7 @@ app.get("/api/attendees", (req, res) => {
 });
 
 app.get("/api/status_info", (req, res) => {
-  const networkInterfaces = os.networkInterfaces();
-  let localHostAddress;
-  if ("Wi-Fi" in networkInterfaces) {
-    localHostAddress = networkInterfaces['Wi-Fi'][3]['address'];
-  } else {
-    localHostAddress = networkInterfaces["Loopback Pseudo-Interface 1"][1]["address"]
-  }
-  res.json({ address: localHostAddress, port: PORT });
+  res.json(getIPAddress());
 });
 
 app.post("/api/update_attendee/:id", (req, res) => {
@@ -71,11 +89,14 @@ app.post("/api/update_attendee/:id", (req, res) => {
 
 app.listen(PORT, () => {
   const networkInterfaces = os.networkInterfaces();
-  let localHostAddress = "localhost";
-  // if("Wi-Fi" in networkInterfaces) {
-  //   localHostAddress = networkInterfaces['Wi-Fi'][3]['address'];
-  // } else {
-  //   localHostAddress = networkInterfaces["Loopback Pseudo-Interface 1"][1]["address"]
-  // }
-  console.log(`QEAM Server from ${localHostAddress}:${PORT} running loaded with Database Schema: ${db.SCHEMA_NAME}`);
+  let localHostAddress = getIPAddress();
+  let localHostIP;
+  const connectionRegex = /Local Area Connection.*|Wi-Fi/;
+  for (const [key, value] of Object.entries(localHostAddress)) {
+    if (connectionRegex.test(key)) {
+      console.log("Desired key:", key);
+      localHostIP = value;
+    }
+  }
+  console.log(`QEAM Server from ${localHostIP}:${PORT} running loaded with Database Schema: ${db.SCHEMA_NAME}`);
 });

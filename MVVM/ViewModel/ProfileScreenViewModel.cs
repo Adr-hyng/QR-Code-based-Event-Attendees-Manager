@@ -125,6 +125,7 @@ namespace QEAMApp.MVVM.ViewModel
             DateTime currentDateTime = DateTime.Now;
             string currentDate = currentDateTime.ToString("MM/dd");
 
+            if (!DayController.ContainsKey(currentDate)) return;
             DayContent subDayController = DayController[currentDate];
 
             // Check In (Time In)

@@ -18,7 +18,7 @@ namespace QEAMApp.MVVM.ViewModel
     {
         public Dictionary<string, RadioButtonViewModel>? RadioButtons { get; set; }
 
-        private const bool AUTO_CLOSE = false;
+        private const bool AUTO_CLOSE = true;
         private string? _firstName;
         public string? FirstName
         {

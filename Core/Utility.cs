@@ -7,6 +7,7 @@ using System.Windows.Media;
 using System.Windows;
 using System.Windows.Media.Animation;
 using System.Windows.Shapes;
+using System.Windows.Controls;
 
 namespace QEAMApp.Core
 {
@@ -42,36 +43,6 @@ namespace QEAMApp.Core
     }
     public class Utility
     {
-        public static void AnimateRectangle(Rectangle ScannerRect, Int16 srcY, Int16 dstY)
-        {
-            var storyboard = new Storyboard();
-
-            var moveAnimation = new DoubleAnimationUsingKeyFrames();
-
-            var keyFrame1 = new LinearDoubleKeyFrame(srcY, KeyTime.FromPercent(0));
-            var keyFrame2 = new LinearDoubleKeyFrame(dstY, KeyTime.FromPercent(0.5));
-            moveAnimation.KeyFrames.Add(keyFrame1);
-            moveAnimation.KeyFrames.Add(keyFrame2);
-
-            var keyFrame3 = new LinearDoubleKeyFrame(dstY, KeyTime.FromPercent(0.5));
-            var keyFrame4 = new LinearDoubleKeyFrame(srcY, KeyTime.FromPercent(1));
-            moveAnimation.KeyFrames.Add(keyFrame3);
-            moveAnimation.KeyFrames.Add(keyFrame4);
-
-            Storyboard.SetTarget(moveAnimation, ScannerRect);
-            Storyboard.SetTargetProperty(moveAnimation, new PropertyPath("(Canvas.Top)"));
-
-            var duration = TimeSpan.FromSeconds(1.5);
-            var repeatBehavior = RepeatBehavior.Forever;
-
-            storyboard.Children.Add(moveAnimation);
-
-            storyboard.Duration = duration;
-            storyboard.RepeatBehavior = repeatBehavior;
-
-            storyboard.Begin();
-        }
-
         public static bool IsNotNullOrEmpty(object value)
         {
             // Check if the value is not null and not an empty string

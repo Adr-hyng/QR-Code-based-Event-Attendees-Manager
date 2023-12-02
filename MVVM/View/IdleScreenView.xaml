@@ -9,6 +9,7 @@
     d:DesignWidth="1066"
     Loaded="UserControl_Loaded"
     MouseLeftButtonDown="Grid_MouseLeftButtonDown"
+    Unloaded="UserControl_Unloaded"
     mc:Ignorable="d">
     <Grid Background="White" MouseLeftButtonDown="Grid_MouseLeftButtonDown">
         <Grid.RowDefinitions>
@@ -20,9 +21,8 @@
             <TextBox
                 x:Name="QRCodeTextBox"
                 Width="450"
-                Margin="0,0,0,0"
                 HorizontalAlignment="Center"
-                VerticalAlignment="Bottom"
+                VerticalAlignment="Center"
                 Background="{x:Null}"
                 BorderBrush="#02ABADB3"
                 Cursor="None"
@@ -68,14 +68,42 @@
                 </Border.Background>
             </Border>
 
-            <Border
-                Grid.Column="1"
-                Grid.ColumnSpan="2"
-                Margin="414,-90,0,332">
-                <Border.Background>
-                    <ImageBrush ImageSource="/QEAMApp;component/Images/logger.png" Stretch="Uniform" />
-                </Border.Background>
-            </Border>
+            <Canvas>
+                <Border
+                    x:Name="welcomeRibbon"
+                    Grid.Column="1"
+                    Grid.ColumnSpan="2"
+                    Canvas.Left="936"
+                    Canvas.Top="-96"
+                    Width="500"
+                    Height="300"
+                    HorizontalAlignment="Left"
+                    VerticalAlignment="Center">
+                    <Border.Background>
+                        <ImageBrush ImageSource="/QEAMApp;component/Images/Welcome Ribbon.png" Stretch="Uniform" />
+                    </Border.Background>
+                    <Viewbox Margin="116,117,168,116">
+                        <TextBlock
+                            FontFamily="Poppins"
+                            FontWeight="Bold"
+                            Foreground="White"
+                            Text="Morning Attendance"
+                            TextWrapping="Wrap" />
+                    </Viewbox>
+                </Border>
+            </Canvas>
+            <Canvas>
+                <Rectangle
+                    x:Name="ScannerRect"
+                    Grid.Column="1"
+                    Canvas.Left="354"
+                    Canvas.Top="243"
+                    Width="358"
+                    Height="25"
+                    HorizontalAlignment="Left"
+                    VerticalAlignment="Center"
+                    Fill="#FF1C1B1F" />
+            </Canvas>
         </Grid>
     </Grid>
 </UserControl>

@@ -32,9 +32,16 @@ namespace QEAMApp.MVVM.View
             QRCodeTextBox.Focus();
         }
 
-        private void UserControl_Loaded(object sender, RoutedEventArgs e)
+        private async void UserControl_Loaded(object sender, RoutedEventArgs e)
         {
             QRCodeTextBox.Focus();
+            AnimationManager.AnimateRectangle(ScannerRect, 130, 350);
+            await Task.Delay(500);
+            AnimationManager.FadeInWelcomeRibbon(welcomeRibbon, 722);
+        }
+
+        private async void UserControl_Unloaded(object sender, RoutedEventArgs e)
+        {
         }
     }
 }

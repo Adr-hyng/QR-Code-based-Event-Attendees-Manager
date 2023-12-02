@@ -37,6 +37,7 @@
     <None Remove="Images\pm_snack_icon.png" />
     <None Remove="Images\profile_icon.png" />
     <None Remove="Images\Table.png" />
+    <None Remove="Images\Welcome Ribbon.png" />
     <None Remove="Images\wrong_icon.png" />
   </ItemGroup>
 
@@ -60,6 +61,7 @@
     <Resource Include="Images\pm_snack_icon.png" />
     <Resource Include="Images\profile_icon.png" />
     <Resource Include="Images\Table.png" />
+    <Resource Include="Images\Welcome Ribbon.png" />
     <Resource Include="Images\wrong_icon.png" />
   </ItemGroup>
 

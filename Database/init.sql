@@ -61,6 +61,8 @@ SET
     checkoutd3 = NULL
 WHERE id = 1;
 
+-- Delete all records in table
+DELETE FROM Attendees;
 
 -- Delete table content created
 DROP TABLE Attendees;

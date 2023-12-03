@@ -13,11 +13,12 @@ using System.Text;
 
 namespace QEAMApp.MVVM.Model
 {
-    public class ApiService
+    public class ApiService: INotifyPropertyChanged
     {
         private readonly HttpClient _client;
         private string DEFAULT_GATEWAY;
         private string _baseUri;
+        private bool _debugMode = false;
 
         public ApiService(string HostAddress = "http://localhost", int Port = 8080)
         {
@@ -172,7 +173,27 @@ namespace QEAMApp.MVVM.Model
             }
         }
 
+        public bool DebugMode
+        {
+            get
+            {
+                return _debugMode;
+            }
+            set
+            {
+                if (_debugMode != value)
+                {
+                    _debugMode = value;
+                    OnPropertyChanged(nameof(DebugMode));
+                }
+            }
+        }
 
+        public event PropertyChangedEventHandler? PropertyChanged;
 
+        protected virtual void OnPropertyChanged(string propertyName)
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+        }
     }
 }

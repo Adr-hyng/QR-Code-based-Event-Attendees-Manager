@@ -94,8 +94,8 @@ namespace QEAMApp.MVVM.ViewModel
 
         public ProfileScreenViewModel(NavigationService GoToIdleScreen)
         {
+            // This is not used anymore. Used only for fake initializing won't be fixing this. but can be better.
             GoBackCommand = new NavigateCommand(GoToIdleScreen);
-            ToggleCommand = new ToggleButtonCommand(RadioButtons!);
         }
 
         public ProfileScreenViewModel(NavigationService GoToIdleScreen, Attendee Profile, ApiService APIInstance)
@@ -111,26 +111,15 @@ namespace QEAMApp.MVVM.ViewModel
             RadioButtonsHandler();
             AttendanceMarking();
 
-            ToggleCommand = new ToggleButtonCommand(RadioButtons!); // Soon for Developer Mode To Manually Toggle
+            ToggleCommand = new ToggleButtonCommand(RadioButtons!, APIInstance); // Soon for Developer Mode To Manually Toggle
             if (AUTO_CLOSE) CloseTimerOption(Seconds: 3);
         }
 
         private async void AttendanceMarking()
         {
-            Dictionary<string, DayContent> DayController = new()
-            {
-                ["12/02"] = _profile.day1,
-                ["12/03"] = _profile.day2,
-                ["12/04"] = _profile.day3,
-            };
+            Dictionary<string, DayContent> DayController = ScheduleManager.GetDayController(_profile);
 
-            Dictionary<string, (TimeSpan from, TimeSpan to, String columnPrefix, String radioButtonPrefix)> timeSpans = new()
-            {
-                { "AmSnack", (new TimeSpan(8, 0, 0), new TimeSpan(11, 59, 0), "am", "AM") }, // Morning Snack (Between 8 AM - 11:59 AM)
-                { "LunchSnack", (new TimeSpan(12, 0, 0), new TimeSpan(15, 59, 59), "lunch" ,"L") }, // Lunch Snack (Between 12 PM - 3:59 PM)
-                { "PmSnack", (new TimeSpan(16, 0, 0), new TimeSpan(17, 59, 59), "pm" , "PM") }, // Evening Snack (Between 4 PM - 5:59 PM)
-                { "CheckOut", (new TimeSpan(18, 0, 0), new TimeSpan(20, 0, 0), "checkout" , "CheckOut") }, // Check Out (Time Out) (Between 6 PM - 8:00 PM)
-            };
+            Dictionary<string, (TimeSpan from, TimeSpan to, String columnPrefix, String radioButtonPrefix)> timeSpans = ScheduleManager.GetTimeController();
 
             DateTime currentDateTime = DateTime.Now;
             string currentDate = currentDateTime.ToString("MM/dd");

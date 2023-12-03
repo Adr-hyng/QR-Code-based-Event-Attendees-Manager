@@ -3,6 +3,7 @@ using QEAMApp.MVVM.Command;
 using QEAMApp.MVVM.Model;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -15,7 +16,8 @@ namespace QEAMApp.MVVM.ViewModel
     internal class ControlScreenViewModel: ViewModelBase
     {
         public ICommand SubmitAddressCommand { get; }
-		private string _ipAddress = "127.0.0.1:5000";
+        private ApiService _apiService;
+        private string _ipAddress = "127.0.0.1:5000";
 
 		private Brush _indicatorColor;
 		public Brush IndicatorColor
@@ -43,8 +45,22 @@ namespace QEAMApp.MVVM.ViewModel
 			}
 		}
 
-		public ControlScreenViewModel(NavigationService _, ApiService InstanceAPI)
+        public bool DebugMode
         {
+            get
+            {
+                return _apiService.DebugMode;
+            }
+            set
+            {
+                _apiService.DebugMode = value;
+                OnPropertyChanged(nameof(_apiService.DebugMode));
+            }
+        }
+
+        public ControlScreenViewModel(NavigationService _, ApiService InstanceAPI)
+        {
+            _apiService = InstanceAPI;
             BrushConverter brushConverter = new BrushConverter();
             IndicatorColor = (Brush) brushConverter.ConvertFrom("#FFE9E9E9")!;
             SubmitAddressCommand = new DistributeAddressCommand(InstanceAPI, this);

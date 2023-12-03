@@ -76,7 +76,7 @@
             <TextBlock
                 Grid.ColumnSpan="2"
                 Width="70"
-                Margin="71,77,0,0"
+                Margin="71,78,0,0"
                 HorizontalAlignment="Left"
                 VerticalAlignment="Top"
                 FontFamily="Consolas"
@@ -109,15 +109,27 @@
                 Content="Export"
                 FontFamily="Consolas"
                 FontSize="13" />
+            <TextBlock
+                Grid.Column="1"
+                Width="70"
+                Margin="42,78,0,0"
+                HorizontalAlignment="Left"
+                VerticalAlignment="Top"
+                FontFamily="Consolas"
+                RenderTransformOrigin="0.518,-1.104"
+                Text="Debug"
+                TextAlignment="Center"
+                TextWrapping="Wrap" />
 
         </Grid>
         <CheckBox
             x:Name="developerModeToggle"
             Grid.Row="2"
-            Margin="161,60,0,0"
+            Margin="175,57,0,0"
             HorizontalAlignment="Left"
             VerticalAlignment="Top"
-            Content="" />
+            Content=""
+            IsChecked="{Binding DebugMode, UpdateSourceTrigger=PropertyChanged}" />
         <ComboBox
             Width="174"
             Margin="0,32,0,0"

@@ -28,7 +28,7 @@
                 Cursor="None"
                 Foreground="Black"
                 IsReadOnly="{Binding IsReadOnly}"
-                Opacity="0"
+                Opacity="{Binding Opacity, UpdateSourceTrigger=PropertyChanged}"
                 Style="{StaticResource ModernTextBox}"
                 Text="{Binding UniqueIdentifier, UpdateSourceTrigger=Default}"
                 TextWrapping="Wrap"
@@ -43,13 +43,30 @@
         </Grid>
 
         <TextBlock
+            x:Name="WelcomePromptText"
             HorizontalAlignment="Center"
             VerticalAlignment="Bottom"
             FontSize="50"
             FontWeight="Light"
             Foreground="Black"
             Text="Scan ID to Get Started!"
-            TextAlignment="Center" />
+            TextAlignment="Center">
+            <TextBlock.Triggers>
+                <EventTrigger RoutedEvent="Loaded">
+                    <BeginStoryboard>
+                        <Storyboard>
+                            <DoubleAnimation
+                                AutoReverse="True"
+                                RepeatBehavior="Forever"
+                                Storyboard.TargetProperty="Opacity"
+                                From="1"
+                                To="0"
+                                Duration="0:0:0.5" />
+                        </Storyboard>
+                    </BeginStoryboard>
+                </EventTrigger>
+            </TextBlock.Triggers>
+        </TextBlock>
 
         <Grid Grid.Row="0">
             <Grid.ColumnDefinitions>

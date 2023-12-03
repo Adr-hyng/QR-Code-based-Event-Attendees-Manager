@@ -8,7 +8,7 @@ using System.Windows;
 using System.Windows.Shapes;
 using System.Windows.Controls;
 
-namespace QEAMApp.Core
+namespace QEAMApp.MVVM.Model
 {
     public class AnimationManager
     {
@@ -28,7 +28,7 @@ namespace QEAMApp.Core
 
             storyboard.Begin();
         }
-        public static void AnimateRectangle(Rectangle ScannerRect, Int16 srcY, Int16 dstY)
+        public static void AnimateRectangle(Rectangle ScannerRect, short srcY, short dstY)
         {
             var storyboard = new Storyboard();
 

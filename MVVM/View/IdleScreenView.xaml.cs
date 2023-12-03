@@ -1,4 +1,4 @@
-﻿using QEAMApp.Core;
+﻿using QEAMApp.MVVM.Model;
 using QEAMApp.MVVM.ViewModel;
 using System;
 using System.Collections.Generic;

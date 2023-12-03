@@ -28,7 +28,7 @@
                 Cursor="None"
                 Foreground="Black"
                 IsReadOnly="{Binding IsReadOnly}"
-                Opacity="1"
+                Opacity="0"
                 Style="{StaticResource ModernTextBox}"
                 Text="{Binding UniqueIdentifier, UpdateSourceTrigger=Default}"
                 TextWrapping="Wrap"
@@ -73,16 +73,16 @@
                     x:Name="welcomeRibbon"
                     Grid.Column="1"
                     Grid.ColumnSpan="2"
-                    Canvas.Left="936"
-                    Canvas.Top="-96"
+                    Canvas.Left="934"
+                    Canvas.Top="10"
                     Width="500"
-                    Height="300"
+                    Height="75"
                     HorizontalAlignment="Left"
                     VerticalAlignment="Center">
                     <Border.Background>
                         <ImageBrush ImageSource="/QEAMApp;component/Images/Welcome Ribbon.png" Stretch="Uniform" />
                     </Border.Background>
-                    <Viewbox Margin="116,117,168,116">
+                    <Viewbox Width="230" Margin="125,0,125,0">
                         <TextBlock
                             FontFamily="Poppins"
                             FontWeight="Bold"

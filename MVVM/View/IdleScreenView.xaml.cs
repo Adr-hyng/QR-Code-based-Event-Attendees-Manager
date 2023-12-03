@@ -36,8 +36,8 @@ namespace QEAMApp.MVVM.View
         {
             QRCodeTextBox.Focus();
             AnimationManager.AnimateRectangle(ScannerRect, 130, 350);
-            await Task.Delay(500);
-            AnimationManager.FadeInWelcomeRibbon(welcomeRibbon, 722);
+            await Task.Delay(200);
+            AnimationManager.FadeInWelcomeRibbon(welcomeRibbon, 684);
         }
 
         private async void UserControl_Unloaded(object sender, RoutedEventArgs e)

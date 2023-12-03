@@ -1,4 +1,5 @@
-﻿using System;
+﻿using QEAMApp.Core;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
@@ -69,6 +70,11 @@ namespace QEAMApp.MVVM.View
             {
                 periodCount = 1;
             }
+        }
+
+        private void UserControl_Loaded(object sender, RoutedEventArgs e)
+        {
+            AnimationManager.FadeInWelcomeRibbon(welcomeRibbon, 934);
         }
     }
 }

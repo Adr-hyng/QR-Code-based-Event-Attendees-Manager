@@ -32,7 +32,6 @@
     <None Remove="Images\found_user_loading_icon.png" />
     <None Remove="Images\go_back_button.png" />
     <None Remove="Images\Header.png" />
-    <None Remove="Images\logger.png" />
     <None Remove="Images\lunch_snack_icon.png" />
     <None Remove="Images\pm_snack_icon.png" />
     <None Remove="Images\profile_icon.png" />
@@ -56,7 +55,6 @@
     <Resource Include="Images\found_user_loading_icon.png" />
     <Resource Include="Images\go_back_button.png" />
     <Resource Include="Images\header.png" />
-    <Resource Include="Images\logger.png" />
     <Resource Include="Images\lunch_snack_icon.png" />
     <Resource Include="Images\pm_snack_icon.png" />
     <Resource Include="Images\profile_icon.png" />

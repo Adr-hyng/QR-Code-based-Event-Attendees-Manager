@@ -7,6 +7,7 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     d:DesignHeight="550"
     d:DesignWidth="1066"
+    Loaded="UserControl_Loaded"
     mc:Ignorable="d">
     <Grid Background="White">
         <Grid.RowDefinitions>
@@ -52,6 +53,31 @@
                 <ColumnDefinition Width="300" />
             </Grid.ColumnDefinitions>
 
+            <Canvas>
+                <Border
+                    x:Name="welcomeRibbon"
+                    Grid.Column="1"
+                    Grid.ColumnSpan="2"
+                    Canvas.Left="683"
+                    Canvas.Top="10"
+                    Width="500"
+                    Height="75"
+                    HorizontalAlignment="Left"
+                    VerticalAlignment="Center">
+                    <Border.Background>
+                        <ImageBrush ImageSource="/QEAMApp;component/Images/Welcome Ribbon.png" Stretch="Uniform" />
+                    </Border.Background>
+                    <Viewbox Width="230" Margin="125,0,125,0">
+                        <TextBlock
+                            FontFamily="Poppins"
+                            FontWeight="Bold"
+                            Foreground="White"
+                            Text="Morning Attendance"
+                            TextWrapping="Wrap" />
+                    </Viewbox>
+                </Border>
+            </Canvas>
+
             <Border
                 x:Name="FoundIcon"
                 Grid.Column="1"
@@ -60,15 +86,6 @@
                 Margin="10,10,10,10">
                 <Border.Background>
                     <ImageBrush ImageSource="/QEAMApp;component/Images/found_user_loading_icon.png" Stretch="UniformToFill" />
-                </Border.Background>
-            </Border>
-
-            <Border
-                Grid.Column="1"
-                Grid.ColumnSpan="2"
-                Margin="414,-90,0,332">
-                <Border.Background>
-                    <ImageBrush ImageSource="/QEAMApp;component/Images/logger.png" Stretch="Uniform" />
                 </Border.Background>
             </Border>
         </Grid>

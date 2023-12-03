@@ -14,7 +14,7 @@ namespace QEAMApp.MVVM.ViewModel
 {
     internal class IdleScreenViewModel: ViewModelBase
     {
-        private ApiService _apiService;
+        private readonly ApiService _apiService;
         private byte _opacity;
         public byte Opacity
         {

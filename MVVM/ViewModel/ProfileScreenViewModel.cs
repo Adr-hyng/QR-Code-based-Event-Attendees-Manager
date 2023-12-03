@@ -17,8 +17,14 @@ namespace QEAMApp.MVVM.ViewModel
     internal class ProfileScreenViewModel: ViewModelBase
     {
         public Dictionary<string, RadioButtonViewModel>? RadioButtons { get; set; }
+        public Dictionary<string, RadioButtonViewModel>? OriginalRadioButtons { get; set; }
+        public ApiService _apiService;
+        public Attendee _profile;
+        public NavigationService? _navigationService;
+        public ICommand? StayCommand { get; private set; }
+        public ICommand? GoBackCommand { get; }
+        public ICommand? ToggleCommand { get; }
 
-        private const bool AUTO_CLOSE = false;
         private string? _firstName;
         public string? FirstName
         {
@@ -32,12 +38,12 @@ namespace QEAMApp.MVVM.ViewModel
                 OnPropertyChanged(nameof(FirstName));
             }
         }
-        private string _name;
+        private string? _name;
         public string Name
         {
             get
             {
-                return _name;
+                return _name!;
             }
             set
             {
@@ -45,12 +51,12 @@ namespace QEAMApp.MVVM.ViewModel
                 OnPropertyChanged(nameof(Name));
             }
         }
-        private string _membership;
+        private string? _membership;
         public string Membership
         {
             get
             {
-                return _membership;
+                return _membership!;
             }
             set
             {
@@ -58,12 +64,12 @@ namespace QEAMApp.MVVM.ViewModel
                 OnPropertyChanged(nameof(Membership));
             }
         }
-        private string _position;
+        private string? _position;
         public string Position
         {
             get
             {
-                return _position;
+                return _position!;
             }
             set
             {
@@ -71,12 +77,12 @@ namespace QEAMApp.MVVM.ViewModel
                 OnPropertyChanged(nameof(Position));
             }
         }
-        private string _institution;
+        private string? _institution;
         public string Institution
         {
             get
             {
-                return _institution;
+                return _institution!;
             }
             set
             {
@@ -84,13 +90,6 @@ namespace QEAMApp.MVVM.ViewModel
                 OnPropertyChanged(nameof(Institution));
             }
         }
-
-        private Attendee _profile;
-        private readonly ApiService _apiService;
-
-        public ICommand StayCommand { get; private set; }
-        public ICommand GoBackCommand { get;}
-        public ICommand ToggleCommand { get;}
 
         public ProfileScreenViewModel(NavigationService GoToIdleScreen)
         {
@@ -100,26 +99,24 @@ namespace QEAMApp.MVVM.ViewModel
 
         public ProfileScreenViewModel(NavigationService GoToIdleScreen, Attendee Profile, ApiService APIInstance)
         {
-            FirstName = Profile.fn;
-            Name = $"{Profile.fn} {(!String.IsNullOrEmpty(Profile.mi) ? Profile.mi + "." : "")} {Profile.ln}";
-            Membership = Profile.membership;
-            Position = Profile.position;
-            Institution = Profile.institution;
-            GoBackCommand = new NavigateCommand(GoToIdleScreen);
+            FirstName = Profile.FN;
+            Name = $"{Profile.FN} {(!String.IsNullOrEmpty(Profile.MI) ? Profile.MI + "." : "")} {Profile.LN}";
+            Membership = Profile.Membership;
+            Position = Profile.Position;
+            Institution = Profile.Institution;
             _profile = Profile;
             _apiService = APIInstance;
+            _navigationService = GoToIdleScreen;
             RadioButtonsHandler();
             AttendanceMarking();
-
-            ToggleCommand = new ToggleButtonCommand(RadioButtons!, APIInstance); // Soon for Developer Mode To Manually Toggle
-            if (AUTO_CLOSE) CloseTimerOption(Seconds: 3);
+            GoBackCommand = new GoBackUpdateCommand(this);
+            ToggleCommand = new ToggleButtonCommand(this); // Soon for Developer Mode To Manually Toggle
+            if (!_apiService.DebugMode) CloseTimerOption(Seconds: 3);
         }
 
         private async void AttendanceMarking()
         {
             Dictionary<string, DayContent> DayController = ScheduleManager.GetDayController(_profile);
-
-            Dictionary<string, (TimeSpan from, TimeSpan to, String columnPrefix, String radioButtonPrefix)> timeSpans = ScheduleManager.GetTimeController();
 
             DateTime currentDateTime = DateTime.Now;
             string currentDate = currentDateTime.ToString("MM/dd");
@@ -132,7 +129,7 @@ namespace QEAMApp.MVVM.ViewModel
             // Check In (Time In)
             if (!subDayController.CheckIn.HasValue)
             {
-                (bool IsUpdated, _profile) = await _apiService.UpdateAttendee(_profile.uid, $"checkin{subDayController.id}", currentDateTime.ToString());
+                (bool IsUpdated, _profile) = await _apiService.UpdateAttendee(_profile.UID, $"checkin{subDayController.id}", currentDateTime.ToString());
                 if (!IsUpdated) return;
                 await Task.Delay(1000);
                 RadioButtons![$"CheckIn{subDayController.id.ToUpper()}"].Opacity = 1;
@@ -145,13 +142,13 @@ namespace QEAMApp.MVVM.ViewModel
                     string propertyName = property.Name;
                     object propertyValue = property.GetValue(subDayController)!;
                     if (propertyName.Contains("CheckIn")) continue;
-                    if (timeSpans.TryGetValue(propertyName, out var TimeSchedule))
+                    if (ScheduleManager.GetTimeController().TryGetValue(propertyName, out var TimeSchedule))
                     {
-                        if (!Utility.IsNotNullOrEmpty(propertyValue) && subDayController.InTimeBound(currentDateTime, TimeSchedule.from, TimeSchedule.to))
+                        if (!Utility.IsNotNullOrEmpty(propertyValue) && DayContent.InTimeBound(currentDateTime, TimeSchedule.from, TimeSchedule.to))
                         {
                             Action<string, string> updateMarkIcon = async (columnPrefix, radioButtonPrefix) =>
                             {
-                                (bool IsUpdated, _profile) = await _apiService.UpdateAttendee(_profile.uid, $"{columnPrefix}{subDayController.id}", currentDateTime.ToString());
+                                (bool IsUpdated, _profile) = await _apiService.UpdateAttendee(_profile.UID, $"{columnPrefix}{subDayController.id}", currentDateTime.ToString());
                                 if (IsUpdated)
                                 {
                                     await Task.Delay(1000);
@@ -170,37 +167,49 @@ namespace QEAMApp.MVVM.ViewModel
         {
             Dictionary<string, bool> dayContents = new()
             {
-                ["AMD1"] = _profile.day1.AmSnack.HasValue,
-                ["LD1"] = _profile.day1.LunchSnack.HasValue,
-                ["PMD1"] = _profile.day1.PmSnack.HasValue,
-                ["CheckInD1"] = _profile.day1.CheckIn.HasValue,
-                ["CheckOutD1"] = _profile.day1.CheckOut.HasValue,
+                ["AMD1"] = _profile.Day1.AmSnack.HasValue,
+                ["LD1"] = _profile.Day1.LunchSnack.HasValue,
+                ["PMD1"] = _profile.Day1.PmSnack.HasValue,
+                ["CheckInD1"] = _profile.Day1.CheckIn.HasValue,
+                ["CheckOutD1"] = _profile.Day1.CheckOut.HasValue,
 
-                ["AMD2"] = _profile.day2.AmSnack.HasValue,
-                ["LD2"] = _profile.day2.LunchSnack.HasValue,
-                ["PMD2"] = _profile.day2.PmSnack.HasValue,
-                ["CheckInD2"] = _profile.day2.CheckIn.HasValue,
-                ["CheckOutD2"] = _profile.day2.CheckOut.HasValue,
+                ["AMD2"] = _profile.Day2.AmSnack.HasValue,
+                ["LD2"] = _profile.Day2.LunchSnack.HasValue,
+                ["PMD2"] = _profile.Day2.PmSnack.HasValue,
+                ["CheckInD2"] = _profile.Day2.CheckIn.HasValue,
+                ["CheckOutD2"] = _profile.Day2.CheckOut.HasValue,
 
-                ["AMD3"] = _profile.day3.AmSnack.HasValue,
-                ["LD3"] = _profile.day3.LunchSnack.HasValue,
-                ["PMD3"] = _profile.day3.PmSnack.HasValue,
-                ["CheckInD3"] = _profile.day3.CheckIn.HasValue,
-                ["CheckOutD3"] = _profile.day3.CheckOut.HasValue,
+                ["AMD3"] = _profile.Day3.AmSnack.HasValue,
+                ["LD3"] = _profile.Day3.LunchSnack.HasValue,
+                ["PMD3"] = _profile.Day3.PmSnack.HasValue,
+                ["CheckInD3"] = _profile.Day3.CheckIn.HasValue,
+                ["CheckOutD3"] = _profile.Day3.CheckOut.HasValue,
             };
 
-            RadioButtons = new Dictionary<string, RadioButtonViewModel>();
+            RadioButtons = new();
 
             foreach (KeyValuePair<string, bool> ToggleButtonContent in dayContents)
             {
                 RadioButtons.Add(ToggleButtonContent.Key, new RadioButtonViewModel { IsChecked = true, Opacity = ToggleButtonContent.Value ? 1 : 0 });
             }
+            OriginalRadioButtons = CloneDictionaryCloningValues(RadioButtons);
         }
-
         public async void CloseTimerOption(int Seconds)
         {
             await Task.Delay(1000 * Seconds);
-            GoBackCommand.Execute(null);
+            GoBackCommand!.Execute(null);
+        }
+
+        private static Dictionary<TKey, TValue> CloneDictionaryCloningValues<TKey, TValue>
+ (Dictionary<TKey, TValue> original) where TValue : ICloneable
+        {
+            Dictionary<TKey, TValue> ret = new (original.Count,
+                                                              original.Comparer);
+            foreach (KeyValuePair<TKey, TValue> entry in original)
+            {
+                ret.Add(entry.Key, (TValue)entry.Value.Clone());
+            }
+            return ret;
         }
     }
 }

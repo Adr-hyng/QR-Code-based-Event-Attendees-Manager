@@ -40,7 +40,7 @@ namespace QEAMApp.MVVM.View
             AnimationManager.FadeInWelcomeRibbon(welcomeRibbon, 684);
         }
 
-        private async void UserControl_Unloaded(object sender, RoutedEventArgs e)
+        private void UserControl_Unloaded(object sender, RoutedEventArgs e)
         {
         }
     }

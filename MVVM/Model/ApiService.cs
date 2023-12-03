@@ -104,9 +104,9 @@ namespace QEAMApp.MVVM.Model
                             _position: position,
                             _institution: firstElement["institution"] + "",
                             _pn: "0" + firstElement["pn"],
-                            _day1: new DayContent(firstElement.ToObject<Dictionary<string, object>>()!, new string[] { "amd1", "lunchd1", "pmd1", "checkind1", "checkoutd1" }),
-                            _day2: new DayContent(firstElement.ToObject<Dictionary<string, object>>()!, new string[] { "amd2", "lunchd2", "pmd2", "checkind2", "checkoutd2" }),
-                            _day3: new DayContent(firstElement.ToObject<Dictionary<string, object>>()!, new string[] { "amd3", "lunchd3", "pmd3", "checkind3", "checkoutd3" })
+                            _day1: new DayContent(firstElement.ToObject<Dictionary<string, object>>()!, ScheduleManager.GetDayDBColumnName(1)),
+                            _day2: new DayContent(firstElement.ToObject<Dictionary<string, object>>()!, ScheduleManager.GetDayDBColumnName(2)),
+                            _day3: new DayContent(firstElement.ToObject<Dictionary<string, object>>()!, ScheduleManager.GetDayDBColumnName(3))
                         );
 
                         return (true, attendee);

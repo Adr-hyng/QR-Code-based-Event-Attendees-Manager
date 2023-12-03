@@ -24,13 +24,13 @@ namespace QEAMApp.MVVM.View
     /// </summary>
     public partial class UserFoundScreenView : UserControl
     {
-        private DispatcherTimer timer;
+        private readonly DispatcherTimer timer;
         private int periodCount;
         public UserFoundScreenView()
         {
             InitializeComponent();
 
-            DoubleAnimation animation = new DoubleAnimation
+            DoubleAnimation animation = new()
             {
                 From = 0,
                 To = 1,
@@ -44,7 +44,7 @@ namespace QEAMApp.MVVM.View
             Storyboard.SetTargetProperty(animation, new PropertyPath(Border.OpacityProperty));
 
             // Create a Storyboard and add the animation to it
-            Storyboard storyboard = new Storyboard();
+            Storyboard storyboard = new();
             storyboard.Children.Add(animation);
 
             // Start the storyboard animation
@@ -53,8 +53,10 @@ namespace QEAMApp.MVVM.View
             periodCount = 1;
 
             // Create a DispatcherTimer with an interval of x milliseconds (How fast the dots generate)
-            timer = new DispatcherTimer();
-            timer.Interval = TimeSpan.FromMilliseconds(200);
+            timer = new()
+            {
+                Interval = TimeSpan.FromMilliseconds(200)
+            };
             timer.Tick += Timer_Tick!;
             timer.Start();
         }

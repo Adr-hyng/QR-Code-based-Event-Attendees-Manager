@@ -16,7 +16,7 @@ namespace QEAMApp.MVVM.ViewModel
     internal class ControlScreenViewModel: ViewModelBase
     {
         public ICommand SubmitAddressCommand { get; }
-        private ApiService _apiService;
+        private readonly ApiService _apiService;
         private string _ipAddress = "127.0.0.1:5000";
 
 		private Brush _indicatorColor;
@@ -61,7 +61,7 @@ namespace QEAMApp.MVVM.ViewModel
         public ControlScreenViewModel(NavigationService _, ApiService InstanceAPI)
         {
             _apiService = InstanceAPI;
-            BrushConverter brushConverter = new BrushConverter();
+            BrushConverter brushConverter = new();
             IndicatorColor = (Brush) brushConverter.ConvertFrom("#FFE9E9E9")!;
             SubmitAddressCommand = new DistributeAddressCommand(InstanceAPI, this);
         }

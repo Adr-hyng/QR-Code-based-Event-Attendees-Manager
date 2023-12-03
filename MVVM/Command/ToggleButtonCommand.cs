@@ -12,12 +12,10 @@ namespace QEAMApp.MVVM.Command
 {
     internal class ToggleButtonCommand: CommandBase
     {
-        private Dictionary<string, RadioButtonViewModel> RadioButtons;
-        private ApiService apiService;
-        public ToggleButtonCommand(Dictionary<string, RadioButtonViewModel> _RadioButtons, ApiService _ApiService)
+        readonly ProfileScreenViewModel _profileScreen;
+        public ToggleButtonCommand(ProfileScreenViewModel profileScreen)
         {
-            RadioButtons = _RadioButtons;
-            apiService = _ApiService;
+            _profileScreen = profileScreen;
         }
         public override void Execute(object? parameter)
         {
@@ -25,12 +23,12 @@ namespace QEAMApp.MVVM.Command
             {
                 bool isChecked = (bool)parameters[0];
                 string name = (string)parameters[1];
-                if (RadioButtons.TryGetValue(name, out var SelectedRadioButton))
+                if (_profileScreen.RadioButtons!.TryGetValue(name, out var SelectedRadioButton))
                 {
                     // Made only since Food Distribution is not needed anymore. 
                     if (! (new[] { "am", "l", "pm" }.Any(element => element.Contains(name))) )
                     {
-                        if (apiService.DebugMode)
+                        if (_profileScreen._apiService.DebugMode)
                         {
                             SelectedRadioButton.Opacity = 1;
                             SelectedRadioButton.IsChecked = isChecked;

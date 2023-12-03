@@ -24,7 +24,5 @@ namespace QEAMApp.MVVM.View
         {
             InitializeComponent();
         }
-
-
     }
 }

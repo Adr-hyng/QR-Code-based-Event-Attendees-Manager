@@ -291,8 +291,7 @@
                 Margin="238,296,368,164"
                 BorderBrush="#00707070"
                 Command="{Binding ToggleCommand}"
-                IsChecked="{Binding RadioButtons[PMD1].IsChecked}"
-                Opacity="{Binding RadioButtons[PMD1].Opacity}"
+                IsChecked="False"
                 Style="{StaticResource {x:Type ToggleButton}}">
                 <CheckBox.CommandParameter>
                     <MultiBinding Converter="{StaticResource CustomConverter}">
@@ -345,8 +344,7 @@
                 Margin="378,166,228,294"
                 BorderBrush="#00707070"
                 Command="{Binding ToggleCommand}"
-                IsChecked="{Binding RadioButtons[AMD2].IsChecked}"
-                Opacity="{Binding RadioButtons[AMD2].Opacity}"
+                IsChecked="False"
                 Style="{StaticResource {x:Type ToggleButton}}">
                 <CheckBox.CommandParameter>
                     <MultiBinding Converter="{StaticResource CustomConverter}">
@@ -363,8 +361,7 @@
                 Margin="378,232,228,228"
                 BorderBrush="#00707070"
                 Command="{Binding ToggleCommand}"
-                IsChecked="{Binding RadioButtons[LD2].IsChecked}"
-                Opacity="{Binding RadioButtons[LD2].Opacity}"
+                IsChecked="False"
                 Style="{StaticResource {x:Type ToggleButton}}">
                 <CheckBox.CommandParameter>
                     <MultiBinding Converter="{StaticResource CustomConverter}">
@@ -381,8 +378,7 @@
                 Margin="378,296,228,164"
                 BorderBrush="#00707070"
                 Command="{Binding ToggleCommand}"
-                IsChecked="{Binding RadioButtons[PMD2].IsChecked}"
-                Opacity="{Binding RadioButtons[PMD2].Opacity}"
+                IsChecked="False"
                 Style="{StaticResource {x:Type ToggleButton}}">
                 <CheckBox.CommandParameter>
                     <MultiBinding Converter="{StaticResource CustomConverter}">
@@ -435,8 +431,7 @@
                 Margin="518,166,88,294"
                 BorderBrush="#00707070"
                 Command="{Binding ToggleCommand}"
-                IsChecked="{Binding RadioButtons[AMD3].IsChecked}"
-                Opacity="{Binding RadioButtons[AMD3].Opacity}"
+                IsChecked="False"
                 Style="{StaticResource {x:Type ToggleButton}}">
                 <CheckBox.CommandParameter>
                     <MultiBinding Converter="{StaticResource CustomConverter}">
@@ -453,8 +448,7 @@
                 Margin="518,232,88,228"
                 BorderBrush="#00707070"
                 Command="{Binding ToggleCommand}"
-                IsChecked="{Binding RadioButtons[LD3].IsChecked}"
-                Opacity="{Binding RadioButtons[LD3].Opacity}"
+                IsChecked="False"
                 Style="{StaticResource {x:Type ToggleButton}}">
                 <CheckBox.CommandParameter>
                     <MultiBinding Converter="{StaticResource CustomConverter}">
@@ -471,8 +465,7 @@
                 Margin="518,296,88,164"
                 BorderBrush="#00707070"
                 Command="{Binding ToggleCommand}"
-                IsChecked="{Binding RadioButtons[PMD3].IsChecked}"
-                Opacity="{Binding RadioButtons[PMD3].Opacity}"
+                IsChecked="False"
                 Style="{StaticResource {x:Type ToggleButton}}">
                 <CheckBox.CommandParameter>
                     <MultiBinding Converter="{StaticResource CustomConverter}">

@@ -18,12 +18,13 @@
         <TextBlock
             Width="112"
             Height="16"
-            Margin="0,16,0,0"
+            Margin="0,11,0,0"
             HorizontalAlignment="Center"
             VerticalAlignment="Top"
             FontFamily="Consolas"
             FontSize="14"
-            Text="Developer Mode"
+            Text="setLogState"
+            TextAlignment="Center"
             TextWrapping="Wrap" />
         <TextBlock
             Grid.Row="1"
@@ -112,9 +113,22 @@
         </Grid>
         <CheckBox
             x:Name="developerModeToggle"
-            Margin="0,37,0,0"
-            HorizontalAlignment="Center"
+            Grid.Row="2"
+            Margin="161,60,0,0"
+            HorizontalAlignment="Left"
             VerticalAlignment="Top"
             Content="" />
+        <ComboBox
+            Width="174"
+            Margin="0,32,0,0"
+            HorizontalAlignment="Center"
+            VerticalAlignment="Top">
+            <ComboBoxItem Content="0" IsSelected="True" />
+            <ComboBoxItem Content="1" />
+            <ComboBoxItem Content="2" />
+            <ComboBoxItem Content="3" />
+            <ComboBoxItem Content="4" />
+            <ComboBoxItem Content="5" />
+        </ComboBox>
     </Grid>
 </UserControl>

@@ -99,7 +99,7 @@
                     HorizontalAlignment="Left"
                     VerticalAlignment="Top">
                     <Border.Background>
-                        <ImageBrush ImageSource="/QEAMApp;component/Images/morning_ribbon.png" Stretch="Uniform" />
+                        <ImageBrush ImageSource="{Binding WelcomeRibbonSource}" Stretch="Uniform" />
                     </Border.Background>
                 </Border>
             </Canvas>

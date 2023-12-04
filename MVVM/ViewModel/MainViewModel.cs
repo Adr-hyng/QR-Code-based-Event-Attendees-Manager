@@ -39,6 +39,8 @@ namespace QEAMApp.MVVM.ViewModel
         {
             _navigationStore = navigationStore;
             _navigationStore.CurrentViewModelChanged += OnCurrentViewModelChanged;
+
+            SnackBarImageSource = "/QEAMApp;component/Images/success_snackbar.png";
         }
 
         private void OnCurrentViewModelChanged()

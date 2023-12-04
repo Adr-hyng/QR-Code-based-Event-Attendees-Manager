@@ -12,9 +12,9 @@ namespace QEAMApp.MVVM.Model
         {
             return new Dictionary<string, DayContent>()
             {
-                ["12/02"] = _profile.Day1,
-                ["12/03"] = _profile.Day2,
-                ["12/04"] = _profile.Day3,
+                ["12/04"] = _profile.Day1,
+                ["12/05"] = _profile.Day2,
+                ["12/06"] = _profile.Day3,
             };
         }
 

@@ -18,7 +18,7 @@ namespace QEAMApp.MVVM.ViewModel
         public ICommand SubmitAddressCommand { get; }
         public ICommand ExportCommand { get; }
         public NavigationService _navigationService;
-        private readonly ApiService _apiService;
+        public readonly ApiService _apiService;
         private string _ipAddress = "127.0.0.1:5000";
 
 		private Brush _indicatorColor;
@@ -66,8 +66,8 @@ namespace QEAMApp.MVVM.ViewModel
             _navigationService = navigationService;
             BrushConverter brushConverter = new();
             IndicatorColor = (Brush) brushConverter.ConvertFrom("#FFE9E9E9")!;
-            SubmitAddressCommand = new DistributeAddressCommand(InstanceAPI, this);
-            ExportCommand = new ExportLogEntriesCommand(InstanceAPI);
+            SubmitAddressCommand = new DistributeAddressCommand(this);
+            ExportCommand = new ExportLogEntriesCommand(this);
         }
     }
 }

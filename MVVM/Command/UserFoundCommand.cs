@@ -52,19 +52,20 @@ namespace QEAMApp.MVVM.Command
                             )
                         )
                     );
-
                     _navigationService._navigationStore = navigationStore;
                     _idleScreen.IsReadOnly = false;
+
                 }
                 else if(IsValidUser == false)
                 {
                     SystemSounds.Exclamation.Play();
-                    AutoClosingMessageBox.Show("User not found.", "ERROR 404", 2000);
+                    (_navigationService._navigationStore.RootViewModel as MainViewModel)!.ShowSnackBar("User not Found", 3, false);
                     _idleScreen.IsReadOnly = false;
                 }
                 else
                 {
                     _idleScreen.IsReadOnly = false;
+                    (_navigationService._navigationStore.RootViewModel as MainViewModel)!.ShowSnackBar("No Server Connected", 3, false);
                 }
             }
         }

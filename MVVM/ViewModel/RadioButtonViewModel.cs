@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace QEAMApp.MVVM.ViewModel
 {
-    public class RadioButtonViewModel : ViewModelBase
+    public class RadioButtonViewModel : ViewModelBase, ICloneable
     {
         private bool _isChecked;
         public bool IsChecked
@@ -28,6 +28,15 @@ namespace QEAMApp.MVVM.ViewModel
                 _opacity = value;
                 OnPropertyChanged(nameof(Opacity));
             }
+        }
+
+        public object Clone()
+        {
+            return new RadioButtonViewModel
+            {
+                IsChecked = this.IsChecked,
+                Opacity = this.Opacity
+            };
         }
     }
 

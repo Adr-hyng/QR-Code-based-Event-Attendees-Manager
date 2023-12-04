@@ -1,4 +1,6 @@
 ﻿using QEAMApp.Core;
+using QEAMApp.MVVM.CEventHandler;
+using QEAMApp.MVVM.Model;
 using QEAMApp.MVVM.ViewModel;
 using System;
 using System.Collections.Generic;
@@ -28,6 +30,7 @@ namespace QEAMApp
     public partial class MainWindow : Window
     {
         public TextBox _QRCodePrompt;
+        private MainViewModel _viewModel;
         public MainWindow()
         {
             InitializeComponent();
@@ -37,6 +40,9 @@ namespace QEAMApp
         private void MainWindow_Loaded(object sender, RoutedEventArgs e)
         {
             _QRCodePrompt = Utility.FindVisualChild<TextBox>(CurrentView, "QRCodeTextBox")!;
+
+            _viewModel = (MainViewModel)DataContext;
+            _viewModel.ShowSnackBarEvent += ShowSnackBar;
         }
 
         private void CloseButton_Click(object sender, RoutedEventArgs e)
@@ -48,6 +54,11 @@ namespace QEAMApp
         {
             this.DragMove();
             _QRCodePrompt.Focus();
+
+        }
+        private void ShowSnackBar(object sender, ShowSnackBarEventArgs e)
+        {
+            AnimationManager.ShowSnackBar(SnackBarPopUp, 680, 630, e.Duration); // Adjust the parameters as needed
         }
     }
 }

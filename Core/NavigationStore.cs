@@ -9,6 +9,7 @@ namespace QEAMApp.Core
 {
     internal class NavigationStore
     {
+        public ViewModelBase RootViewModel;
         private ViewModelBase _currentViewModel;
 
         public ViewModelBase CurrentViewModel

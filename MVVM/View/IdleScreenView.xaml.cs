@@ -1,4 +1,6 @@
 ﻿using QEAMApp.Core;
+using QEAMApp.MVVM.CEventHandler;
+using QEAMApp.MVVM.Model;
 using QEAMApp.MVVM.ViewModel;
 using System;
 using System.Collections.Generic;
@@ -32,9 +34,16 @@ namespace QEAMApp.MVVM.View
             QRCodeTextBox.Focus();
         }
 
-        private void UserControl_Loaded(object sender, RoutedEventArgs e)
+        private async void UserControl_Loaded(object sender, RoutedEventArgs e)
         {
             QRCodeTextBox.Focus();
+            AnimationManager.AnimateRectangle(ScannerRect, 109, 346);
+            await Task.Delay(200);
+            AnimationManager.FadeInWelcomeRibbon(welcomeRibbon, 720);
+        }
+
+        private void UserControl_Unloaded(object sender, RoutedEventArgs e)
+        {
         }
     }
 }

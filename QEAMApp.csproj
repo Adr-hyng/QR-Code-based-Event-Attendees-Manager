@@ -15,6 +15,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <None Remove="Database\logs.txt" />
     <None Remove="Fonts\JetBrainsMono-Bold.ttf" />
     <None Remove="Fonts\JetBrainsMono-ExtraBold.ttf" />
     <None Remove="Fonts\JetBrainsMono-ExtraLight.ttf" />
@@ -29,13 +30,18 @@
     <None Remove="Images\check-in_icon.png" />
     <None Remove="Images\check-out_icon.png" />
     <None Remove="Images\check_icon.png" />
+    <None Remove="Images\evening_ribbon.png" />
+    <None Remove="Images\failed_snackbar.png" />
     <None Remove="Images\found_user_loading_icon.png" />
     <None Remove="Images\go_back_button.png" />
     <None Remove="Images\Header.png" />
-    <None Remove="Images\logger.png" />
     <None Remove="Images\lunch_snack_icon.png" />
+    <None Remove="Images\morning_ribbon.png" />
+    <None Remove="Images\noon_ribbon.png" />
     <None Remove="Images\pm_snack_icon.png" />
     <None Remove="Images\profile_icon.png" />
+    <None Remove="Images\School %284%29.png" />
+    <None Remove="Images\success_snackbar.png" />
     <None Remove="Images\Table.png" />
     <None Remove="Images\wrong_icon.png" />
   </ItemGroup>
@@ -46,19 +52,24 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Resource Include="Database\logs.txt" />
     <Resource Include="Fonts\Poppins-Regular.ttf" />
     <Resource Include="Images\am_snack_icon.png" />
     <Resource Include="Images\barcode_scanner.png" />
     <Resource Include="Images\check-in_icon.png" />
     <Resource Include="Images\check-out_icon.png" />
     <Resource Include="Images\check_icon.png" />
+    <Resource Include="Images\evening_ribbon.png" />
+    <Resource Include="Images\failed_snackbar.png" />
     <Resource Include="Images\found_user_loading_icon.png" />
     <Resource Include="Images\go_back_button.png" />
     <Resource Include="Images\header.png" />
-    <Resource Include="Images\logger.png" />
     <Resource Include="Images\lunch_snack_icon.png" />
+    <Resource Include="Images\morning_ribbon.png" />
+    <Resource Include="Images\noon_ribbon.png" />
     <Resource Include="Images\pm_snack_icon.png" />
     <Resource Include="Images\profile_icon.png" />
+    <Resource Include="Images\success_snackbar.png" />
     <Resource Include="Images\Table.png" />
     <Resource Include="Images\wrong_icon.png" />
   </ItemGroup>

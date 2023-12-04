@@ -14,15 +14,6 @@ namespace QEAMApp.MVVM.Model
         public DateTime? CheckIn { get; set; }
         public DateTime? CheckOut { get; set; }
 
-        public DayContent()
-        {
-            this.AmSnack = null;
-            this.LunchSnack = null;
-            this.PmSnack = null;
-            this.CheckIn = null;
-            this.CheckOut = null;
-        }
-
         public DayContent(Dictionary<string, object> values, string[] key)
         {
             Regex dayIdentifier = new("d[1-3]");
@@ -44,7 +35,7 @@ namespace QEAMApp.MVVM.Model
             return null;
         }
 
-        public bool InTimeBound(DateTime time, TimeSpan startTime, TimeSpan endTime)
+        public static bool InTimeBound(DateTime time, TimeSpan startTime, TimeSpan endTime)
         {
             TimeSpan currentTime = time.TimeOfDay;
 

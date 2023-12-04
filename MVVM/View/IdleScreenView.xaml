@@ -9,6 +9,7 @@
     d:DesignWidth="1066"
     Loaded="UserControl_Loaded"
     MouseLeftButtonDown="Grid_MouseLeftButtonDown"
+    Unloaded="UserControl_Unloaded"
     mc:Ignorable="d">
     <Grid Background="White" MouseLeftButtonDown="Grid_MouseLeftButtonDown">
         <Grid.RowDefinitions>
@@ -20,15 +21,15 @@
             <TextBox
                 x:Name="QRCodeTextBox"
                 Width="450"
-                Margin="0,0,0,0"
+                Margin="0,-22,0,0"
                 HorizontalAlignment="Center"
-                VerticalAlignment="Bottom"
+                VerticalAlignment="Top"
                 Background="{x:Null}"
                 BorderBrush="#02ABADB3"
                 Cursor="None"
                 Foreground="Black"
                 IsReadOnly="{Binding IsReadOnly}"
-                Opacity="1"
+                Opacity="{Binding Opacity, UpdateSourceTrigger=PropertyChanged}"
                 Style="{StaticResource ModernTextBox}"
                 Text="{Binding UniqueIdentifier, UpdateSourceTrigger=Default}"
                 TextWrapping="Wrap"
@@ -43,13 +44,31 @@
         </Grid>
 
         <TextBlock
+            x:Name="WelcomePromptText"
+            Margin="0,401,0,0"
             HorizontalAlignment="Center"
-            VerticalAlignment="Bottom"
+            VerticalAlignment="Top"
             FontSize="50"
             FontWeight="Light"
             Foreground="Black"
             Text="Scan ID to Get Started!"
-            TextAlignment="Center" />
+            TextAlignment="Center">
+            <TextBlock.Triggers>
+                <EventTrigger RoutedEvent="Loaded">
+                    <BeginStoryboard>
+                        <Storyboard>
+                            <DoubleAnimation
+                                AutoReverse="True"
+                                RepeatBehavior="Forever"
+                                Storyboard.TargetProperty="Opacity"
+                                From="1"
+                                To="0"
+                                Duration="0:0:0.5" />
+                        </Storyboard>
+                    </BeginStoryboard>
+                </EventTrigger>
+            </TextBlock.Triggers>
+        </TextBlock>
 
         <Grid Grid.Row="0">
             <Grid.ColumnDefinitions>
@@ -62,20 +81,40 @@
                 Grid.Column="1"
                 Width="372"
                 Height="372"
-                Margin="10,10,10,10">
+                Margin="47,52,47,76">
                 <Border.Background>
                     <ImageBrush ImageSource="/QEAMApp;component/Images/barcode_scanner.png" Stretch="UniformToFill" />
                 </Border.Background>
             </Border>
 
-            <Border
-                Grid.Column="1"
-                Grid.ColumnSpan="2"
-                Margin="414,-90,0,332">
-                <Border.Background>
-                    <ImageBrush ImageSource="/QEAMApp;component/Images/logger.png" Stretch="Uniform" />
-                </Border.Background>
-            </Border>
+            <Canvas>
+                <Border
+                    x:Name="welcomeRibbon"
+                    Grid.Column="1"
+                    Grid.ColumnSpan="2"
+                    Canvas.Left="979"
+                    Canvas.Top="13"
+                    Width="500"
+                    Height="75"
+                    HorizontalAlignment="Left"
+                    VerticalAlignment="Top">
+                    <Border.Background>
+                        <ImageBrush ImageSource="{Binding WelcomeRibbonSource}" Stretch="Uniform" />
+                    </Border.Background>
+                </Border>
+            </Canvas>
+            <Canvas>
+                <Rectangle
+                    x:Name="ScannerRect"
+                    Grid.Column="1"
+                    Canvas.Left="354"
+                    Canvas.Top="235"
+                    Width="358"
+                    Height="25"
+                    HorizontalAlignment="Left"
+                    VerticalAlignment="Top"
+                    Fill="#FF1C1B1F" />
+            </Canvas>
         </Grid>
     </Grid>
 </UserControl>

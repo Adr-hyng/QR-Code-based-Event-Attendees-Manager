@@ -36,9 +36,13 @@ namespace QEAMApp
             _mainNavigationStore.CurrentViewModel = GetIdleScreenViewModel();
             _controlNavigationStore.CurrentViewModel = GetControlCenterViewModel();
 
+            MainViewModel MainVM = new (_mainNavigationStore);
+            _mainNavigationStore.RootViewModel = MainVM;
+            _controlNavigationStore.RootViewModel = MainVM;
+
             MainWindow = new MainWindow()
             {
-                DataContext = new MainViewModel(_mainNavigationStore)
+                DataContext = MainVM
             };
             MainWindow.Closing += MainWindow_Closing!; // Attach the Closing event handler
             MainWindow.Show();

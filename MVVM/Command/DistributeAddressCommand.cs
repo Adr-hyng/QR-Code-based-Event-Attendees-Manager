@@ -16,11 +16,9 @@ namespace QEAMApp.MVVM.Command
 {
     internal class DistributeAddressCommand : CommandBase
     {
-        private readonly ApiService _apiService;
         private readonly ControlScreenViewModel _controlViewModel;
-        public DistributeAddressCommand(ApiService API, ControlScreenViewModel controlViewModel)
+        public DistributeAddressCommand(ControlScreenViewModel controlViewModel)
         {
-            _apiService = API;
             _controlViewModel = controlViewModel;
         }
         static bool ValidateIPAddress(string input, out string? ipAddress, out int port)
@@ -41,21 +39,6 @@ namespace QEAMApp.MVVM.Command
             return false;
         }
 
-        private void NotConnected(string Response = "Connection Not Found", string CodeResponse = "DB 404")
-        {
-            SystemSounds.Exclamation.Play();
-            AutoClosingMessageBox.Show(Response, CodeResponse, 5000);
-            _controlViewModel.IndicatorColor = Brushes.Red;
-            return;
-        }
-
-        private void Connected()
-        {
-            AutoClosingMessageBox.Show("Connection Found", "DB 200", 5000);
-            _controlViewModel.IndicatorColor = Brushes.LimeGreen;
-            return;
-        }
-
         public override async void Execute(object? parameter)
         {
             if (parameter is string IpAddress)
@@ -65,18 +48,21 @@ namespace QEAMApp.MVVM.Command
                 if (String.IsNullOrEmpty(ipAddress) || String.IsNullOrEmpty(port.ToString()) || !IsValid)
                 {
                     SystemSounds.Exclamation.Play();
-                    AutoClosingMessageBox.Show("Invalid IP Address", "Server 404", 5000);
+                    (_controlViewModel._navigationService._navigationStore.RootViewModel as MainViewModel)!.ShowSnackBar("Invalid IP Address", 3, false);
                     _controlViewModel.IndicatorColor = Brushes.Red;
                     return;
                 }
-                _apiService.ChangeDefaultGateWay($"{ipAddress}:{port}");
-                bool IsConnected = await _apiService.GetServerInfo(ipAddress, port);
+                _controlViewModel._apiService.ChangeDefaultGateWay($"{ipAddress}:{port}");
+                bool IsConnected = await _controlViewModel._apiService.GetServerInfo(ipAddress, port);
                 if (!IsConnected)
                 {
-                    NotConnected();
+                    SystemSounds.Exclamation.Play();
+                    (_controlViewModel._navigationService._navigationStore.RootViewModel as MainViewModel)!.ShowSnackBar("No Connection Found", 3, false);
+                    _controlViewModel.IndicatorColor = Brushes.Red;
                     return;
                 }
-                Connected();
+                (_controlViewModel._navigationService._navigationStore.RootViewModel as MainViewModel)!.ShowSnackBar("Connection Found", 3);
+                _controlViewModel.IndicatorColor = Brushes.LimeGreen;
             }
         }
     }

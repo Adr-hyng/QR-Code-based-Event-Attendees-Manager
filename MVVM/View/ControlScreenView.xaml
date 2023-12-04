@@ -15,49 +15,29 @@
             <RowDefinition />
         </Grid.RowDefinitions>
 
-        <ComboBox Margin="19,36,19,0" SelectedIndex="0">
-            <ComboBoxItem Content="0" />
-            <ComboBoxItem Content="1" />
-            <ComboBoxItem Content="2" />
-            <ComboBoxItem Content="3" />
-            <ComboBoxItem Content="4" />
-            <ComboBoxItem Content="5" />
-            <ComboBoxItem Content="6" />
-            <ComboBoxItem Content="7" />
-            <ComboBoxItem Content="8" />
-            <ComboBoxItem Content="9" />
-            <ComboBoxItem Content="10" />
-            <ComboBoxItem Content="11" />
-            <ComboBoxItem Content="12" />
-            <ComboBoxItem Content="13" />
-            <ComboBoxItem Content="14" />
-            <ComboBoxItem Content="15" />
-            <ComboBoxItem Content="16" />
-            <ComboBoxItem Content="17" />
-            <ComboBoxItem Content="18" />
-        </ComboBox>
-
         <TextBlock
             Width="112"
             Height="16"
-            Margin="34,16,0,0"
-            HorizontalAlignment="Left"
+            Margin="0,11,0,0"
+            HorizontalAlignment="Center"
             VerticalAlignment="Top"
             FontFamily="Consolas"
             FontSize="14"
             Text="setLogState"
+            TextAlignment="Center"
             TextWrapping="Wrap" />
         <TextBlock
             Grid.Row="1"
             Width="112"
             Height="16"
-            Margin="34,13,0,0"
-            HorizontalAlignment="Left"
+            Margin="0,13,0,0"
+            HorizontalAlignment="Center"
             VerticalAlignment="Top"
             FontFamily="Consolas"
             FontSize="14"
             RenderTransformOrigin="0.518,-1.104"
             Text="IP Address"
+            TextAlignment="Center"
             TextWrapping="Wrap" />
         <Border
             Grid.Row="1"
@@ -96,7 +76,7 @@
             <TextBlock
                 Grid.ColumnSpan="2"
                 Width="70"
-                Margin="71,77,0,0"
+                Margin="71,78,0,0"
                 HorizontalAlignment="Left"
                 VerticalAlignment="Top"
                 FontFamily="Consolas"
@@ -126,10 +106,42 @@
                 VerticalAlignment="Top"
                 Background="#FFE9E9E9"
                 BorderBrush="#FFACACAC"
+                Command="{Binding ExportCommand}"
                 Content="Export"
                 FontFamily="Consolas"
                 FontSize="13" />
+            <TextBlock
+                Grid.Column="1"
+                Width="70"
+                Margin="42,78,0,0"
+                HorizontalAlignment="Left"
+                VerticalAlignment="Top"
+                FontFamily="Consolas"
+                RenderTransformOrigin="0.518,-1.104"
+                Text="Debug"
+                TextAlignment="Center"
+                TextWrapping="Wrap" />
 
         </Grid>
+        <CheckBox
+            x:Name="developerModeToggle"
+            Grid.Row="2"
+            Margin="175,57,0,0"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Top"
+            Content=""
+            IsChecked="{Binding DebugMode, UpdateSourceTrigger=PropertyChanged}" />
+        <ComboBox
+            Width="174"
+            Margin="0,32,0,0"
+            HorizontalAlignment="Center"
+            VerticalAlignment="Top">
+            <ComboBoxItem Content="0" IsSelected="True" />
+            <ComboBoxItem Content="1" />
+            <ComboBoxItem Content="2" />
+            <ComboBoxItem Content="3" />
+            <ComboBoxItem Content="4" />
+            <ComboBoxItem Content="5" />
+        </ComboBox>
     </Grid>
 </UserControl>

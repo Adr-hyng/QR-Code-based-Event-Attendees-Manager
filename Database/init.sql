@@ -2,7 +2,7 @@ CREATE DATABASE qeamDB;
 USE qeamDB;
 
 -- Initialize table content
-CREATE TABLE Attendees (
+CREATE TABLE attendees (
 	id INT AUTO_INCREMENT,
     uid  VARCHAR(25) NOT NULL,
     fn VARCHAR (24) NOT NULL,
@@ -58,9 +58,10 @@ SET
     lunchd3 = NULL,
     pmd3 = NULL,
     checkind3 = NULL,
-    checkoutd3 = NULL
-WHERE id = 1;
+    checkoutd3 = NULL;
 
+-- Delete all records in table
+DELETE FROM attendees;
 
 -- Delete table content created
-DROP TABLE Attendees;
+DROP TABLE attendees;

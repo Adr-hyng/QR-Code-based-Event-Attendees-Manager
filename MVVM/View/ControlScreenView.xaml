@@ -106,6 +106,7 @@
                 VerticalAlignment="Top"
                 Background="#FFE9E9E9"
                 BorderBrush="#FFACACAC"
+                Command="{Binding ExportCommand}"
                 Content="Export"
                 FontFamily="Consolas"
                 FontSize="13" />

@@ -18,7 +18,9 @@ namespace QEAMApp.MVVM.Model
         private readonly HttpClient _client;
         private string DEFAULT_GATEWAY;
         private string _baseUri;
+
         private bool _debugMode = false;
+        public Dictionary<string, LogEntry> LogEntries = new() { };
 
         public ApiService(string HostAddress = "http://localhost", int Port = 8080)
         {

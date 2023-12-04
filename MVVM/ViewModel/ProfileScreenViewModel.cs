@@ -11,6 +11,7 @@ using System.Security.Principal;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
+using System.Xml.Linq;
 
 namespace QEAMApp.MVVM.ViewModel
 {
@@ -131,6 +132,8 @@ namespace QEAMApp.MVVM.ViewModel
             {
                 (bool IsUpdated, _profile) = await _apiService.UpdateAttendee(_profile.UID, $"checkin{subDayController.id}", currentDateTime.ToString());
                 if (!IsUpdated) return;
+                String name = _profile!.FN + $" {(_profile.MI.Length > 0 ? $"{_profile.MI}. " : "")}" + _profile.LN;
+                _apiService.LogEntries.Add(name, new LogEntry(currentDateTime, _apiService.LogEntries.Count + 1, name, "Checked-In"));
                 await Task.Delay(1000);
                 RadioButtons![$"CheckIn{subDayController.id.ToUpper()}"].Opacity = 1;
             }
@@ -149,11 +152,11 @@ namespace QEAMApp.MVVM.ViewModel
                             Action<string, string> updateMarkIcon = async (columnPrefix, radioButtonPrefix) =>
                             {
                                 (bool IsUpdated, _profile) = await _apiService.UpdateAttendee(_profile.UID, $"{columnPrefix}{subDayController.id}", currentDateTime.ToString());
-                                if (IsUpdated)
-                                {
-                                    await Task.Delay(1000);
-                                    RadioButtons![$"{radioButtonPrefix}{subDayController.id.ToUpper()}"].Opacity = 1;
-                                }
+                                if (!IsUpdated) return;
+                                String name = _profile!.FN + $" {(_profile.MI.Length > 0 ? $"{_profile.MI}. " : "")}" + _profile.LN;
+                                _apiService.LogEntries.Add(name, new LogEntry(currentDateTime, _apiService.LogEntries.Count + 1, name, "Checked-Out"));
+                                await Task.Delay(1000);
+                                RadioButtons![$"{radioButtonPrefix}{subDayController.id.ToUpper()}"].Opacity = 1;
                             };
 
                             updateMarkIcon.Invoke(TimeSchedule.columnPrefix, TimeSchedule.radioButtonPrefix);

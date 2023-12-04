@@ -28,6 +28,45 @@ namespace QEAMApp.MVVM.Model
 
             storyboard.Begin();
         }
+
+        public static async void ShowSnackBar(Border border, double srcY, double dstY, double Duration = 2)
+        {
+            var storyboard = new Storyboard();
+
+            // First animation: Move from srcY to dstY
+            var moveAnimation1 = new DoubleAnimationUsingKeyFrames();
+            var keyFrame1 = new SplineDoubleKeyFrame(dstY, KeyTime.FromPercent(1), new KeySpline(0.5, 0, 0.75, 1));
+            moveAnimation1.KeyFrames.Add(keyFrame1);
+            Storyboard.SetTarget(moveAnimation1, border);
+            Storyboard.SetTargetProperty(moveAnimation1, new PropertyPath("(Canvas.Top)"));
+            storyboard.Children.Add(moveAnimation1);
+
+            // Pause after the first animation
+            moveAnimation1.Completed += async (s, e) =>
+            {
+                // Pause for 1 second
+                await Task.Delay(TimeSpan.FromSeconds(Duration));
+
+                // Clear the Storyboard
+                storyboard.Children.Clear();
+
+                // Second animation: Move back from dstY to srcY
+                var moveAnimation2 = new DoubleAnimationUsingKeyFrames
+                {
+                    FillBehavior = FillBehavior.Stop // Set FillBehavior to Stop
+                };
+                var keyFrame2 = new SplineDoubleKeyFrame(srcY, KeyTime.FromPercent(1), new KeySpline(0.5, 0, 0.75, 1));
+                moveAnimation2.KeyFrames.Add(keyFrame2);
+                Storyboard.SetTarget(moveAnimation2, border);
+                Storyboard.SetTargetProperty(moveAnimation2, new PropertyPath("(Canvas.Top)"));
+                storyboard.Children.Add(moveAnimation2);
+
+                storyboard.Begin();
+            };
+
+            storyboard.Begin();
+        }
+
         public static void AnimateRectangle(Rectangle ScannerRect, short srcY, short dstY)
         {
             var storyboard = new Storyboard();
@@ -47,7 +86,7 @@ namespace QEAMApp.MVVM.Model
             Storyboard.SetTarget(moveAnimation, ScannerRect);
             Storyboard.SetTargetProperty(moveAnimation, new PropertyPath("(Canvas.Top)"));
 
-            var duration = TimeSpan.FromSeconds(1.2);
+            var duration = TimeSpan.FromSeconds(1);
             var repeatBehavior = RepeatBehavior.Forever;
 
             storyboard.Children.Add(moveAnimation);

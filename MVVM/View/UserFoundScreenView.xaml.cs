@@ -76,7 +76,7 @@ namespace QEAMApp.MVVM.View
 
         private void UserControl_Loaded(object sender, RoutedEventArgs e)
         {
-            AnimationManager.FadeInWelcomeRibbon(welcomeRibbon, 934);
+            AnimationManager.FadeInWelcomeRibbon(welcomeRibbon, 979);
         }
     }
 }

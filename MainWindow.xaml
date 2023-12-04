@@ -52,5 +52,28 @@
             x:Name="CurrentView"
             Grid.Row="1"
             Content="{Binding CurrentViewModel}" />
+
+        <Canvas>
+            <Border
+                x:Name="SnackBarPopUp"
+                Canvas.Left="340"
+                Canvas.Top="670"
+                Width="388"
+                Height="40"
+                HorizontalAlignment="Left"
+                VerticalAlignment="Center"
+                BorderThickness="1">
+                <Border.Background>
+                    <ImageBrush ImageSource="{Binding SnackBarImageSource}" />
+                </Border.Background>
+                <Viewbox Margin="40,6,13,6" Stretch="Uniform">
+                    <TextBlock
+                        Width="133"
+                        FontFamily="Consolas"
+                        Foreground="White"
+                        Text="{Binding SnackBarContent}" />
+                </Viewbox>
+            </Border>
+        </Canvas>
     </Grid>
 </Window>

@@ -118,7 +118,6 @@ namespace QEAMApp.MVVM.Model
             catch (Exception)
             {
                 SystemSounds.Exclamation.Play();
-                AutoClosingMessageBox.Show("No Server Connected.", "SERVER 404", 5000);
                 return Exit(flag: null);
             }
         }

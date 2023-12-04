@@ -1,4 +1,5 @@
 ﻿using QEAMApp.Core;
+using QEAMApp.MVVM.CEventHandler;
 using QEAMApp.MVVM.Command;
 using QEAMApp.MVVM.Model;
 using System;

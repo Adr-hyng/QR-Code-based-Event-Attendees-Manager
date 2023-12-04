@@ -21,8 +21,9 @@
             <TextBox
                 x:Name="QRCodeTextBox"
                 Width="450"
+                Margin="0,-22,0,0"
                 HorizontalAlignment="Center"
-                VerticalAlignment="Center"
+                VerticalAlignment="Top"
                 Background="{x:Null}"
                 BorderBrush="#02ABADB3"
                 Cursor="None"
@@ -44,8 +45,9 @@
 
         <TextBlock
             x:Name="WelcomePromptText"
+            Margin="0,401,0,0"
             HorizontalAlignment="Center"
-            VerticalAlignment="Bottom"
+            VerticalAlignment="Top"
             FontSize="50"
             FontWeight="Light"
             Foreground="Black"
@@ -79,7 +81,7 @@
                 Grid.Column="1"
                 Width="372"
                 Height="372"
-                Margin="10,10,10,10">
+                Margin="47,52,47,76">
                 <Border.Background>
                     <ImageBrush ImageSource="/QEAMApp;component/Images/barcode_scanner.png" Stretch="UniformToFill" />
                 </Border.Background>
@@ -90,23 +92,15 @@
                     x:Name="welcomeRibbon"
                     Grid.Column="1"
                     Grid.ColumnSpan="2"
-                    Canvas.Left="934"
-                    Canvas.Top="10"
+                    Canvas.Left="979"
+                    Canvas.Top="13"
                     Width="500"
                     Height="75"
                     HorizontalAlignment="Left"
-                    VerticalAlignment="Center">
+                    VerticalAlignment="Top">
                     <Border.Background>
-                        <ImageBrush ImageSource="/QEAMApp;component/Images/Welcome Ribbon.png" Stretch="Uniform" />
+                        <ImageBrush ImageSource="/QEAMApp;component/Images/morning_ribbon.png" Stretch="Uniform" />
                     </Border.Background>
-                    <Viewbox Width="230" Margin="125,0,125,0">
-                        <TextBlock
-                            FontFamily="Poppins"
-                            FontWeight="Bold"
-                            Foreground="White"
-                            Text="Morning Attendance"
-                            TextWrapping="Wrap" />
-                    </Viewbox>
                 </Border>
             </Canvas>
             <Canvas>
@@ -114,11 +108,11 @@
                     x:Name="ScannerRect"
                     Grid.Column="1"
                     Canvas.Left="354"
-                    Canvas.Top="243"
+                    Canvas.Top="235"
                     Width="358"
                     Height="25"
                     HorizontalAlignment="Left"
-                    VerticalAlignment="Center"
+                    VerticalAlignment="Top"
                     Fill="#FF1C1B1F" />
             </Canvas>
         </Grid>

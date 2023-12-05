@@ -34,7 +34,7 @@ namespace QEAMApp.MVVM.Command
 
             foreach (KeyValuePair<string, LogEntry> entry in _controlViewModel._apiService.LogEntries)
             {
-                String _logEntry = $"[{entry.Value.TimeQuery}]{entry.Key} has {entry.Value.ActionQuery}.";
+                String _logEntry = $"[{entry.Value.TimeQuery}]{entry.Value.Name} has {entry.Value.ActionQuery}.";
                 File.AppendAllText(filePath, _logEntry + Environment.NewLine);
             }
             

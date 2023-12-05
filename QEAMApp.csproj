@@ -15,7 +15,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <None Remove="Database\logs.txt" />
     <None Remove="Fonts\JetBrainsMono-Bold.ttf" />
     <None Remove="Fonts\JetBrainsMono-ExtraBold.ttf" />
     <None Remove="Fonts\JetBrainsMono-ExtraLight.ttf" />
@@ -52,7 +51,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Resource Include="Database\logs.txt" />
     <Resource Include="Fonts\Poppins-Regular.ttf" />
     <Resource Include="Images\am_snack_icon.png" />
     <Resource Include="Images\barcode_scanner.png" />

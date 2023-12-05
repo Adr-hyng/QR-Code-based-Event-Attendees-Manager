@@ -76,7 +76,7 @@ namespace QEAMApp.MVVM.ViewModel
         {
             _apiService = InstanceAPI;
             _navigationService = GoToFoundScreenNavigation;
-            WelcomeRibbonSource = "/QEAMApp;component/Images/noon_ribbon.png";
+            WelcomeRibbonSource = "/QEAMApp;component/Images/morning_ribbon.png";
             _apiService.PropertyChanged += ApiService_PropertyChanged;
 
             ScanningCommand = new UserFoundCommand(GoToFoundScreenNavigation, this, InstanceAPI);
@@ -112,8 +112,8 @@ namespace QEAMApp.MVVM.ViewModel
             {
                 // Your code here
                 DateTime currentDateTime = DateTime.Now;
-                // 8 AM - 11:59 AM
-                if (DayContent.InTimeBound(currentDateTime, new TimeSpan(8, 0, 0), new TimeSpan(11, 59, 59)))
+                // 12 AM - 11:59 AM
+                if (DayContent.InTimeBound(currentDateTime, new TimeSpan(0, 0, 0), new TimeSpan(11, 59, 59)))
                 {
                     WelcomeRibbonSource = "/QEAMApp;component/Images/morning_ribbon.png";
                 }
